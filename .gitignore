@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# EAS
+.eas/
+
+# macOS
+.DS_Store
+
+# iOS
+ios/Pods/
+ios/build/
+ios/.xcode.env.local
+*.xcworkspace/
+*.xcworkspace
+WellValet.xcworkspace/
+
+# Android
+android/app/build/
+android/local.properties
+.gradle/
+build/
+
+# Sensitive files / API keys
+.env
+.env*.local
