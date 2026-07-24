@@ -37,8 +37,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.cruiseanalytix.wellvalet",
-      "usesCleartextTraffic": true
+      "package": "com.cruiseanalytix.wellvalet"
     },
     "web": {
       "output": "static",

@@ -102,10 +102,22 @@ export default function LandingScreen() {
 
       {/* Buttons */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.primaryButton} onPress={() => router.push("/signup")}>
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={() => router.push("/signup")}
+          accessibilityRole="button"
+          accessibilityLabel="Create Account"
+          accessibilityHint="Navigates to the signup screen to create a new account"
+        >
           <Text style={styles.primaryButtonText}>Create Account</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.secondaryButton} onPress={() => router.push("/login")}>
+        <TouchableOpacity
+          style={styles.secondaryButton}
+          onPress={() => router.push("/login")}
+          accessibilityRole="button"
+          accessibilityLabel="Login"
+          accessibilityHint="Navigates to the login screen to sign in"
+        >
           <Text style={styles.secondaryButtonText}>Login</Text>
         </TouchableOpacity>
 

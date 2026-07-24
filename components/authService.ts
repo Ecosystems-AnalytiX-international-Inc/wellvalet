@@ -49,5 +49,13 @@ export async function fetchWithAuth(url: string, options: RequestInit = {}): Pro
     }
   }
 
+  // If 429 Too Many Requests — wait for Retry-After header or default backoff and retry once
+  if (response.status === 429) {
+    const retryAfter = response.headers.get("Retry-After");
+    const delayMs = retryAfter ? (parseInt(retryAfter, 10) || 1) * 1000 : 1500;
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+    response = await fetch(url, { ...options, headers });
+  }
+
   return response;
 }

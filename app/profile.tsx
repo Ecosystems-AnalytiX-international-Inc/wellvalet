@@ -203,14 +203,23 @@ export default function ProfileScreen() {
         )}
 
         <View style={styles.legalLinksRow}>
-          <TouchableOpacity onPress={() => router.push("/privacy")}>
+          <TouchableOpacity
+            onPress={() => router.push("/privacy")}
+            accessibilityRole="link"
+            accessibilityLabel="Privacy Policy"
+          >
             <Text style={styles.legalLink}>Privacy Policy</Text>
           </TouchableOpacity>
           <Text style={styles.legalDot}>·</Text>
-          <TouchableOpacity onPress={() => router.push("/terms")}>
+          <TouchableOpacity
+            onPress={() => router.push("/terms")}
+            accessibilityRole="link"
+            accessibilityLabel="Terms and Conditions"
+          >
             <Text style={styles.legalLink}>Terms and Conditions</Text>
           </TouchableOpacity>
         </View>
+        <Text style={styles.versionText}>WellValet v1.0.0 (13)</Text>
       </View>
 
     </ScrollView>
@@ -261,4 +270,5 @@ const styles = StyleSheet.create({
                     marginTop: 16, gap: 8 },
   legalLink: { fontSize: 12, color: "#555", textDecorationLine: "underline" },
   legalDot: { fontSize: 12, color: "#888" },
+  versionText: { fontSize: 11, color: "#666", textAlign: "center", marginTop: 12, fontStyle: "italic" },
 });

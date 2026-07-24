@@ -1,11 +1,13 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import OfflineBanner from "../components/OfflineBanner";
 
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <StatusBar backgroundColor="#E3F0A3" barStyle="dark-content" />
+      <OfflineBanner />
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="login" options={{ headerShown: false }} />

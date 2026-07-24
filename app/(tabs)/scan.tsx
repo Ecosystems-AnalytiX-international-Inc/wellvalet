@@ -208,6 +208,9 @@ export default function ScanTab() {
           style={styles.choiceCard}
           onPress={() => setScanMode("food")}
           activeOpacity={0.85}
+          accessibilityRole="button"
+          accessibilityLabel="Food Product Scan"
+          accessibilityHint="Scan any food barcode to receive instant wellness score and nutritional analysis"
         >
           <View style={styles.choiceCardInner}>
             <Text style={styles.choiceCardIcon}>🥗</Text>
@@ -233,6 +236,9 @@ export default function ScanTab() {
           style={[styles.choiceCard, styles.beautyCard]}
           onPress={() => setScanMode("beauty")}
           activeOpacity={0.85}
+          accessibilityRole="button"
+          accessibilityLabel="Beauty Product Scan"
+          accessibilityHint="Point camera at skincare or cosmetics ingredients label for safety analysis"
         >
           <View style={styles.choiceCardInner}>
             <Text style={styles.choiceCardIcon}>💄</Text>

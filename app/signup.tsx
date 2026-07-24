@@ -91,7 +91,12 @@ export default function SignupScreen() {
           placeholderTextColor="#999"
           onChangeText={setPassword}
         />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeButton}>
+        <TouchableOpacity
+          onPress={() => setShowPassword(!showPassword)}
+          style={styles.eyeButton}
+          accessibilityRole="button"
+          accessibilityLabel={showPassword ? "Hide password" : "Show password"}
+        >
           <Text style={styles.eyeIcon}>{showPassword ? "🙈" : "👁"}</Text>
         </TouchableOpacity>
       </View>
@@ -106,7 +111,12 @@ export default function SignupScreen() {
           placeholderTextColor="#999"
           onChangeText={setConfirmPassword}
         />
-        <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)} style={styles.eyeButton}>
+        <TouchableOpacity
+          onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+          style={styles.eyeButton}
+          accessibilityRole="button"
+          accessibilityLabel={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+        >
           <Text style={styles.eyeIcon}>{showConfirmPassword ? "🙈" : "👁"}</Text>
         </TouchableOpacity>
       </View>
@@ -115,6 +125,9 @@ export default function SignupScreen() {
         style={styles.checkboxRow}
         onPress={() => setAgreed(!agreed)}
         activeOpacity={0.7}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: agreed }}
+        accessibilityLabel="I agree to the Privacy Policy and Terms and Conditions"
       >
         <View style={[styles.checkbox, agreed && styles.checkboxChecked]}>
           {agreed && <Text style={styles.checkmark}>✓</Text>}
@@ -137,11 +150,21 @@ export default function SignupScreen() {
         </Text>
       ) : null}
 
-      <TouchableOpacity onPress={signup} style={styles.createButton}>
+      <TouchableOpacity
+        onPress={signup}
+        style={styles.createButton}
+        accessibilityRole="button"
+        accessibilityLabel="Create Account"
+      >
         <Text style={styles.createButtonText}>Create Account</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => router.replace("/login")} style={styles.loginLink}>
+      <TouchableOpacity
+        onPress={() => router.replace("/login")}
+        style={styles.loginLink}
+        accessibilityRole="link"
+        accessibilityLabel="Already have an account? Login"
+      >
         <Text style={styles.loginLinkText}>Already have an account? Login</Text>
       </TouchableOpacity>
 

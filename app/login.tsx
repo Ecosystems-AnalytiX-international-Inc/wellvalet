@@ -53,18 +53,31 @@ export default function LoginScreen() {
             placeholderTextColor="#999"
             onChangeText={setPassword}
           />
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeButton}>
+          <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+            style={styles.eyeButton}
+            accessibilityRole="button"
+            accessibilityLabel={showPassword ? "Hide password" : "Show password"}
+          >
             <Text style={styles.eyeIcon}>{showPassword ? "🙈" : "👁"}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
           style={styles.forgotPassword}
           onPress={() => router.push("/forgot-password")}
+          accessibilityRole="link"
+          accessibilityLabel="Forgot Password"
+          accessibilityHint="Navigates to password reset screen"
         >
           <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
         </TouchableOpacity>
         {message ? <Text style={styles.error}>{message}</Text> : null}
-        <TouchableOpacity style={styles.loginButton} onPress={login}>
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={login}
+          accessibilityRole="button"
+          accessibilityLabel="Login"
+        >
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
 
@@ -77,7 +90,12 @@ export default function LoginScreen() {
           />
         </View>
 
-        <TouchableOpacity style={styles.createLink} onPress={() => router.push("/signup")}>
+        <TouchableOpacity
+          style={styles.createLink}
+          onPress={() => router.push("/signup")}
+          accessibilityRole="link"
+          accessibilityLabel="Don't have an account? Create one"
+        >
           <Text style={styles.createLinkText}>
             Don&apos;t have an account?{" "}
             <Text style={styles.createLinkBold}>Create one</Text>

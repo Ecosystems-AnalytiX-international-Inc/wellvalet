@@ -33,3 +33,7 @@ build/
 # Sensitive files / API keys
 .env
 .env*.local
+google-play-service-account.json
+appstore-connect-api-key.p8
+*.p8
+*.json-key
