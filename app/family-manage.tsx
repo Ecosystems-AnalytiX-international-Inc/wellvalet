@@ -147,6 +147,8 @@ export default function FamilyManageScreen() {
                 style={styles.editInput}
                 value={editName}
                 onChangeText={setEditName}
+                placeholder="Member name"
+                placeholderTextColor="#999"
                 autoFocus
                 onSubmitEditing={saveRename}
                 returnKeyType="done"
@@ -246,12 +248,6 @@ const styles = StyleSheet.create({
   memberAvatar: { width: 36, height: 36, borderRadius: 18, backgroundColor: "#2D6A2D", justifyContent: "center", alignItems: "center" },
   memberAvatarText: { color: "#fff", fontWeight: "800", fontSize: 15 },
   memberName: { flex: 1, fontSize: 15, color: "#1a1a1a", fontWeight: "500" },
-  editInput: { flex: 1, backgroundColor: "#f5f5f5", borderRadius: 10, paddingHorizontal: 10,
-                paddingVertical: 6, fontSize: 14, color: "#1a1a1a", marginRight: 8 },
-  memberActionBtn: { marginLeft: 8, paddingHorizontal: 6, paddingVertical: 4 },
-  memberActionEdit: { fontSize: 12, color: "#1565C0", fontWeight: "700" },
-  memberActionSave: { fontSize: 12, color: "#2D6A2D", fontWeight: "700" },
-  memberActionRemove: { fontSize: 14, color: "#dc2626", fontWeight: "900" },
   editInput: { flex: 1, backgroundColor: "#f5f5f5", borderRadius: 10, paddingHorizontal: 10,
                 paddingVertical: 6, fontSize: 14, color: "#1a1a1a", marginRight: 8 },
   memberActionBtn: { marginLeft: 8, paddingHorizontal: 6, paddingVertical: 4 },

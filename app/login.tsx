@@ -42,6 +42,8 @@ export default function LoginScreen() {
           value={email}
           autoCapitalize="none"
           keyboardType="email-address"
+          placeholder="Enter your email"
+          placeholderTextColor="#999"
           onChangeText={setEmail}
         />
         <Text style={styles.label}>Password</Text>
@@ -50,7 +52,7 @@ export default function LoginScreen() {
             style={styles.passwordInput}
             value={password}
             secureTextEntry={!showPassword}
-            placeholder="Password Field"
+            placeholder="Enter your password"
             placeholderTextColor="#999"
             onChangeText={setPassword}
           />

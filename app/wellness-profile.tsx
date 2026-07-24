@@ -203,6 +203,8 @@ export default function WellnessProfileScreen() {
           style={styles.metricInput}
           value={String(profile.age)}
           keyboardType="numeric"
+          placeholder="e.g. 28"
+          placeholderTextColor="#999"
           onChangeText={(v) => updateProfile("age", v)}
         />
       </View>
@@ -215,6 +217,8 @@ export default function WellnessProfileScreen() {
           style={styles.metricInput}
           value={String(profile.weight_kg)}
           keyboardType="numeric"
+          placeholder="e.g. 70 (kg)"
+          placeholderTextColor="#999"
           onChangeText={(v) => updateProfile("weight_kg", v)}
         />
       </View>

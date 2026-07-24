@@ -10,6 +10,7 @@ import {
   Button,
   StyleSheet,
   TextInput,
+  Alert,
 } from "react-native";
 import {
   getPurchaseHistory,
@@ -114,6 +115,8 @@ export default function HistoryScreen({ onBack }: any) {
                 <TextInput
                   style={styles.input}
                   value={editName}
+                  placeholder="e.g. Peanut Butter"
+                  placeholderTextColor="#999"
                   onChangeText={setEditName}
                 />
 
@@ -121,6 +124,8 @@ export default function HistoryScreen({ onBack }: any) {
                 <TextInput
                   style={styles.input}
                   value={editBrand}
+                  placeholder="e.g. Skippy"
+                  placeholderTextColor="#999"
                   onChangeText={setEditBrand}
                 />
 
