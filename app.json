@@ -2,7 +2,7 @@
   "expo": {
     "name": "WellValet",
     "slug": "food-ai-mobile",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "foodaimobile",
@@ -10,13 +10,12 @@
     "newArchEnabled": true,
     "ios": {
       "bundleIdentifier": "com.cruiseanalytix.wellvalet",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "supportsTablet": false,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSCameraUsageDescription": "WellValet needs camera access to scan product barcodes and ingredient labels.",
         "NSPhotoLibraryUsageDescription": "WellValet needs photo library access to analyse product images.",
-        "NSLocationWhenInUseUsageDescription": "WellValet may use your location to find nearby products.",
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": false,
           "NSExceptionDomains": {

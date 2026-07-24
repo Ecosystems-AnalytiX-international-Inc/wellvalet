@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { isPremium, clearPremium, setFamilyPlan, isFamilyPlan } from "../components/premiumService";
-import { fetchWithAuth, logout } from "../components/authService";
+import { fetchWithAuth, logout, deleteAccount } from "../components/authService";
 import { useEffect, useState } from "react";
 
 export default function ProfileScreen() {
@@ -16,6 +16,7 @@ export default function ProfileScreen() {
   const [joiningFamily, setJoiningFamily] = useState(false);
   const [joinMessage, setJoinMessage] = useState("");
   const [joinStatus, setJoinStatus] = useState<"success" | "error" | "">("");
+  const [deletingAccount, setDeletingAccount] = useState(false);
 
   useEffect(() => {
     isPremium().then(setPremiumState);
@@ -62,6 +63,58 @@ export default function ProfileScreen() {
   const handleLogout = async () => {
     await logout();
     router.replace("/login");
+  };
+
+  // Apple Guideline 5.1.1(v): apps that create accounts must let users delete them
+  // from inside the app. We use a two-step confirmation to prevent accidents.
+  const handleDeleteAccount = () => {
+    if (deletingAccount) return;
+
+    Alert.alert(
+      "Delete your account?",
+      "This will permanently remove your WellValet account and all associated data — " +
+        "wellness profile, scan history, family membership, shopping list and subscription " +
+        "state. This action cannot be undone.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            Alert.alert(
+              "Are you absolutely sure?",
+              "Type-of-last-chance confirmation. Once you tap Delete Forever your data will be erased.",
+              [
+                { text: "Keep my account", style: "cancel" },
+                {
+                  text: "Delete Forever",
+                  style: "destructive",
+                  onPress: async () => {
+                    setDeletingAccount(true);
+                    try {
+                      await deleteAccount();
+                      Alert.alert(
+                        "Account deleted",
+                        "Your account and all associated data have been removed. Thank you for trying WellValet.",
+                        [{ text: "OK", onPress: () => router.replace("/login") }]
+                      );
+                    } catch (err: any) {
+                      Alert.alert(
+                        "Could not delete account",
+                        err?.message ||
+                          "Something went wrong while deleting your account. Please try again."
+                      );
+                    } finally {
+                      setDeletingAccount(false);
+                    }
+                  },
+                },
+              ]
+            );
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -249,7 +302,33 @@ export default function ProfileScreen() {
             <Text style={styles.legalLink}>Terms and Conditions</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.versionText}>WellValet v1.0.0 (13)</Text>
+        <Text style={styles.versionText}>WellValet v1.0.1 (2)</Text>
+      </View>
+
+      {/* Danger zone — Apple Guideline 5.1.1(v) requires an in-app account deletion path. */}
+      <View style={styles.dangerCard}>
+        <View style={styles.dangerHeaderRow}>
+          <Ionicons name="warning-outline" size={16} color="#B91C1C" />
+          <Text style={styles.dangerTitle}>Danger zone</Text>
+        </View>
+        <Text style={styles.dangerBody}>
+          Delete your WellValet account and all associated data (wellness profile, scan
+          history, family membership, shopping list). This action cannot be undone.
+        </Text>
+        <TouchableOpacity
+          style={[styles.deleteAccountButton, deletingAccount && styles.deleteAccountButtonDisabled]}
+          onPress={handleDeleteAccount}
+          disabled={deletingAccount}
+          accessibilityRole="button"
+          accessibilityLabel="Delete my account"
+        >
+          <View style={styles.buttonRow}>
+            <Ionicons name="trash-outline" size={15} color="#B91C1C" />
+            <Text style={styles.deleteAccountButtonText}>
+              {deletingAccount ? "Deleting…" : "Delete my account"}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
 
     </ScrollView>
@@ -304,4 +383,28 @@ const styles = StyleSheet.create({
   legalLink: { fontSize: 12, color: "#555", textDecorationLine: "underline" },
   legalDot: { fontSize: 12, color: "#888" },
   versionText: { fontSize: 11, color: "#666", textAlign: "center", marginTop: 12, fontStyle: "italic" },
+
+  // Danger zone (account deletion) — visually distinct from regular cards so users don't
+  // hit it accidentally, but still discoverable per Apple 5.1.1(v).
+  dangerCard: {
+    backgroundColor: "#FFF5F5",
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#FCA5A5",
+  },
+  dangerHeaderRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 8 },
+  dangerTitle: { fontSize: 15, fontWeight: "800", color: "#B91C1C" },
+  dangerBody: { fontSize: 13, color: "#7F1D1D", lineHeight: 20, marginBottom: 14 },
+  deleteAccountButton: {
+    borderWidth: 1.5,
+    borderColor: "#B91C1C",
+    backgroundColor: "#fff",
+    borderRadius: 25,
+    paddingVertical: 12,
+    alignItems: "center",
+  },
+  deleteAccountButtonDisabled: { opacity: 0.5 },
+  deleteAccountButtonText: { fontSize: 14, color: "#B91C1C", fontWeight: "700" },
 });

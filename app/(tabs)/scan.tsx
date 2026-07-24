@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import {
   Text, View, StyleSheet, ScrollView, TouchableOpacity,
-  Dimensions, Animated
+  Dimensions, Animated, Linking
 } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Link, useRouter } from "expo-router";
@@ -156,13 +156,51 @@ export default function ScanTab() {
     return <View style={styles.center}><Text>Loading camera...</Text></View>;
   }
 
+  // Apple Guideline 5.1.1(iv): pre-permission screen explains WHY we need the camera.
+  // The CTA is neutral ("Continue"), and the native iOS prompt is triggered only when the
+  // user taps it. If the user previously denied permission, we surface a Settings deep-link
+  // instead of re-requesting (iOS will not show the system prompt a second time).
   if (!permission.granted) {
+    const permanentlyDenied = permission.canAskAgain === false;
+
+    const handleContinue = async () => {
+      if (permanentlyDenied) {
+        await Linking.openSettings();
+        return;
+      }
+      await requestPermission();
+    };
+
     return (
-      <View style={styles.center}>
-        <Text style={styles.titleText}>Camera permission required</Text>
-        <TouchableOpacity style={styles.scanAgainButton} onPress={requestPermission}>
-          <Text style={styles.scanAgainText}>Allow Camera</Text>
-        </TouchableOpacity>
+      <View style={styles.permissionScreen}>
+        <View style={styles.permissionIconWrap}>
+          <Ionicons name="camera-outline" size={56} color="#2D6A2D" />
+        </View>
+        <Text style={styles.permissionTitle}>Scan products with your camera</Text>
+        <Text style={styles.permissionBody}>
+          WellValet uses your camera to scan barcodes on food and beauty products so we can
+          analyse ingredients and flag allergens from your profile. Photos are processed on
+          the device and are never uploaded or stored.
+        </Text>
+
+        {permanentlyDenied ? (
+          <>
+            <Text style={styles.permissionHint}>
+              Camera access is currently disabled for WellValet. Open Settings to turn it on.
+            </Text>
+            <TouchableOpacity style={styles.permissionPrimaryBtn} onPress={handleContinue}>
+              <Text style={styles.permissionPrimaryBtnText}>Open Settings</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity style={styles.permissionPrimaryBtn} onPress={handleContinue}>
+            <Text style={styles.permissionPrimaryBtnText}>Continue</Text>
+          </TouchableOpacity>
+        )}
+
+        <Text style={styles.permissionFootnote}>
+          You can change this later in iOS Settings › WellValet › Camera.
+        </Text>
       </View>
     );
   }
@@ -571,6 +609,33 @@ const styles = StyleSheet.create({
   // Loading
   center: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#E3F0A3" },
   loadingText: { fontSize: 18, color: "#2D6A2D", fontWeight: "600" },
+
+  // Pre-permission (Apple Guideline 5.1.1(iv)) — neutral CTA, contextual explanation.
+  permissionScreen: {
+    flex: 1, backgroundColor: "#E3F0A3", paddingHorizontal: 28, paddingTop: 80,
+    alignItems: "center",
+  },
+  permissionIconWrap: {
+    width: 96, height: 96, borderRadius: 48, backgroundColor: "#fff",
+    alignItems: "center", justifyContent: "center", marginBottom: 20,
+  },
+  permissionTitle: {
+    fontSize: 22, fontWeight: "800", color: "#1a3a1a", textAlign: "center", marginBottom: 14,
+  },
+  permissionBody: {
+    fontSize: 15, color: "#2D6A2D", textAlign: "center", lineHeight: 22, marginBottom: 24,
+  },
+  permissionHint: {
+    fontSize: 13, color: "#4a7a4a", textAlign: "center", marginBottom: 18, fontStyle: "italic",
+  },
+  permissionPrimaryBtn: {
+    backgroundColor: "#2D6A2D", borderRadius: 28, paddingVertical: 14, paddingHorizontal: 44,
+    minWidth: 220, alignItems: "center", marginBottom: 20,
+  },
+  permissionPrimaryBtnText: { fontSize: 16, fontWeight: "700", color: "#fff" },
+  permissionFootnote: {
+    fontSize: 12, color: "#4a7a4a", textAlign: "center", marginTop: 8, paddingHorizontal: 12,
+  },
   titleText: { fontSize: 18, fontWeight: "600", color: "#2D6A2D", marginBottom: 16 },
 
   // Result screen

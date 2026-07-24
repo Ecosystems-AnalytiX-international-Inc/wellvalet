@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
   View, Text, StyleSheet, TouchableOpacity,
-  ActivityIndicator, Alert, Animated
+  ActivityIndicator, Alert, Animated, Linking
 } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -107,15 +107,48 @@ export default function OCRScanScreen({ onResult, onCancel }: any) {
 
   if (!permission) return <View />;
 
+  // Apple Guideline 5.1.1(iv): show a plain-language reason first, ask permission only
+  // after a neutral CTA. If iOS has permanently denied us, deep-link into Settings.
   if (!permission.granted) {
+    const permanentlyDenied = permission.canAskAgain === false;
+
+    const handleContinue = async () => {
+      if (permanentlyDenied) {
+        await Linking.openSettings();
+        return;
+      }
+      await requestPermission();
+    };
+
     return (
       <View style={styles.permissionContainer}>
-        <Text style={styles.permissionText}>Camera access needed to scan ingredients</Text>
-        <TouchableOpacity style={styles.permissionButton} onPress={requestPermission}>
-          <Text style={styles.permissionButtonText}>Grant Camera Access</Text>
-        </TouchableOpacity>
+        <View style={styles.permissionIconWrap}>
+          <Ionicons name="camera-outline" size={48} color="#7B1FA2" />
+        </View>
+        <Text style={styles.permissionTitle}>Scan ingredient labels</Text>
+        <Text style={styles.permissionText}>
+          WellValet needs camera access to read ingredient labels on beauty products and
+          match them against your wellness profile. Images are analysed on-device and are
+          not stored on our servers.
+        </Text>
+
+        {permanentlyDenied ? (
+          <>
+            <Text style={styles.permissionHint}>
+              Camera access is turned off. Open Settings to enable it.
+            </Text>
+            <TouchableOpacity style={styles.permissionButton} onPress={handleContinue}>
+              <Text style={styles.permissionButtonText}>Open Settings</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity style={styles.permissionButton} onPress={handleContinue}>
+            <Text style={styles.permissionButtonText}>Continue</Text>
+          </TouchableOpacity>
+        )}
+
         <TouchableOpacity onPress={onCancel}>
-          <Text style={styles.cancelText}>Cancel</Text>
+          <Text style={styles.cancelText}>Not now</Text>
         </TouchableOpacity>
       </View>
     );
@@ -243,10 +276,16 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   permissionContainer: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#F3E5F5", padding: 30 },
-  permissionText: { fontSize: 16, color: "#333", textAlign: "center", marginBottom: 20 },
-  permissionButton: { backgroundColor: "#7B1FA2", borderRadius: 25, paddingVertical: 12, paddingHorizontal: 30, marginBottom: 12 },
+  permissionIconWrap: {
+    width: 80, height: 80, borderRadius: 40, backgroundColor: "#fff",
+    alignItems: "center", justifyContent: "center", marginBottom: 20,
+  },
+  permissionTitle: { fontSize: 20, fontWeight: "800", color: "#333", textAlign: "center", marginBottom: 10 },
+  permissionText: { fontSize: 15, color: "#555", textAlign: "center", lineHeight: 22, marginBottom: 20 },
+  permissionHint: { fontSize: 13, color: "#7B1FA2", textAlign: "center", fontStyle: "italic", marginBottom: 12 },
+  permissionButton: { backgroundColor: "#7B1FA2", borderRadius: 25, paddingVertical: 12, paddingHorizontal: 40, marginBottom: 12, minWidth: 200, alignItems: "center" },
   permissionButtonText: { fontSize: 16, color: "#fff", fontWeight: "700" },
-  cancelText: { fontSize: 15, color: "#7B1FA2", fontWeight: "600" },
+  cancelText: { fontSize: 15, color: "#7B1FA2", fontWeight: "600", marginTop: 8 },
   topOverlay: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 20, paddingTop: 60, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 2 },
   cancelButton: { padding: 8 },
   cancelButtonRow: { flexDirection: "row", alignItems: "center", gap: 4 },
