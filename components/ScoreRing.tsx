@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Animated } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
+import { Ionicons } from "@expo/vector-icons";
 
 interface ScoreRingProps {
   score: number;
@@ -87,7 +88,10 @@ export default function ScoreRing({ score, label, letter }: ScoreRingProps) {
           </View>
         ) : null}
       </View>
-      <Text style={styles.personalisedLabel}>⭐ Your personalised wellness score</Text>
+      <View style={styles.personalisedRow}>
+        <Ionicons name="star" size={11} color="#2D6A2D" />
+        <Text style={styles.personalisedLabel}>Your personalised wellness score</Text>
+      </View>
       <Text style={styles.subLabel}>
         {label === "Good" ? "Great choice for your wellness!" :
          label === "Moderate" ? "Acceptable — consume mindfully." :
@@ -107,6 +111,7 @@ const styles = StyleSheet.create({
   labelRow: { flexDirection: "row", alignItems: "center", gap: 8, marginTop: 8 },
   letterBadge: { width: 32, height: 32, borderRadius: 8, justifyContent: "center", alignItems: "center" },
   letterText: { fontSize: 18, fontWeight: "900", color: "#fff" },
-  personalisedLabel: { fontSize: 11, color: "#2D6A2D", fontWeight: "600", marginTop: 4 },
+  personalisedRow: { flexDirection: "row", alignItems: "center", gap: 4, marginTop: 4 },
+  personalisedLabel: { fontSize: 11, color: "#2D6A2D", fontWeight: "600" },
   subLabel: { fontSize: 12, color: "#555", textAlign: "center", marginTop: 4, lineHeight: 20 },
 });

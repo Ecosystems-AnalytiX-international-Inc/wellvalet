@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Modal, ActivityIndicator } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
 import { DeliveryPlatform, PLATFORM_INFO, generateAffiliateUrl, formatListForPlatform } from "./affiliateUrls";
 
@@ -47,7 +48,7 @@ export default function OrderDeliveryModal({ visible, items, onClose, onOpenBrow
                 disabled={preparing !== null}
               >
                 <View style={styles.platformLeft}>
-                  <Text style={styles.platformEmoji}>{info.emoji}</Text>
+                  <Ionicons name={info.iconName} size={28} color={info.color} />
                   <View>
                     <Text style={styles.platformLabel}>{info.label}</Text>
                     <Text style={styles.platformDesc}>{info.description}</Text>
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
   subtitle:      { fontSize: 13, color: "#888", marginBottom: 20, lineHeight: 20 },
   platformCard:  { flexDirection: "row", alignItems: "center", backgroundColor: "#F9FBF9", borderRadius: 14, padding: 16, marginBottom: 10, borderLeftWidth: 4 },
   platformLeft:  { flex: 1, flexDirection: "row", alignItems: "center", gap: 14 },
-  platformEmoji: { fontSize: 28 },
   platformLabel: { fontSize: 15, fontWeight: "800", color: "#1A1A1A", marginBottom: 2 },
   platformDesc:  { fontSize: 13, color: "#555", marginBottom: 2 },
   platformComm:  { fontSize: 11, color: "#999", fontStyle: "italic" },

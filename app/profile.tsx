@@ -15,6 +15,7 @@ export default function ProfileScreen() {
   const [inviteCode, setInviteCode] = useState("");
   const [joiningFamily, setJoiningFamily] = useState(false);
   const [joinMessage, setJoinMessage] = useState("");
+  const [joinStatus, setJoinStatus] = useState<"success" | "error" | "">("");
 
   useEffect(() => {
     isPremium().then(setPremiumState);
@@ -70,7 +71,7 @@ export default function ProfileScreen() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Profile & Account</Text>
-        <Text style={styles.profileIcon}>👤</Text>
+        <Ionicons name="person-circle-outline" size={30} color="#1a1a1a" />
       </View>
 
       {/* Wellness Profile Card */}
@@ -90,7 +91,10 @@ export default function ProfileScreen() {
       {/* Family Card — only shown for family plan users */}
       {familyPlanActive && (
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>👨‍👩‍👧‍👦 Family Plan</Text>
+        <View style={styles.cardTitleRow}>
+          <Ionicons name="people-outline" size={18} color="#1a1a1a" />
+          <Text style={styles.cardTitle}>Family Plan</Text>
+        </View>
         {hasFamily ? (
           <>
             <Text style={styles.cardText}>
@@ -100,13 +104,19 @@ export default function ProfileScreen() {
               style={styles.darkButton}
               onPress={() => router.push("/family-manage")}
             >
-              <Text style={styles.darkButtonText}>⚙️ Manage Family Group</Text>
+              <View style={styles.buttonRow}>
+                <Ionicons name="settings-outline" size={14} color="#fff" />
+                <Text style={styles.darkButtonText}>Manage Family Group</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.darkButton}
               onPress={() => router.push("/family-setup")}
             >
-              <Text style={styles.darkButtonText}>➕ Create New Family Group</Text>
+              <View style={styles.buttonRow}>
+                <Ionicons name="add-circle-outline" size={14} color="#fff" />
+                <Text style={styles.darkButtonText}>Create New Family Group</Text>
+              </View>
             </TouchableOpacity>
           </>
         ) : (
@@ -118,7 +128,10 @@ export default function ProfileScreen() {
               style={styles.darkButton}
               onPress={() => router.push("/family-setup")}
             >
-              <Text style={styles.darkButtonText}>➕ Create a Family Group</Text>
+              <View style={styles.buttonRow}>
+                <Ionicons name="add-circle-outline" size={14} color="#fff" />
+                <Text style={styles.darkButtonText}>Create a Family Group</Text>
+              </View>
             </TouchableOpacity>
             <Text style={[styles.cardText, { marginTop: 16, fontWeight: "700" }]}>
               Join with Invite Code
@@ -141,6 +154,7 @@ export default function ProfileScreen() {
                 onPress={async () => {
                   setJoiningFamily(true);
                   setJoinMessage("");
+                  setJoinStatus("");
                   try {
                     const res = await fetchWithAuth('https://api.wellvalet.com/family/join', {
                       method: 'POST',
@@ -149,13 +163,16 @@ export default function ProfileScreen() {
                     });
                     const data = await res.json();
                     if (data.error) {
-                      setJoinMessage('❌ ' + data.error);
+                      setJoinMessage(data.error);
+                      setJoinStatus("error");
                     } else {
                       setHasFamily(true);
-                      setJoinMessage('✅ Joined successfully!');
+                      setJoinMessage('Joined successfully!');
+                      setJoinStatus("success");
                     }
                   } catch {
-                    setJoinMessage('❌ Could not join. Please try again.');
+                    setJoinMessage('Could not join. Please try again.');
+                    setJoinStatus("error");
                   }
                   setJoiningFamily(false);
                 }}
@@ -166,10 +183,17 @@ export default function ProfileScreen() {
               </TouchableOpacity>
             </View>
             {joinMessage ? (
-              <Text style={{ marginTop: 8, fontSize: 13,
-                color: joinMessage.startsWith("✅") ? "#2D6A2D" : "#dc2626" }}>
-                {joinMessage}
-              </Text>
+              <View style={styles.joinMessageRow}>
+                <Ionicons
+                  name={joinStatus === "success" ? "checkmark-circle" : "close-circle"}
+                  size={14}
+                  color={joinStatus === "success" ? "#2D6A2D" : "#dc2626"}
+                />
+                <Text style={[styles.joinMessageText,
+                  { color: joinStatus === "success" ? "#2D6A2D" : "#dc2626" }]}>
+                  {joinMessage}
+                </Text>
+              </View>
             ) : null}
           </>
         )}
@@ -194,11 +218,17 @@ export default function ProfileScreen() {
         </TouchableOpacity>
         {premium ? (
           <TouchableOpacity style={[styles.unsubscribeButton, {marginTop: 10}]} onPress={handleUnsubscribe}>
-            <Text style={styles.unsubscribeButtonText}>⭐ Premium — Unsubscribe</Text>
+            <View style={styles.buttonRow}>
+              <Ionicons name="star" size={14} color="#F44336" />
+              <Text style={styles.unsubscribeButtonText}>Premium — Unsubscribe</Text>
+            </View>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity style={[styles.upgradeButton, {marginTop: 10}]} onPress={() => router.push("/upgrade")}>
-            <Text style={styles.upgradeButtonText}>⭐ Go Premium as from C$4.17/month</Text>
+            <View style={styles.buttonRow}>
+              <Ionicons name="star" size={14} color="#1a1a1a" />
+              <Text style={styles.upgradeButtonText}>Go Premium as from C$4.17/month</Text>
+            </View>
           </TouchableOpacity>
         )}
 
@@ -254,9 +284,12 @@ const styles = StyleSheet.create({
   tabItem: { flex: 1, alignItems: "center", justifyContent: "center" },
   header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 24 },
   title: { fontSize: 24, fontWeight: "bold", color: "#1a1a1a" },
-  profileIcon: { fontSize: 26 },
   card: { backgroundColor: "#D6EAA0", borderRadius: 14, padding: 16, marginBottom: 16 },
-  cardTitle: { fontSize: 16, fontWeight: "700", color: "#1a1a1a", marginBottom: 10 },
+  cardTitleRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 10 },
+  cardTitle: { fontSize: 16, fontWeight: "700", color: "#1a1a1a" },
+  buttonRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+  joinMessageRow: { flexDirection: "row", alignItems: "center", gap: 6, marginTop: 8 },
+  joinMessageText: { fontSize: 13 },
   cardText: { fontSize: 13, color: "#444", marginBottom: 14, lineHeight: 20 },
   darkButton: { backgroundColor: "#2D6A2D", borderRadius: 25, paddingVertical: 13, alignItems: "center", marginBottom: 10 },
   darkButtonText: { fontSize: 14, color: "white", fontWeight: "500" },

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useOnlineStatus } from "./useOnlineStatus";
 
 export default function OfflineBanner() {
@@ -14,7 +15,8 @@ export default function OfflineBanner() {
       accessibilityLiveRegion="polite"
       accessibilityLabel="No Internet Connection. You are currently offline."
     >
-      <Text style={styles.text}>⚠️ No Internet Connection (Offline Mode)</Text>
+      <Ionicons name="warning-outline" size={14} color="#ffffff" />
+      <Text style={styles.text}>No Internet Connection (Offline Mode)</Text>
     </View>
   );
 }
@@ -24,8 +26,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#dc2626",
     paddingVertical: 8,
     paddingHorizontal: 16,
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    gap: 6,
   },
   text: {
     color: "#ffffff",

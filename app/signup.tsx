@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 const API_BASE_URL = "https://api.wellvalet.com";
 
@@ -97,7 +98,7 @@ export default function SignupScreen() {
           accessibilityRole="button"
           accessibilityLabel={showPassword ? "Hide password" : "Show password"}
         >
-          <Text style={styles.eyeIcon}>{showPassword ? "🙈" : "👁"}</Text>
+          <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={22} color="#666" />
         </TouchableOpacity>
       </View>
 
@@ -117,7 +118,7 @@ export default function SignupScreen() {
           accessibilityRole="button"
           accessibilityLabel={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
         >
-          <Text style={styles.eyeIcon}>{showConfirmPassword ? "🙈" : "👁"}</Text>
+          <Ionicons name={showConfirmPassword ? "eye-off-outline" : "eye-outline"} size={22} color="#666" />
         </TouchableOpacity>
       </View>
 
@@ -130,7 +131,7 @@ export default function SignupScreen() {
         accessibilityLabel="I agree to the Privacy Policy and Terms and Conditions"
       >
         <View style={[styles.checkbox, agreed && styles.checkboxChecked]}>
-          {agreed && <Text style={styles.checkmark}>✓</Text>}
+          {agreed && <Ionicons name="checkmark" size={14} color="#fff" />}
         </View>
         <Text style={styles.checkboxLabel}>
           I agree to the{" "}

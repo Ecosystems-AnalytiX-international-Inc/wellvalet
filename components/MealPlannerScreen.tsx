@@ -17,6 +17,16 @@ import { getUserProfile } from "./profileService";
 import { useFocusEffect } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+
+type IoniconName = React.ComponentProps<typeof Ionicons>["name"];
+
+const MEAL_ICONS: { key: "breakfast" | "lunch" | "dinner" | "snack"; label: string; icon: IoniconName; color: string }[] = [
+  { key: "breakfast", label: "Breakfast", icon: "sunny-outline",        color: "#F59E0B" },
+  { key: "lunch",     label: "Lunch",     icon: "partly-sunny-outline", color: "#F59E0B" },
+  { key: "dinner",    label: "Dinner",    icon: "moon-outline",         color: "#4B5563" },
+  { key: "snack",     label: "Snack",     icon: "nutrition-outline",    color: "#DC2626" },
+];
 
 const API_BASE_URL = "https://api.wellvalet.com";
 
@@ -118,7 +128,10 @@ export default function MealPlannerScreen({ onBack }: any) {
         {loading ? (
           <ActivityIndicator color="white" />
         ) : (
-          <Text style={styles.refreshButtonText}>🔄 Refresh Meal Plan</Text>
+          <View style={styles.refreshButtonRow}>
+            <Ionicons name="refresh" size={16} color="#fff" />
+            <Text style={styles.refreshButtonText}>Refresh Meal Plan</Text>
+          </View>
         )}
       </TouchableOpacity>
 
@@ -152,15 +165,24 @@ export default function MealPlannerScreen({ onBack }: any) {
                 {mealPlan.total_products} bagged product(s) used to personalise your plan.
               </Text>
               {mealPlan.avoid_count > 0 && (
-                <Text style={styles.avoidText}>
-                  ⚠️ {mealPlan.avoid_count} item(s) rated Avoid — used as occasional treats only.
-                </Text>
+                <View style={styles.summaryRow}>
+                  <Ionicons name="warning-outline" size={13} color="#dc2626" />
+                  <Text style={styles.avoidText}>
+                    {mealPlan.avoid_count} item(s) rated Avoid — used as occasional treats only.
+                  </Text>
+                </View>
               )}
               {mealPlan.goal_tip ? (
-                <Text style={styles.goalTip}>🎯 {mealPlan.goal_tip}</Text>
+                <View style={styles.summaryRow}>
+                  <Ionicons name="locate-outline" size={13} color="#2D6A2D" />
+                  <Text style={styles.goalTip}>{mealPlan.goal_tip}</Text>
+                </View>
               ) : null}
               {mealPlan.allergen_note ? (
-                <Text style={styles.allergenNote}>⚠️ {mealPlan.allergen_note}</Text>
+                <View style={styles.summaryRow}>
+                  <Ionicons name="warning-outline" size={13} color="#dc2626" />
+                  <Text style={styles.allergenNote}>{mealPlan.allergen_note}</Text>
+                </View>
               ) : null}
             </View>
           )}
@@ -183,50 +205,31 @@ export default function MealPlannerScreen({ onBack }: any) {
 
               {day.avoid_warning ? (
                 <View style={styles.avoidWarning}>
-                  <Text style={styles.avoidWarningText}>⚠️ {day.avoid_warning}</Text>
+                  <View style={styles.avoidWarningRow}>
+                    <Ionicons name="warning-outline" size={13} color="#991b1b" />
+                    <Text style={styles.avoidWarningText}>{day.avoid_warning}</Text>
+                  </View>
                 </View>
               ) : null}
 
-              <View style={styles.mealRow}>
-                <Text style={styles.mealEmoji}>🌅</Text>
-                <View style={styles.mealContent}>
-                  <Text style={styles.mealLabel}>Breakfast</Text>
-                  <Text style={styles.mealText}>{day.breakfast}</Text>
+              {MEAL_ICONS.map((meal, mi) => (
+                <View key={meal.key}>
+                  <View style={styles.mealRow}>
+                    <Ionicons name={meal.icon} size={20} color={meal.color} style={styles.mealIcon} />
+                    <View style={styles.mealContent}>
+                      <Text style={styles.mealLabel}>{meal.label}</Text>
+                      <Text style={styles.mealText}>{day[meal.key]}</Text>
+                    </View>
+                  </View>
+                  {mi < MEAL_ICONS.length - 1 && <View style={styles.divider} />}
                 </View>
-              </View>
-
-              <View style={styles.divider} />
-
-              <View style={styles.mealRow}>
-                <Text style={styles.mealEmoji}>☀️</Text>
-                <View style={styles.mealContent}>
-                  <Text style={styles.mealLabel}>Lunch</Text>
-                  <Text style={styles.mealText}>{day.lunch}</Text>
-                </View>
-              </View>
-
-              <View style={styles.divider} />
-
-              <View style={styles.mealRow}>
-                <Text style={styles.mealEmoji}>🌙</Text>
-                <View style={styles.mealContent}>
-                  <Text style={styles.mealLabel}>Dinner</Text>
-                  <Text style={styles.mealText}>{day.dinner}</Text>
-                </View>
-              </View>
-
-              <View style={styles.divider} />
-
-              <View style={styles.mealRow}>
-                <Text style={styles.mealEmoji}>🍎</Text>
-                <View style={styles.mealContent}>
-                  <Text style={styles.mealLabel}>Snack</Text>
-                  <Text style={styles.mealText}>{day.snack}</Text>
-                </View>
-              </View>
+              ))}
 
               <View style={styles.tipBox}>
-                <Text style={styles.tipText}>💡 {day.tip}</Text>
+                <View style={styles.tipRow}>
+                  <Ionicons name="bulb-outline" size={14} color="#2D6A2D" />
+                  <Text style={styles.tipText}>{day.tip}</Text>
+                </View>
               </View>
 
               <TouchableOpacity
@@ -242,7 +245,10 @@ export default function MealPlannerScreen({ onBack }: any) {
                   setRecipeModal(true);
                 }}
               >
-                <Text style={styles.recipeButtonText}>💡 Recipe Ideas for {day.day}</Text>
+                <View style={styles.recipeButtonRow}>
+                  <Ionicons name="bulb-outline" size={14} color="#1a1a1a" />
+                  <Text style={styles.recipeButtonText}>Recipe Ideas for {day.day}</Text>
+                </View>
               </TouchableOpacity>
             </View>
           ))}
@@ -250,11 +256,18 @@ export default function MealPlannerScreen({ onBack }: any) {
           {/* Balanced Plate Guide */}
           <View style={styles.legendBox}>
             <Text style={styles.legendTitle}>Balanced Plate Guide</Text>
-            <Text style={styles.legendItem}>🥦 Half your plate: vegetables and fruit</Text>
-            <Text style={styles.legendItem}>🌾 Quarter plate: whole grains or starchy foods</Text>
-            <Text style={styles.legendItem}>🥩 Quarter plate: lean protein</Text>
-            <Text style={styles.legendItem}>💧 Drink 8 glasses of water daily</Text>
-            <Text style={styles.legendItem}>🫒 Use healthy fats like olive oil in moderation</Text>
+            {[
+              { icon: "food-apple-outline", family: "mci", text: "Half your plate: vegetables and fruit" },
+              { icon: "grain",              family: "mci", text: "Quarter plate: whole grains or starchy foods" },
+              { icon: "food-drumstick-outline", family: "mci", text: "Quarter plate: lean protein" },
+              { icon: "cup-water",          family: "mci", text: "Drink 8 glasses of water daily" },
+              { icon: "oil",                family: "mci", text: "Use healthy fats like olive oil in moderation" },
+            ].map((item, i) => (
+              <View key={i} style={styles.legendRow}>
+                <MaterialCommunityIcons name={item.icon as React.ComponentProps<typeof MaterialCommunityIcons>["name"]} size={16} color="#2D6A2D" />
+                <Text style={styles.legendItem}>{item.text}</Text>
+              </View>
+            ))}
           </View>
 
           <Text style={styles.disclaimer}>
@@ -268,37 +281,43 @@ export default function MealPlannerScreen({ onBack }: any) {
       <Modal visible={recipeModal} animationType="slide" transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>
-            <Text style={styles.modalTitle}>💡 Recipe Ideas</Text>
+            <View style={styles.modalTitleRow}>
+              <Ionicons name="bulb-outline" size={22} color="#2D6A2D" />
+              <Text style={styles.modalTitle}>Recipe Ideas</Text>
+            </View>
             <Text style={styles.modalSubtitle}>{recipeDay}</Text>
             {recipeList.map((meal, i) => (
               <View key={i} style={styles.recipeItem}>
-                <Text style={styles.recipeItemIcon}>🍽️</Text>
+                <Ionicons name="restaurant-outline" size={26} color="#2D6A2D" style={styles.recipeItemIcon} />
                 <View style={styles.recipeItemText}>
                   <Text style={styles.recipeItemName}>{meal}</Text>
                   <Text style={styles.recipeItemTip}>{
                     (() => {
                       const mAny: any = meal;
                       const name = (typeof meal === "string" ? meal : (mAny?.name || mAny?.meal || "")).toLowerCase();
-                      if (name.includes("oat") || name.includes("porridge")) return "💧 Add chia seeds for extra fibre · Top with fresh berries";
-                      if (name.includes("chicken") || name.includes("poulet")) return "🌿 Marinate with lemon & herbs · Pair with steamed greens";
-                      if (name.includes("salmon") || name.includes("fish")) return "🫐 Rich in omega-3 · Serve with quinoa or brown rice";
-                      if (name.includes("salad")) return "🥑 Add avocado for healthy fats · Use lemon juice as dressing";
-                      if (name.includes("egg") || name.includes("omelette")) return "🥦 Add spinach or broccoli · Use minimal oil";
-                      if (name.includes("soup") || name.includes("stew")) return "🧄 Add garlic and ginger for anti-inflammatory benefits";
-                      if (name.includes("pasta") || name.includes("rice")) return "🌾 Choose whole grain · Add legumes for protein";
-                      if (name.includes("smoothie") || name.includes("shake")) return "🍌 Add flaxseed or protein powder · Use unsweetened milk";
-                      if (name.includes("wrap") || name.includes("tortilla")) return "🫘 Add hummus for protein · Choose whole wheat wrap";
-                      if (name.includes("yogurt") || name.includes("yoghurt")) return "🍯 Choose plain Greek yogurt · Add honey in moderation";
-                      if (name.includes("nut") || name.includes("almond")) return "🌰 Eat in small portions · Great source of healthy fats";
-                      if (name.includes("fruit")) return "🍎 Best eaten fresh · Natural sugar — enjoy with protein";
-                      return "🥗 Use fresh seasonal ingredients · Cook with minimal oil";
+                      if (name.includes("oat") || name.includes("porridge")) return "Add chia seeds for extra fibre · Top with fresh berries";
+                      if (name.includes("chicken") || name.includes("poulet")) return "Marinate with lemon & herbs · Pair with steamed greens";
+                      if (name.includes("salmon") || name.includes("fish")) return "Rich in omega-3 · Serve with quinoa or brown rice";
+                      if (name.includes("salad")) return "Add avocado for healthy fats · Use lemon juice as dressing";
+                      if (name.includes("egg") || name.includes("omelette")) return "Add spinach or broccoli · Use minimal oil";
+                      if (name.includes("soup") || name.includes("stew")) return "Add garlic and ginger for anti-inflammatory benefits";
+                      if (name.includes("pasta") || name.includes("rice")) return "Choose whole grain · Add legumes for protein";
+                      if (name.includes("smoothie") || name.includes("shake")) return "Add flaxseed or protein powder · Use unsweetened milk";
+                      if (name.includes("wrap") || name.includes("tortilla")) return "Add hummus for protein · Choose whole wheat wrap";
+                      if (name.includes("yogurt") || name.includes("yoghurt")) return "Choose plain Greek yogurt · Add honey in moderation";
+                      if (name.includes("nut") || name.includes("almond")) return "Eat in small portions · Great source of healthy fats";
+                      if (name.includes("fruit")) return "Best eaten fresh · Natural sugar — enjoy with protein";
+                      return "Use fresh seasonal ingredients · Cook with minimal oil";
                     })()
                   }</Text>
                   <TouchableOpacity
                     style={styles.bbcBtn}
                     onPress={() => openBBC(meal)}
                   >
-                    <Text style={styles.bbcBtnText}>🔍 How to cook this</Text>
+                    <View style={styles.bbcBtnRow}>
+                      <Ionicons name="search-outline" size={12} color="#2D6A2D" />
+                      <Text style={styles.bbcBtnText}>How to cook this</Text>
+                    </View>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -314,9 +333,15 @@ export default function MealPlannerScreen({ onBack }: any) {
       <Modal visible={showBbc} animationType="slide" onRequestClose={() => setShowBbc(false)}>
         <View style={{ flex: 1, backgroundColor: "#2D6A2D" }}>
           <View style={[styles.bbcHeader, { paddingTop: insets.top + 14 }]}>
-            <Text style={styles.bbcHeaderTitle}>🍳 BBC Good Food</Text>
+            <View style={styles.bbcHeaderTitleRow}>
+              <MaterialCommunityIcons name="chef-hat" size={18} color="#fff" />
+              <Text style={styles.bbcHeaderTitle}>BBC Good Food</Text>
+            </View>
             <TouchableOpacity onPress={() => setShowBbc(false)} style={styles.bbcCloseBtn}>
-              <Text style={styles.bbcCloseText}>✕ Close</Text>
+              <View style={styles.bbcCloseRow}>
+                <Ionicons name="close" size={13} color="#fff" />
+                <Text style={styles.bbcCloseText}>Close</Text>
+              </View>
             </TouchableOpacity>
           </View>
           {bbcUrl ? (
@@ -345,6 +370,7 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 14, color: "#555", marginBottom: 16, lineHeight: 20 },
   refreshButton: { backgroundColor: "#2D6A2D", borderRadius: 25, paddingVertical: 14, alignItems: "center", marginBottom: 8 },
   refreshButtonDisabled: { backgroundColor: "#aaa" },
+  refreshButtonRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   refreshButtonText: { fontSize: 15, color: "white", fontWeight: "600" },
   lastUpdated: { fontSize: 12, color: "#666", textAlign: "center", marginBottom: 16 },
   errorCard: { backgroundColor: "#fee2e2", borderRadius: 12, padding: 16, marginBottom: 16 },
@@ -354,32 +380,37 @@ const styles = StyleSheet.create({
   summaryCard: { backgroundColor: "#D6EAA0", borderRadius: 14, padding: 16, marginBottom: 16 },
   summaryTitle: { fontSize: 15, fontWeight: "bold", color: "#1a1a1a", marginBottom: 8 },
   summaryText: { fontSize: 13, color: "#333", marginBottom: 6 },
-  avoidText: { fontSize: 13, color: "#dc2626", marginBottom: 6 },
-  goalTip: { fontSize: 13, color: "#2D6A2D", fontStyle: "italic", marginBottom: 4 },
-  allergenNote: { fontSize: 13, color: "#dc2626", fontStyle: "italic" },
+  summaryRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 6 },
+  avoidText: { fontSize: 13, color: "#dc2626", flex: 1 },
+  goalTip: { fontSize: 13, color: "#2D6A2D", fontStyle: "italic", flex: 1 },
+  allergenNote: { fontSize: 13, color: "#dc2626", fontStyle: "italic", flex: 1 },
   emptyCard: { backgroundColor: "#D6EAA0", borderRadius: 14, padding: 16, marginBottom: 16 },
   emptyText: { fontSize: 14, color: "#333", marginBottom: 8, lineHeight: 22 },
   emptySubText: { fontSize: 13, color: "#666", fontStyle: "italic" },
   card: { backgroundColor: "#D6EAA0", padding: 16, borderRadius: 14, marginBottom: 16 },
   day: { fontSize: 20, fontWeight: "bold", color: "#1a1a1a", marginBottom: 14 },
   avoidWarning: { backgroundColor: "#fee2e2", borderRadius: 8, padding: 10, marginBottom: 12 },
-  avoidWarningText: { fontSize: 12, color: "#991b1b", lineHeight: 18 },
+  avoidWarningRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+  avoidWarningText: { fontSize: 12, color: "#991b1b", lineHeight: 18, flex: 1 },
   mealRow: { flexDirection: "row", alignItems: "flex-start", marginBottom: 8 },
-  mealEmoji: { fontSize: 20, marginRight: 10, marginTop: 2 },
+  mealIcon: { marginRight: 10, marginTop: 2 },
   mealContent: { flex: 1 },
   mealLabel: { fontSize: 13, fontWeight: "700", color: "#2D6A2D", marginBottom: 3 },
   mealText: { fontSize: 13, color: "#333", lineHeight: 20 },
   divider: { height: 1, backgroundColor: "#c5d97a", marginVertical: 10 },
   tipBox: { backgroundColor: "#E3F0A3", borderRadius: 10, padding: 10, marginTop: 10, marginBottom: 12 },
-  tipText: { fontSize: 13, color: "#2D6A2D", fontStyle: "italic", lineHeight: 20 },
+  tipRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+  tipText: { fontSize: 13, color: "#2D6A2D", fontStyle: "italic", lineHeight: 20, flex: 1 },
   recipeButton: { backgroundColor: "#42D674", padding: 12, borderRadius: 20, alignItems: "center" },
+  recipeButtonRow: { flexDirection: "row", alignItems: "center", gap: 6 },
   recipeButtonText: { color: "#1a1a1a", fontWeight: "bold", fontSize: 13 },
   modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "flex-end" },
   modalCard: { backgroundColor: "#fff", borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: "80%" },
-  modalTitle: { fontSize: 22, fontWeight: "900", color: "#2D6A2D", marginBottom: 4 },
+  modalTitleRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 4 },
+  modalTitle: { fontSize: 22, fontWeight: "900", color: "#2D6A2D" },
   modalSubtitle: { fontSize: 14, color: "#888", marginBottom: 20 },
   recipeItem: { flexDirection: "row", alignItems: "flex-start", marginBottom: 16, gap: 12 },
-  recipeItemIcon: { fontSize: 28, marginTop: 2 },
+  recipeItemIcon: { marginTop: 2 },
   recipeItemText: { flex: 1 },
   recipeItemName: { fontSize: 16, fontWeight: "700", color: "#1a1a1a", marginBottom: 4 },
   recipeItemTip: { fontSize: 13, color: "#888", lineHeight: 18 },
@@ -387,12 +418,16 @@ const styles = StyleSheet.create({
   modalCloseText: { color: "#fff", fontWeight: "700", fontSize: 16 },
   legendBox: { backgroundColor: "#D6EAA0", padding: 16, borderRadius: 14, marginBottom: 16 },
   legendTitle: { fontWeight: "bold", marginBottom: 10, color: "#1a1a1a", fontSize: 15 },
-  legendItem: { color: "#333", marginBottom: 6, fontSize: 13, lineHeight: 20 },
+  legendRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 6 },
+  legendItem: { color: "#333", fontSize: 13, lineHeight: 20, flex: 1 },
   disclaimer: { fontSize: 12, color: "#666", marginBottom: 20, lineHeight: 20 },
   bbcBtn: { marginTop: 8, backgroundColor: "#E3F0A3", borderRadius: 12, paddingVertical: 6, paddingHorizontal: 12, alignSelf: "flex-start" },
+  bbcBtnRow: { flexDirection: "row", alignItems: "center", gap: 4 },
   bbcBtnText: { fontSize: 12, color: "#2D6A2D", fontWeight: "700" },
   bbcHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, paddingBottom: 14, backgroundColor: "#2D6A2D" },
+  bbcHeaderTitleRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   bbcHeaderTitle: { fontSize: 18, fontWeight: "800", color: "#fff" },
   bbcCloseBtn: { backgroundColor: "rgba(255,255,255,0.2)", borderRadius: 16, paddingHorizontal: 12, paddingVertical: 6 },
+  bbcCloseRow: { flexDirection: "row", alignItems: "center", gap: 4 },
   bbcCloseText: { color: "#fff", fontWeight: "700", fontSize: 13 },
 });

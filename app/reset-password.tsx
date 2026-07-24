@@ -4,6 +4,7 @@ import {
   TouchableOpacity, ActivityIndicator
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 const API_BASE_URL = "https://api.wellvalet.com";
 
@@ -57,7 +58,7 @@ export default function ResetPasswordScreen() {
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <Text style={styles.emoji}>✅</Text>
+          <Ionicons name="checkmark-circle" size={56} color="#2D6A2D" style={styles.heroIcon} />
           <Text style={styles.title}>Password Updated</Text>
           <Text style={styles.subtitle}>
             Your password has been reset successfully. You can now log in with your new password.
@@ -76,7 +77,7 @@ export default function ResetPasswordScreen() {
         <Text style={styles.backText}>← Back</Text>
       </TouchableOpacity>
       <View style={styles.content}>
-        <Text style={styles.emoji}>🔑</Text>
+        <Ionicons name="key-outline" size={56} color="#2D6A2D" style={styles.heroIcon} />
         <Text style={styles.title}>Reset Password</Text>
         <Text style={styles.subtitle}>
           Enter the reset code from your email and choose a new password.
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   backButton: { marginBottom: 24 },
   backText: { fontSize: 15, color: "#2D6A2D", fontWeight: "600" },
   content: { flex: 1, alignItems: "center", justifyContent: "center" },
-  emoji: { fontSize: 56, marginBottom: 20 },
+  heroIcon: { marginBottom: 20 },
   title: { fontSize: 26, fontWeight: "900", color: "#2D6A2D", marginBottom: 12, textAlign: "center" },
   subtitle: { fontSize: 15, color: "#444", textAlign: "center", lineHeight: 24, marginBottom: 28 },
   inputCard: { backgroundColor: "#fff", borderRadius: 16, padding: 16, width: "100%", marginBottom: 16 },

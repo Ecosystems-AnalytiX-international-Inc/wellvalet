@@ -4,6 +4,7 @@ import {
   ScrollView, ActivityIndicator, Alert, RefreshControl
 } from "react-native";
 import { useRouter, useFocusEffect } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { isFamilyPlan } from "../components/premiumService";
 import OrderDeliveryModal from "../components/OrderDeliveryModal";
 import MarketplaceBrowserScreen from "../components/MarketplaceBrowserScreen";
@@ -150,7 +151,10 @@ export default function FamilyShoppingScreen() {
           <Text style={styles.backText}>← Back</Text>
         </TouchableOpacity>
         <View style={styles.headerCenter}>
-          <Text style={styles.headerTitle}>🛒 {familyData?.family_name}</Text>
+          <View style={styles.headerTitleRow}>
+            <Ionicons name="cart-outline" size={16} color="#fff" />
+            <Text style={styles.headerTitle}>{familyData?.family_name}</Text>
+          </View>
           <Text style={styles.headerSub}>{familyData?.member_count} members · {totalItems} items</Text>
         </View>
         <TouchableOpacity onPress={() => router.push("/family-manage")}>
@@ -185,7 +189,7 @@ export default function FamilyShoppingScreen() {
       >
         {shoppingList.length === 0 ? (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>🛒</Text>
+            <Ionicons name="cart-outline" size={48} color="#A0B884" style={styles.emptyIcon} />
             <Text style={styles.emptyTitle}>List is empty</Text>
             <Text style={styles.emptyText}>Add items above — your family will see them instantly!</Text>
           </View>
@@ -210,7 +214,7 @@ export default function FamilyShoppingScreen() {
                   <Text style={styles.itemText}>{item.item}</Text>
                   {member.is_me && (
                     <TouchableOpacity onPress={() => deleteItem(item.id)} style={styles.deleteButton}>
-                      <Text style={styles.deleteText}>✕</Text>
+                      <Ionicons name="close" size={16} color="#dc2626" />
                     </TouchableOpacity>
                   )}
                 </View>
@@ -222,12 +226,22 @@ export default function FamilyShoppingScreen() {
         {/* Bottom actions */}
         <View style={styles.bottomActions}>
           <TouchableOpacity style={styles.clearButton} onPress={clearMyItems}>
-            <Text style={styles.clearButtonText}>🗑️ Clear My Items</Text>
+            <View style={styles.actionButtonRow}>
+              <Ionicons name="trash-outline" size={14} color="#2D6A2D" />
+              <Text style={styles.clearButtonText}>Clear My Items</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.leaveButton} onPress={leaveFamily}>
-            <Text style={styles.leaveButtonText}>
-              {familyData?.is_admin ? "🗑️ Delete Group" : "👋 Leave Group"}
-            </Text>
+            <View style={styles.actionButtonRow}>
+              <Ionicons
+                name={familyData?.is_admin ? "trash-outline" : "exit-outline"}
+                size={14}
+                color="#dc2626"
+              />
+              <Text style={styles.leaveButtonText}>
+                {familyData?.is_admin ? "Delete Group" : "Leave Group"}
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -241,7 +255,7 @@ export default function FamilyShoppingScreen() {
             style={[styles.actionBtn, styles.orderBtnHalf]}
             onPress={() => setShowOrderModal(true)}
           >
-            <Text style={styles.actionBtnEmoji}>🚀</Text>
+            <Ionicons name="rocket-outline" size={22} color="#fff" style={styles.actionBtnIcon} />
             <Text style={styles.actionBtnText}>Order for Delivery</Text>
           </TouchableOpacity>
         )}
@@ -249,7 +263,7 @@ export default function FamilyShoppingScreen() {
           style={[styles.actionBtn, styles.scanBtnHalf]}
           onPress={() => router.push("/(tabs)/scan")}
         >
-          <Text style={styles.actionBtnEmoji}>📷</Text>
+          <Ionicons name="camera-outline" size={22} color="#fff" style={styles.actionBtnIcon} />
           <Text style={styles.actionBtnText}>Scan a Product</Text>
         </TouchableOpacity>
       </View>
@@ -282,6 +296,7 @@ const styles = StyleSheet.create({
   header: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 16, paddingTop: 60, backgroundColor: "#2D6A2D" },
   backText: { color: "#42D674", fontSize: 14, fontWeight: "600" },
   headerCenter: { alignItems: "center" },
+  headerTitleRow: { flexDirection: "row", alignItems: "center", gap: 6 },
   headerTitle: { fontSize: 16, fontWeight: "800", color: "#fff" },
   headerSub: { fontSize: 11, color: "#42D674", marginTop: 2 },
   manageText: { color: "#42D674", fontSize: 14, fontWeight: "600" },
@@ -292,7 +307,7 @@ const styles = StyleSheet.create({
   addButtonText: { color: "#fff", fontWeight: "700", fontSize: 15 },
   list: { flex: 1 },
   emptyState: { alignItems: "center", paddingTop: 60, paddingHorizontal: 40 },
-  emptyIcon: { fontSize: 48, marginBottom: 16 },
+  emptyIcon: { marginBottom: 16 },
   emptyTitle: { fontSize: 18, fontWeight: "700", color: "#2D6A2D", marginBottom: 8 },
   emptyText: { fontSize: 14, color: "#4a7a4a", textAlign: "center", lineHeight: 22 },
   memberSection: { marginBottom: 8 },
@@ -305,8 +320,8 @@ const styles = StyleSheet.create({
   itemBullet: { fontSize: 18, color: "#42D674", marginRight: 10 },
   itemText: { flex: 1, fontSize: 15, color: "#1a1a1a" },
   deleteButton: { padding: 6 },
-  deleteText: { fontSize: 14, color: "#dc2626", fontWeight: "700" },
   bottomActions: { flexDirection: "row", gap: 12, padding: 16, paddingTop: 24 },
+  actionButtonRow: { flexDirection: "row", alignItems: "center", gap: 6 },
   clearButton: { flex: 1, backgroundColor: "#fff", borderRadius: 20, paddingVertical: 12, alignItems: "center", borderWidth: 1, borderColor: "#2D6A2D" },
   clearButtonText: { fontSize: 14, color: "#2D6A2D", fontWeight: "600" },
   orderDeliveryBtn: { flexDirection: "row", alignItems: "center", backgroundColor: "#2D6A2D", borderRadius: 16, padding: 16, margin: 12, gap: 12 },
@@ -318,7 +333,7 @@ const styles = StyleSheet.create({
   actionBtn:      { flex: 1, borderRadius: 16, padding: 14, alignItems: "center", justifyContent: "center" },
   orderBtnHalf:   { backgroundColor: "#2D6A2D" },
   scanBtnHalf:    { backgroundColor: "#1565C0" },
-  actionBtnEmoji: { fontSize: 22, marginBottom: 4 },
+  actionBtnIcon:  { marginBottom: 4 },
   actionBtnText:  { fontSize: 13, fontWeight: "800", color: "#fff", textAlign: "center" },
   leaveButton: { flex: 1, backgroundColor: "#fff", borderRadius: 20, paddingVertical: 12, alignItems: "center", borderWidth: 1, borderColor: "#dc2626" },
   leaveButtonText: { fontSize: 14, color: "#dc2626", fontWeight: "600" },

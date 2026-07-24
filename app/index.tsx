@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from "react-native";
 import { useRouter } from "expo-router";
 import Svg, { Circle, Path, Line } from "react-native-svg";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("window");
 
@@ -76,9 +77,18 @@ export default function LandingScreen() {
 
         {/* Feature pills */}
         <View style={styles.pillRow}>
-          <View style={styles.pill}><Text style={styles.pillText}>🥗 Food</Text></View>
-          <View style={styles.pill}><Text style={styles.pillText}>💄 Beauty</Text></View>
-          <View style={styles.pill}><Text style={styles.pillText}>👨‍👩‍👧 Family</Text></View>
+          <View style={styles.pill}>
+            <MaterialCommunityIcons name="food-apple-outline" size={13} color="#2D6A2D" />
+            <Text style={styles.pillText}>Food</Text>
+          </View>
+          <View style={styles.pill}>
+            <MaterialCommunityIcons name="lipstick" size={13} color="#2D6A2D" />
+            <Text style={styles.pillText}>Beauty</Text>
+          </View>
+          <View style={styles.pill}>
+            <Ionicons name="people-outline" size={13} color="#2D6A2D" />
+            <Text style={styles.pillText}>Family</Text>
+          </View>
         </View>
       </View>
 
@@ -145,7 +155,7 @@ const styles = StyleSheet.create({
   appNameValet: { color: "#42D674", fontFamily: "Georgia" },
   tagline: { fontSize: 16, color: "#2D6A2D", fontWeight: "500", marginBottom: 20, letterSpacing: 0.3 },
   pillRow: { flexDirection: "row", gap: 8 },
-  pill: { backgroundColor: "#fff", borderRadius: 20, paddingHorizontal: 14, paddingVertical: 7, shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.06, shadowRadius: 4 },
+  pill: { flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: "#fff", borderRadius: 20, paddingHorizontal: 14, paddingVertical: 7, shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.06, shadowRadius: 4 },
   pillText: { fontSize: 13, color: "#2D6A2D", fontWeight: "600" },
   statsRow: { flexDirection: "row", backgroundColor: "#fff", borderRadius: 20, paddingVertical: 16, paddingHorizontal: 24, gap: 20, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.06, shadowRadius: 8 },
   statItem: { alignItems: "center" },

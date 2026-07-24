@@ -1,6 +1,7 @@
 import { ScrollView, Text, View, StyleSheet, TouchableOpacity, TextInput, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { getUserEmail } from "../components/authService";
 
 const API_BASE_URL = "https://api.wellvalet.com";
@@ -102,8 +103,14 @@ export default function ContactScreen() {
 
       <View style={styles.contactInfo}>
         <Text style={styles.contactInfoTitle}>Other ways to reach us:</Text>
-        <Text style={styles.contactInfoText}>📧 cruise.analytix@gmail.com</Text>
-        <Text style={styles.contactInfoText}>🌐 www.cruise-mu.com</Text>
+        <View style={styles.contactInfoRow}>
+          <Ionicons name="mail-outline" size={14} color="#2D6A2D" />
+          <Text style={styles.contactInfoText}>cruise.analytix@gmail.com</Text>
+        </View>
+        <View style={styles.contactInfoRow}>
+          <Ionicons name="globe-outline" size={14} color="#2D6A2D" />
+          <Text style={styles.contactInfoText}>www.cruise-mu.com</Text>
+        </View>
       </View>
 
     </ScrollView>
@@ -128,5 +135,6 @@ const styles = StyleSheet.create({
   sendButtonText: { fontSize: 16, color: "white", fontWeight: "600" },
   contactInfo: { backgroundColor: "#D6EAA0", borderRadius: 14, padding: 16 },
   contactInfoTitle: { fontSize: 14, fontWeight: "600", color: "#1a1a1a", marginBottom: 10 },
-  contactInfoText: { fontSize: 14, color: "#444", marginBottom: 6 },
+  contactInfoRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 6 },
+  contactInfoText: { fontSize: 14, color: "#444" },
 });

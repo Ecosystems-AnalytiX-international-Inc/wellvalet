@@ -5,6 +5,7 @@ import {
 } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Link, useRouter } from "expo-router";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { fetchWithAuth, getAuthToken } from "../../components/authService";
 import { getUserProfile } from "../../components/profileService";
 import { savePurchasedItem } from "../../components/historyService";
@@ -170,10 +171,10 @@ export default function ScanTab() {
   if (scanLimitReached) {
     return (
       <View style={styles.limitContainer}>
-        <Text style={styles.limitEmoji}>🔒</Text>
+        <Ionicons name="lock-closed" size={56} color="#fff" style={styles.limitIcon} />
         <Text style={styles.limitTitle}>Daily scan limit reached</Text>
         <Text style={styles.limitSub}>
-          You have used your 3 free scans for today. Scans refresh at midnight 🌙
+          You have used your 3 free scans for today. Scans refresh at midnight.
         </Text>
         <TouchableOpacity
           style={styles.limitCta}
@@ -197,11 +198,13 @@ export default function ScanTab() {
       <View style={styles.choiceContainer}>
         <View style={styles.choiceHeader}>
           <Text style={styles.choiceTitle}>WellValet</Text>
-          <Link href="/profile" style={styles.profileIcon}>👤</Link>
+          <Link href="/profile" style={styles.profileLink}>
+            <Ionicons name="person-circle-outline" size={30} color="#2D6A2D" />
+          </Link>
         </View>
 
         <Text style={styles.choiceSubtitle}>What would you like to scan today?</Text>
-        <Text style={styles.choiceTagline}>Personalised wellness scores for every product 🌿</Text>
+        <Text style={styles.choiceTagline}>Personalised wellness scores for every product</Text>
 
         {/* Food Card */}
         <TouchableOpacity
@@ -213,7 +216,7 @@ export default function ScanTab() {
           accessibilityHint="Scan any food barcode to receive instant wellness score and nutritional analysis"
         >
           <View style={styles.choiceCardInner}>
-            <Text style={styles.choiceCardIcon}>🥗</Text>
+            <MaterialCommunityIcons name="food-apple-outline" size={44} color="#2D6A2D" style={styles.choiceCardIcon} />
             <View style={styles.choiceCardText}>
               <Text style={styles.choiceCardTitle}>Food Product</Text>
               <Text style={styles.choiceCardDesc}>
@@ -241,7 +244,7 @@ export default function ScanTab() {
           accessibilityHint="Point camera at skincare or cosmetics ingredients label for safety analysis"
         >
           <View style={styles.choiceCardInner}>
-            <Text style={styles.choiceCardIcon}>💄</Text>
+            <MaterialCommunityIcons name="lipstick" size={44} color="#7B1FA2" style={styles.choiceCardIcon} />
             <View style={styles.choiceCardText}>
               <Text style={[styles.choiceCardTitle, styles.beautyTitle]}>Beauty Product</Text>
               <Text style={styles.choiceCardDesc}>
@@ -259,9 +262,13 @@ export default function ScanTab() {
           </View>
         </TouchableOpacity>
 
-        <Text style={styles.choiceFooter}>
-          ✅ Food scanning always free · 💄 Beauty scanning included in Premium
-        </Text>
+        <View style={styles.choiceFooterRow}>
+          <Ionicons name="checkmark-circle" size={13} color="#4a7a4a" />
+          <Text style={styles.choiceFooter}>Food scanning always free</Text>
+          <Text style={styles.choiceFooter}>·</Text>
+          <MaterialCommunityIcons name="lipstick" size={13} color="#4a7a4a" />
+          <Text style={styles.choiceFooter}>Beauty scanning included in Premium</Text>
+        </View>
       </View>
     );
   }
@@ -272,7 +279,7 @@ export default function ScanTab() {
       return (
         <View style={styles.center}>
           <View style={{ backgroundColor: "#fff", borderRadius: 20, padding: 28, margin: 24, alignItems: "center" }}>
-            <Text style={{ fontSize: 48, marginBottom: 12 }}>💄</Text>
+            <MaterialCommunityIcons name="lipstick" size={48} color="#7B1FA2" style={{ marginBottom: 12 }} />
             <Text style={{ fontSize: 20, fontWeight: "800", color: "#2D6A2D", marginBottom: 10 }}>Premium Feature</Text>
             <Text style={{ fontSize: 14, color: "#555", textAlign: "center", lineHeight: 22, marginBottom: 20 }}>
               Beauty product scanning is available to Premium members only.
@@ -319,24 +326,34 @@ export default function ScanTab() {
             <Text style={styles.backBtnText}>← Back</Text>
           </TouchableOpacity>
           <Text style={styles.scanTitle}>Scan Food Barcode</Text>
-          <Link href="/profile" style={styles.profileIcon}>👤</Link>
+          <Link href="/profile" style={styles.profileLink}>
+            <Ionicons name="person-circle-outline" size={28} color="#fff" />
+          </Link>
         </View>
         <View style={styles.cameraWrapper}>
           <CameraView style={styles.camera} onBarcodeScanned={handleFoodScan} />
           {!premium && scansRemaining !== null && (
             <View style={styles.scanCounter}>
-              <Text style={styles.scanCounterText}>
-                {scansRemaining === 0
-                  ? "No free scans left today 🔒"
-                  : `${scansRemaining} free scan${scansRemaining !== 1 ? "s" : ""} left today`}
-              </Text>
+              {scansRemaining === 0 ? (
+                <>
+                  <Ionicons name="lock-closed" size={13} color="#fff" />
+                  <Text style={styles.scanCounterText}>No free scans left today</Text>
+                </>
+              ) : (
+                <Text style={styles.scanCounterText}>
+                  {`${scansRemaining} free scan${scansRemaining !== 1 ? "s" : ""} left today`}
+                </Text>
+              )}
             </View>
           )}
         </View>
         <View style={styles.scanHintBar}>
-          <Text style={styles.scanHintText}>
-            📦 Point camera at the barcode on the product packaging
-          </Text>
+          <View style={styles.scanHintRow}>
+            <Ionicons name="cube-outline" size={14} color="#fff" />
+            <Text style={styles.scanHintText}>
+              Point camera at the barcode on the product packaging
+            </Text>
+          </View>
         </View>
       </View>
     );
@@ -358,19 +375,27 @@ export default function ScanTab() {
         <TouchableOpacity onPress={resetAll} style={styles.backBtn}>
           <Text style={styles.backBtnText}>← Scan Again</Text>
         </TouchableOpacity>
-        <Link href="/profile" style={styles.profileIcon}>👤</Link>
+        <Link href="/profile" style={styles.profileLink}>
+          <Ionicons name="person-circle-outline" size={30} color="#2D6A2D" />
+        </Link>
       </View>
 
       {result?.error ? (
         <View style={styles.errorCard}>
-          <Text style={styles.errorTitle}>🔍 Product Not Found</Text>
+          <View style={styles.errorTitleRow}>
+            <Ionicons name="search-outline" size={20} color="#2D6A2D" />
+            <Text style={styles.errorTitle}>Product Not Found</Text>
+          </View>
           <Text style={styles.errorHint}>This barcode is not in our food database yet.</Text>
           <Text style={styles.errorHint}>Is this a beauty or personal care product?</Text>
           <TouchableOpacity
             style={styles.ocrButton}
             onPress={() => { setScanMode("beauty"); setResult(null); setScanned(false); scanningRef.current = false; }}
           >
-            <Text style={styles.ocrButtonText}>💄 Try Beauty Scan Instead</Text>
+            <View style={styles.ocrButtonRow}>
+              <MaterialCommunityIcons name="lipstick" size={15} color="#fff" />
+              <Text style={styles.ocrButtonText}>Try Beauty Scan Instead</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.scanAgainButtonAlt} onPress={resetAll}>
             <Text style={styles.scanAgainTextAlt}>← Scan a Different Product</Text>
@@ -387,7 +412,10 @@ export default function ScanTab() {
 
           {result?.allergen_alert?.has_alert && (
             <View style={styles.alertBanner}>
-              <Text style={styles.alertTitle}>⚠️ ALLERGEN WARNING</Text>
+              <View style={styles.alertTitleRow}>
+                <Ionicons name="warning-outline" size={16} color="#92400E" />
+                <Text style={styles.alertTitle}>ALLERGEN WARNING</Text>
+              </View>
               <Text style={styles.alertMessage}>{result?.allergen_alert?.message}</Text>
               {result?.allergen_alert?.matches?.map((match: any, index: number) => (
                 <Text key={index} style={styles.alertItem}>
@@ -404,7 +432,10 @@ export default function ScanTab() {
               <View style={styles.nutritionSection}>
                 <Text style={styles.sectionTitle}>Nutrition per 100g</Text>
                 {result?.nutrition?.calories_100g == null && result?.nutrition?.sugar_100g == null && result?.nutrition?.fat_100g == null && result?.nutrition?.salt_100g == null ? (
-                  <Text style={styles.warningText}>⚠️ Nutritional data not available. Please check the product label directly.</Text>
+                  <View style={styles.warningRow}>
+                    <Ionicons name="warning-outline" size={14} color="#F59E0B" />
+                    <Text style={styles.warningText}>Nutritional data not available. Please check the product label directly.</Text>
+                  </View>
                 ) : null}
                 <Text style={styles.nutritionText}>Calories: {result?.nutrition?.calories_100g != null ? result.nutrition.calories_100g > 0 ? Number(result.nutrition.calories_100g).toFixed(1) + " kcal" : "N/A" : "N/A"}</Text>
                 <Text style={styles.nutritionText}>Sugar: {result?.nutrition?.sugar_100g != null ? result.nutrition.sugar_100g > 0 ? Number(result.nutrition.sugar_100g).toFixed(1) + " g" : "N/A" : "N/A"}</Text>
@@ -423,7 +454,7 @@ export default function ScanTab() {
                     onPress={() => router.push("/upgrade")}
                     activeOpacity={0.85}
                   >
-                    <Text style={styles.lockBannerIcon}>🔒</Text>
+                    <Ionicons name="lock-closed" size={22} color="#fff" />
                     <View style={styles.lockBannerText}>
                       <Text style={styles.lockBannerTitle}>Full ingredients & allergen detail</Text>
                       <Text style={styles.lockBannerSub}>Unlock with Premium →</Text>
@@ -433,9 +464,17 @@ export default function ScanTab() {
                 {result?.ingredients?.map((item: string, index: number) => {
                   const highlighted = isAllergenIngredient(item);
                   return (
-                    <Text key={index} style={[styles.ingredientText, highlighted && styles.allergenIngredient]}>
-                      • {item}{highlighted ? "  ⚠️ allergen match" : ""}
-                    </Text>
+                    <View key={index} style={styles.ingredientRow}>
+                      <Text style={[styles.ingredientText, highlighted && styles.allergenIngredient]}>
+                        • {item}
+                      </Text>
+                      {highlighted && (
+                        <View style={styles.allergenTag}>
+                          <Ionicons name="warning-outline" size={11} color="#B45309" />
+                          <Text style={styles.allergenTagText}>allergen match</Text>
+                        </View>
+                      )}
+                    </View>
                   );
                 })}
               </View>
@@ -448,7 +487,7 @@ export default function ScanTab() {
                 <Text style={styles.premiumLockBlurText}>Fat: ••••</Text>
               </View>
               <View style={styles.premiumLockOverlay}>
-                <Text style={styles.premiumLockIcon}>🔒</Text>
+                <Ionicons name="lock-closed" size={36} color="#2D6A2D" style={styles.premiumLockIcon} />
                 <Text style={styles.premiumLockTitle}>Premium Feature</Text>
                 <Text style={styles.premiumLockDesc}>
                   Unlock full nutrition details, personalised recommendations, better alternatives and ingredient list.
@@ -456,7 +495,10 @@ export default function ScanTab() {
                 <TouchableOpacity style={styles.premiumLockButton} onPress={() => router.push("/upgrade")}>
                   <Text style={styles.premiumLockButtonText}>Go Premium as from C$4.17/month</Text>
                 </TouchableOpacity>
-                <Text style={styles.premiumLockFree}>✅ Score & allergen alerts always free</Text>
+                <View style={styles.premiumLockFreeRow}>
+                  <Ionicons name="checkmark-circle" size={12} color="#4a7a4a" />
+                  <Text style={styles.premiumLockFree}>Score & allergen alerts always free</Text>
+                </View>
               </View>
             </View>
           )}
@@ -497,7 +539,7 @@ const styles = StyleSheet.create({
   choiceCard: { backgroundColor: "#fff", borderRadius: 20, padding: 20, marginBottom: 16, shadowColor: "#2D6A2D", shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.12, shadowRadius: 10, borderLeftWidth: 5, borderLeftColor: "#2D6A2D" },
   beautyCard: { borderLeftColor: "#7B1FA2" },
   choiceCardInner: { flexDirection: "row", gap: 16 },
-  choiceCardIcon: { fontSize: 44, marginTop: 4 },
+  choiceCardIcon: { marginTop: 4 },
   choiceCardText: { flex: 1 },
   choiceCardTitle: { fontSize: 20, fontWeight: "800", color: "#2D6A2D", marginBottom: 6 },
   beautyTitle: { color: "#7B1FA2" },
@@ -510,7 +552,8 @@ const styles = StyleSheet.create({
   choiceCardArrow: { position: "absolute", right: 20, top: "50%", backgroundColor: "#2D6A2D", width: 32, height: 32, borderRadius: 16, justifyContent: "center", alignItems: "center" },
   beautyArrow: { backgroundColor: "#7B1FA2" },
   choiceCardArrowText: { color: "#fff", fontSize: 16, fontWeight: "800" },
-  choiceFooter: { fontSize: 12, color: "#4a7a4a", textAlign: "center", marginTop: 16, lineHeight: 20 },
+  choiceFooterRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 4, marginTop: 16 },
+  choiceFooter: { fontSize: 12, color: "#4a7a4a", lineHeight: 20 },
 
   // Food scan screen
   container: { flex: 1, backgroundColor: "#000" },
@@ -518,10 +561,11 @@ const styles = StyleSheet.create({
   backBtn: { padding: 8 },
   backBtnText: { color: "#42D674", fontSize: 15, fontWeight: "600" },
   scanTitle: { fontSize: 16, color: "#fff", fontWeight: "700" },
-  profileIcon: { fontSize: 28, textDecorationLine: "none" },
+  profileLink: { textDecorationLine: "none" },
   cameraWrapper: { flex: 1 },
   camera: { flex: 1 },
   scanHintBar: { backgroundColor: "rgba(0,0,0,0.7)", padding: 16, alignItems: "center" },
+  scanHintRow: { flexDirection: "row", alignItems: "center", gap: 6 },
   scanHintText: { color: "#fff", fontSize: 14, textAlign: "center" },
 
   // Loading
@@ -537,28 +581,34 @@ const styles = StyleSheet.create({
   productNameText: { fontSize: 20, fontWeight: "800", color: "#1a1a1a" },
   brandText: { fontSize: 15, color: "#555" },
   alertBanner: { backgroundColor: "#FFF3CD", borderRadius: 12, padding: 14, marginBottom: 12, borderLeftWidth: 4, borderLeftColor: "#F59E0B" },
-  alertTitle: { fontSize: 15, fontWeight: "800", color: "#92400E", marginBottom: 4 },
+  alertTitleRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 4 },
+  alertTitle: { fontSize: 15, fontWeight: "800", color: "#92400E" },
   alertMessage: { fontSize: 14, color: "#92400E", marginBottom: 4 },
   alertItem: { fontSize: 13, color: "#B45309", marginTop: 2 },
   nutritionSection: { backgroundColor: "#fff", borderRadius: 16, padding: 16, marginBottom: 12 },
   sectionTitle: { fontSize: 15, fontWeight: "700", color: "#2D6A2D", marginBottom: 10 },
   nutritionText: { fontSize: 14, color: "#333", marginBottom: 4 },
-  warningText: { fontSize: 13, color: "#F59E0B", marginBottom: 8 },
+  warningRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 8 },
+  warningText: { fontSize: 13, color: "#F59E0B", flex: 1 },
   recommendationCard: { backgroundColor: "#fff", borderRadius: 16, padding: 16, marginBottom: 12 },
   recommendationTitle: { fontSize: 14, fontWeight: "700", color: "#2D6A2D", marginBottom: 6, marginTop: 10 },
   recommendationText: { fontSize: 14, color: "#333", lineHeight: 22 },
-  ingredientText: { fontSize: 13, color: "#444", marginBottom: 3 },
+  ingredientRow: { flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 8, marginBottom: 3 },
+  ingredientText: { fontSize: 13, color: "#444" },
   allergenIngredient: { color: "#B45309", fontWeight: "600" },
+  allergenTag: { flexDirection: "row", alignItems: "center", gap: 3 },
+  allergenTagText: { fontSize: 11, color: "#B45309", fontWeight: "600" },
   premiumLock: { backgroundColor: "#fff", borderRadius: 16, padding: 20, marginBottom: 12, alignItems: "center" },
   premiumLockBlur: { width: "100%", marginBottom: 16 },
   premiumLockBlurText: { fontSize: 14, color: "#ddd", marginBottom: 4 },
   premiumLockOverlay: { alignItems: "center" },
-  premiumLockIcon: { fontSize: 36, marginBottom: 8 },
+  premiumLockIcon: { marginBottom: 8 },
   premiumLockTitle: { fontSize: 18, fontWeight: "800", color: "#2D6A2D", marginBottom: 8 },
   premiumLockDesc: { fontSize: 14, color: "#555", textAlign: "center", marginBottom: 16, lineHeight: 22 },
   premiumLockButton: { backgroundColor: "#2D6A2D", borderRadius: 25, paddingVertical: 12, paddingHorizontal: 24 },
   premiumLockButtonText: { color: "#fff", fontWeight: "700", fontSize: 15 },
-  premiumLockFree: { fontSize: 12, color: "#4a7a4a", marginTop: 10 },
+  premiumLockFreeRow: { flexDirection: "row", alignItems: "center", gap: 4, marginTop: 10 },
+  premiumLockFree: { fontSize: 12, color: "#4a7a4a" },
   promptBox: { backgroundColor: "#fff", borderRadius: 16, padding: 16, marginBottom: 12 },
   promptTitle: { fontSize: 15, fontWeight: "700", color: "#2D6A2D", marginBottom: 12, textAlign: "center" },
   promptButtons: { flexDirection: "row", gap: 10 },
@@ -573,16 +623,18 @@ const styles = StyleSheet.create({
   scanAgainButtonAlt: { marginTop: 16, paddingVertical: 10 },
   scanAgainTextAlt: { fontSize: 14, color: "#2D6A2D", fontWeight: "600", textAlign: "center" },
   errorCard: { backgroundColor: "#fff", borderRadius: 16, padding: 24, marginBottom: 16, alignItems: "center" },
-  errorTitle: { fontSize: 20, fontWeight: "800", color: "#2D6A2D", marginBottom: 12 },
+  errorTitleRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 12 },
+  errorTitle: { fontSize: 20, fontWeight: "800", color: "#2D6A2D" },
   errorHint: { fontSize: 14, color: "#555", textAlign: "center", marginBottom: 8, lineHeight: 22 },
   errorHintSmall: { fontSize: 12, color: "#888", textAlign: "center", marginTop: 8, lineHeight: 18, paddingHorizontal: 10 },
   ocrButton: { backgroundColor: "#7B1FA2", borderRadius: 25, paddingVertical: 14, paddingHorizontal: 24, alignItems: "center", marginTop: 12 },
+  ocrButtonRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   ocrButtonText: { color: "#fff", fontWeight: "700", fontSize: 15 },
 
   // Scan limit modal
   limitContainer:   { flex: 1, backgroundColor: "#1a3a1a", justifyContent: "center",
                        alignItems: "center", padding: 32 },
-  limitEmoji:       { fontSize: 56, marginBottom: 16 },
+  limitIcon:        { marginBottom: 16 },
   limitTitle:       { fontSize: 24, fontWeight: "900", color: "#fff",
                        textAlign: "center", marginBottom: 12 },
   limitSub:         { fontSize: 15, color: "rgba(255,255,255,0.7)", textAlign: "center",
@@ -595,13 +647,13 @@ const styles = StyleSheet.create({
                        textDecorationLine: "underline" },
   // Scan counter
   scanCounter:      { position: "absolute", bottom: 100, alignSelf: "center",
+                       flexDirection: "row", alignItems: "center", gap: 6,
                        backgroundColor: "rgba(0,0,0,0.6)", borderRadius: 20,
                        paddingHorizontal: 16, paddingVertical: 8 },
   scanCounterText:  { color: "#fff", fontSize: 13, fontWeight: "600" },
   // Partial lock banner
   lockBanner:       { flexDirection: "row", alignItems: "center", backgroundColor: "#1a3a1a",
                        borderRadius: 12, padding: 14, marginBottom: 12, gap: 12 },
-  lockBannerIcon:   { fontSize: 22 },
   lockBannerText:   { flex: 1 },
   lockBannerTitle:  { fontSize: 14, fontWeight: "700", color: "#fff" },
   lockBannerSub:    { fontSize: 12, color: "#42D674", marginTop: 2 },

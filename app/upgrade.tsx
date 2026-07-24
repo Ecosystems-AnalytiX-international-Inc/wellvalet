@@ -1,9 +1,21 @@
 import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { setPremium, setFamilyPlan } from "../components/premiumService";
 
 const API_BASE_URL = "https://api.wellvalet.com";
+
+type FeatureIcon =
+  | { family: "Ionicons"; name: React.ComponentProps<typeof Ionicons>["name"] }
+  | { family: "MaterialCommunityIcons"; name: React.ComponentProps<typeof MaterialCommunityIcons>["name"] };
+
+function FeatureIcon({ icon, size, color }: { icon: FeatureIcon; size: number; color: string }) {
+  if (icon.family === "MaterialCommunityIcons") {
+    return <MaterialCommunityIcons name={icon.name} size={size} color={color} />;
+  }
+  return <Ionicons name={icon.name} size={size} color={color} />;
+}
 
 const DEFAULT_PLANS = [
   {
@@ -45,17 +57,17 @@ const DEFAULT_PLANS = [
   },
 ];
 
-const PREMIUM_FEATURES = [
-  { icon: "🔬", title: "Full Nutrition Analysis", desc: "Calories, Sugar, Fat and Salt per 100g for every scanned product." },
-  { icon: "🎯", title: "Personalised Recommendations", desc: "AI-powered advice tailored to your age, weight, goals and health conditions." },
-  { icon: "💡", title: "Better Alternative Suggestions", desc: "Smarter choices suggested every time you scan a product rated Care." },
-  { icon: "📋", title: "Full Ingredient List", desc: "Complete ingredient breakdown with allergen highlights." },
-  { icon: "📊", title: "Purchase History", desc: "Track every product you have bagged and filter by Good, Moderate or Care." },
-  { icon: "🍽️", title: "Weekly Meal Planner", desc: "Dietitian-inspired meal plans generated from your purchase history." },
-  { icon: "👤", title: "Wellness Profile", desc: "Personalise your experience with your health goals, conditions and allergies." },
-  { icon: "💄", title: "Beauty Product Scanning", desc: "Scan any beauty or personal care product and get a full ingredient safety analysis." },
-  { icon: "📷", title: "OCR Ingredient Scanner", desc: "Point your camera at any ingredients label and get an instant safety analysis." },
-  { icon: "👨‍👩‍👧‍👦", title: "Family Shopping List", desc: "Share a live shopping list with up to 4 family members. See who added what!" },
+const PREMIUM_FEATURES: { icon: FeatureIcon; title: string; desc: string }[] = [
+  { icon: { family: "MaterialCommunityIcons", name: "flask-outline" }, title: "Full Nutrition Analysis", desc: "Calories, Sugar, Fat and Salt per 100g for every scanned product." },
+  { icon: { family: "Ionicons", name: "locate-outline" },              title: "Personalised Recommendations", desc: "AI-powered advice tailored to your age, weight, goals and health conditions." },
+  { icon: { family: "Ionicons", name: "bulb-outline" },                title: "Better Alternative Suggestions", desc: "Smarter choices suggested every time you scan a product rated Care." },
+  { icon: { family: "Ionicons", name: "clipboard-outline" },           title: "Full Ingredient List", desc: "Complete ingredient breakdown with allergen highlights." },
+  { icon: { family: "Ionicons", name: "bar-chart-outline" },           title: "Purchase History", desc: "Track every product you have bagged and filter by Good, Moderate or Care." },
+  { icon: { family: "Ionicons", name: "restaurant-outline" },          title: "Weekly Meal Planner", desc: "Dietitian-inspired meal plans generated from your purchase history." },
+  { icon: { family: "Ionicons", name: "person-outline" },              title: "Wellness Profile", desc: "Personalise your experience with your health goals, conditions and allergies." },
+  { icon: { family: "MaterialCommunityIcons", name: "lipstick" },      title: "Beauty Product Scanning", desc: "Scan any beauty or personal care product and get a full ingredient safety analysis." },
+  { icon: { family: "Ionicons", name: "camera-outline" },              title: "OCR Ingredient Scanner", desc: "Point your camera at any ingredients label and get an instant safety analysis." },
+  { icon: { family: "Ionicons", name: "people-outline" },              title: "Family Shopping List", desc: "Share a live shopping list with up to 4 family members. See who added what!" },
 ];
 
 export default function UpgradeScreen() {
@@ -82,7 +94,7 @@ export default function UpgradeScreen() {
                         ? `C$${Number(p.price).toFixed(2)} billed annually`
                         : `C$${Number(p.price).toFixed(2)} billed monthly`,
             saving:   p.trial_days > 0
-                        ? `🎁 First ${p.trial_days} days FREE, then C$${Number(p.price).toFixed(2)}${p.period}`
+                        ? `First ${p.trial_days} days FREE, then C$${Number(p.price).toFixed(2)}${p.period}`
                         : null,
             color:    p.color,
             family:   p.is_family,
@@ -101,7 +113,7 @@ export default function UpgradeScreen() {
 
   const handleSubscribe = async () => {
     Alert.alert(
-      "Coming Soon! 🎉",
+      "Coming Soon!",
       "In-app payments will be available when WellValet launches on the App Store and Google Play.\n\nFor now, we are activating Premium for you to test all features!",
       [
         {
@@ -114,7 +126,7 @@ export default function UpgradeScreen() {
               await setFamilyPlan(false);
             }
             Alert.alert(
-              "Premium Activated! ⭐",
+              "Premium Activated!",
               selectedPlan === "family"
                 ? "Family Plan activated! You can now set up your family shopping list."
                 : "You now have full access to all Premium features. Enjoy WellValet!",
@@ -142,7 +154,7 @@ export default function UpgradeScreen() {
       </TouchableOpacity>
 
       <View style={styles.hero}>
-        <Text style={styles.heroEmoji}>⭐</Text>
+        <Ionicons name="star" size={48} color="#FFD54F" style={styles.heroIcon} />
         <Text style={styles.heroTitle}>Go Premium</Text>
         <Text style={styles.heroSubtitle}>Unlock the full WellValet experience</Text>
         <Text style={styles.heroFrom}>from C$4.17/month</Text>
@@ -172,11 +184,11 @@ export default function UpgradeScreen() {
             </View>
             <Text style={styles.planTotal}>{p.total}</Text>
             {p.saving && (
-              <Text style={[styles.planSaving, { color: p.color }]}>🎉 {p.saving}</Text>
+              <Text style={[styles.planSaving, { color: p.color }]}>{p.saving}</Text>
             )}
             {selectedPlan === p.id && (
               <View style={[styles.planSelectedDot, { backgroundColor: p.color }]}>
-                <Text style={styles.planSelectedCheck}>✓</Text>
+                <Ionicons name="checkmark" size={14} color="#fff" />
               </View>
             )}
           </TouchableOpacity>
@@ -221,7 +233,9 @@ export default function UpgradeScreen() {
       <Text style={styles.sectionTitle}>What you get with Premium</Text>
       {PREMIUM_FEATURES.map((feature, index) => (
         <View key={index} style={styles.featureCard}>
-          <Text style={styles.featureIcon}>{feature.icon}</Text>
+          <View style={styles.featureIconWrap}>
+            <FeatureIcon icon={feature.icon} size={26} color="#2D6A2D" />
+          </View>
           <View style={styles.featureContent}>
             <Text style={styles.featureTitle}>{feature.title}</Text>
             <Text style={styles.featureDesc}>{feature.desc}</Text>
@@ -250,8 +264,20 @@ function ComparisonRow({ feature, free, premium }: { feature: string; free: bool
   return (
     <View style={styles.comparisonRow}>
       <Text style={styles.comparisonFeature}>{feature}</Text>
-      <Text style={styles.comparisonValue}>{free ? "✅" : "❌"}</Text>
-      <Text style={styles.comparisonValue}>{premium ? "✅" : "❌"}</Text>
+      <View style={styles.comparisonValue}>
+        <Ionicons
+          name={free ? "checkmark-circle" : "close-circle"}
+          size={18}
+          color={free ? "#2D6A2D" : "#c0392b"}
+        />
+      </View>
+      <View style={styles.comparisonValue}>
+        <Ionicons
+          name={premium ? "checkmark-circle" : "close-circle"}
+          size={18}
+          color={premium ? "#2D6A2D" : "#c0392b"}
+        />
+      </View>
     </View>
   );
 }
@@ -262,7 +288,7 @@ const styles = StyleSheet.create({
   backButton: { marginBottom: 20 },
   backText: { fontSize: 16, color: "#2D6A2D", fontWeight: "600" },
   hero: { backgroundColor: "#2D6A2D", borderRadius: 24, padding: 32, alignItems: "center", marginBottom: 24 },
-  heroEmoji: { fontSize: 48, marginBottom: 12 },
+  heroIcon: { marginBottom: 12 },
   heroTitle: { fontSize: 32, fontWeight: "900", color: "white", marginBottom: 8 },
   heroSubtitle: { fontSize: 16, color: "rgba(255,255,255,0.8)", textAlign: "center", marginBottom: 8 },
   heroFrom: { fontSize: 14, color: "#42D674", fontWeight: "700" },
@@ -280,7 +306,6 @@ const styles = StyleSheet.create({
   planTotal: { fontSize: 13, color: "#666", marginBottom: 4 },
   planSaving: { fontSize: 13, fontWeight: "600" },
   planSelectedDot: { position: "absolute", top: 16, right: 16, width: 24, height: 24, borderRadius: 12, alignItems: "center", justifyContent: "center" },
-  planSelectedCheck: { color: "white", fontSize: 14, fontWeight: "700" },
   subscribeButton: { borderRadius: 25, paddingVertical: 18, alignItems: "center", marginBottom: 24 },
   subscribeButtonText: { fontSize: 17, fontWeight: "700", color: "white" },
   subscribeButtonSub: { fontSize: 12, color: "rgba(255,255,255,0.8)", marginTop: 4 },
@@ -290,10 +315,10 @@ const styles = StyleSheet.create({
   comparisonHeaderFree: { flex: 1, fontSize: 14, fontWeight: "700", color: "#666", textAlign: "center" },
   comparisonHeaderPremium: { flex: 1, fontSize: 14, fontWeight: "700", color: "#2D6A2D", textAlign: "center" },
   comparisonFeature: { flex: 2, fontSize: 13, color: "#444" },
-  comparisonValue: { flex: 1, fontSize: 16, textAlign: "center" },
+  comparisonValue: { flex: 1, alignItems: "center", justifyContent: "center" },
   divider: { height: 1, backgroundColor: "#f0f0f0", marginVertical: 4 },
   featureCard: { backgroundColor: "white", borderRadius: 14, padding: 16, marginBottom: 12, flexDirection: "row", alignItems: "flex-start", gap: 14 },
-  featureIcon: { fontSize: 28, marginTop: 2 },
+  featureIconWrap: { width: 32, alignItems: "center", marginTop: 2 },
   featureContent: { flex: 1 },
   featureTitle: { fontSize: 15, fontWeight: "700", color: "#1a1a1a", marginBottom: 4 },
   featureDesc: { fontSize: 13, color: "#666", lineHeight: 20 },

@@ -5,6 +5,7 @@ import {
 } from "react-native";
 import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from "@expo/vector-icons";
 import { fetchWithAuth, getUserEmail } from "../../components/authService";
 import { isFamilyPlan } from "../../components/premiumService";
 import OrderDeliveryModal from "../../components/OrderDeliveryModal";
@@ -212,7 +213,10 @@ export default function ShoppingTab() {
       <View style={styles.wrapper}>
         <View style={styles.header}>
           <View style={styles.headerCenter}>
-            <Text style={styles.headerTitle}>🛒 My Shopping List</Text>
+            <View style={styles.headerTitleRow}>
+              <Ionicons name="cart-outline" size={20} color="#fff" />
+              <Text style={styles.headerTitle}>My Shopping List</Text>
+            </View>
             <Text style={styles.headerSub}>Personal · {items.length} item{items.length !== 1 ? "s" : ""}</Text>
           </View>
           {items.length > 0 && (
@@ -236,7 +240,7 @@ export default function ShoppingTab() {
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#2D6A2D" />}>
           {items.length === 0 ? (
             <View style={styles.emptyState}>
-              <Text style={styles.emptyIcon}>🛒</Text>
+              <Ionicons name="cart-outline" size={48} color="#A0B884" style={styles.emptyIcon} />
               <Text style={styles.emptyTitle}>Your list is empty</Text>
               <Text style={styles.emptyText}>Add items above to get started!</Text>
             </View>
@@ -246,7 +250,7 @@ export default function ShoppingTab() {
                 <View style={styles.itemDot} />
                 <Text style={styles.itemText}>{typeof item === "string" ? item : item.text}</Text>
                 <TouchableOpacity onPress={() => deletePersonalItem(i)} style={styles.deleteBtn}>
-                  <Text style={styles.deleteText}>✕</Text>
+                  <Ionicons name="close" size={18} color="#dc2626" />
                 </TouchableOpacity>
               </View>
             ))
@@ -255,12 +259,12 @@ export default function ShoppingTab() {
             <View style={styles.actionRow}>
               <TouchableOpacity style={[styles.actionBtn, styles.orderBtnHalf]}
                 onPress={() => setShowOrderModal(true)}>
-                <Text style={styles.actionBtnEmoji}>🚀</Text>
+                <Ionicons name="rocket-outline" size={22} color="#fff" style={styles.actionBtnIcon} />
                 <Text style={styles.actionBtnText}>Order for Delivery</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.actionBtn, styles.scanBtnHalf]}
                 onPress={() => router.push("/(tabs)/scan")}>
-                <Text style={styles.actionBtnEmoji}>📷</Text>
+                <Ionicons name="camera-outline" size={22} color="#fff" style={styles.actionBtnIcon} />
                 <Text style={styles.actionBtnText}>Scan a Product</Text>
               </TouchableOpacity>
             </View>
@@ -285,7 +289,10 @@ export default function ShoppingTab() {
       <View style={styles.wrapper}>
         <View style={styles.header}>
           <View style={styles.headerCenter}>
-            <Text style={styles.headerTitle}>🛒 {familyName}</Text>
+            <View style={styles.headerTitleRow}>
+              <Ionicons name="cart-outline" size={20} color="#fff" />
+              <Text style={styles.headerTitle}>{familyName}</Text>
+            </View>
             <Text style={styles.headerSub}>Family List · {totalItems} item{totalItems !== 1 ? "s" : ""}</Text>
           </View>
           <TouchableOpacity onPress={() => router.push("/family-manage")}>
@@ -309,7 +316,7 @@ export default function ShoppingTab() {
             <ActivityIndicator size="large" color="#2D6A2D" style={{ marginTop: 40 }} />
           ) : familyList.length === 0 ? (
             <View style={styles.emptyState}>
-              <Text style={styles.emptyIcon}>🛒</Text>
+              <Ionicons name="cart-outline" size={48} color="#A0B884" style={styles.emptyIcon} />
               <Text style={styles.emptyTitle}>Family list is empty</Text>
               <Text style={styles.emptyText}>Add items above — members will see them instantly!</Text>
             </View>
@@ -337,7 +344,7 @@ export default function ShoppingTab() {
                     {member.is_me && (
                       <TouchableOpacity onPress={() => deleteFamilyItem(item.id)}
                         style={styles.deleteBtn}>
-                        <Text style={styles.deleteText}>✕</Text>
+                        <Ionicons name="close" size={18} color="#dc2626" />
                       </TouchableOpacity>
                     )}
                   </View>
@@ -350,19 +357,19 @@ export default function ShoppingTab() {
               {(profileType === "FAM_ADMIN" || profileType === "FAM_MEMBER") ? (
                 <TouchableOpacity style={[styles.actionBtn, styles.orderBtnHalf]}
                   onPress={() => setShowOrderModal(true)}>
-                  <Text style={styles.actionBtnEmoji}>🚀</Text>
+                  <Ionicons name="rocket-outline" size={22} color="#fff" style={styles.actionBtnIcon} />
                   <Text style={styles.actionBtnText}>Order for Delivery</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity style={[styles.actionBtn, styles.orderBtnHalf]}
                   onPress={() => router.push("/upgrade")}>
-                  <Text style={styles.actionBtnEmoji}>⭐</Text>
+                  <Ionicons name="star" size={22} color="#FFD54F" style={styles.actionBtnIcon} />
                   <Text style={styles.actionBtnText}>Shop Online? Unlock Premium!</Text>
                 </TouchableOpacity>
               )}
               <TouchableOpacity style={[styles.actionBtn, styles.scanBtnHalf]}
                 onPress={() => router.push("/(tabs)/scan")}>
-                <Text style={styles.actionBtnEmoji}>📷</Text>
+                <Ionicons name="camera-outline" size={22} color="#fff" style={styles.actionBtnIcon} />
                 <Text style={styles.actionBtnText}>Scan a Product</Text>
               </TouchableOpacity>
             </View>
@@ -385,16 +392,22 @@ export default function ShoppingTab() {
     <View style={styles.wrapper}>
       <View style={styles.header}>
         <View style={styles.headerCenter}>
-          <Text style={styles.headerTitle}>🛒 My List</Text>
+          <View style={styles.headerTitleRow}>
+            <Ionicons name="cart-outline" size={20} color="#fff" />
+            <Text style={styles.headerTitle}>My List</Text>
+          </View>
           <Text style={styles.headerSub}>
             My list to {familyName} · {items.length} item{items.length !== 1 ? "s" : ""}
           </Text>
         </View>
       </View>
       <View style={styles.memberNotice}>
-        <Text style={styles.memberNoticeText}>
-          ℹ️ Items you add are shared with your family admin
-        </Text>
+        <View style={styles.memberNoticeRow}>
+          <Ionicons name="information-circle-outline" size={14} color="#555" />
+          <Text style={styles.memberNoticeText}>
+            Items you add are shared with your family admin
+          </Text>
+        </View>
       </View>
       <View style={styles.addBar}>
         <TextInput style={styles.addInput} placeholder="Add an item..."
@@ -411,7 +424,7 @@ export default function ShoppingTab() {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#2D6A2D" />}>
         {items.length === 0 ? (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>🛒</Text>
+            <Ionicons name="cart-outline" size={48} color="#A0B884" style={styles.emptyIcon} />
             <Text style={styles.emptyTitle}>Your list is empty</Text>
             <Text style={styles.emptyText}>Add items above — the family admin will see them!</Text>
           </View>
@@ -423,7 +436,7 @@ export default function ShoppingTab() {
               <TouchableOpacity
                 onPress={() => item.id ? deleteMemberItem(item.id) : null}
                 style={styles.deleteBtn}>
-                <Text style={styles.deleteText}>✕</Text>
+                <Ionicons name="close" size={18} color="#dc2626" />
               </TouchableOpacity>
             </View>
           ))
@@ -431,7 +444,7 @@ export default function ShoppingTab() {
         <View style={{ margin: 16 }}>
           <TouchableOpacity style={[styles.actionBtn, styles.scanBtnHalf]}
             onPress={() => router.push("/(tabs)/scan")}>
-            <Text style={styles.actionBtnEmoji}>📷</Text>
+            <Ionicons name="camera-outline" size={22} color="#fff" style={styles.actionBtnIcon} />
             <Text style={styles.actionBtnText}>Scan a Product</Text>
           </TouchableOpacity>
         </View>
@@ -446,10 +459,12 @@ const styles = StyleSheet.create({
   loadingContainer:  { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#E3F0A3" },
   header:            { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20, paddingTop: 60, paddingBottom: 12, backgroundColor: "#2D6A2D" },
   headerCenter:      { flex: 1 },
+  headerTitleRow:    { flexDirection: "row", alignItems: "center", gap: 8 },
   headerTitle:       { fontSize: 20, fontWeight: "900", color: "#fff" },
   headerSub:         { fontSize: 13, color: "#A8D5A2", marginTop: 2 },
   clearText:         { fontSize: 14, color: "#42D674", fontWeight: "700" },
   memberNotice:      { backgroundColor: "#FFF9C4", padding: 10, alignItems: "center" },
+  memberNoticeRow:   { flexDirection: "row", alignItems: "center", gap: 6 },
   memberNoticeText:  { fontSize: 13, color: "#555", fontStyle: "italic" },
   addBar:            { flexDirection: "row", padding: 12, backgroundColor: "#fff", borderBottomWidth: 1, borderBottomColor: "#E3F0A3", gap: 8 },
   addInput:          { flex: 1, backgroundColor: "#f5f5f5", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 10, fontSize: 15, color: "#1a1a1a" },
@@ -458,14 +473,13 @@ const styles = StyleSheet.create({
   addButtonText:     { color: "#fff", fontWeight: "700", fontSize: 15 },
   list:              { flex: 1 },
   emptyState:        { alignItems: "center", paddingTop: 80, paddingHorizontal: 40 },
-  emptyIcon:         { fontSize: 48, marginBottom: 16 },
+  emptyIcon:         { marginBottom: 16 },
   emptyTitle:        { fontSize: 18, fontWeight: "800", color: "#2D6A2D", marginBottom: 8 },
   emptyText:         { fontSize: 14, color: "#666", textAlign: "center", lineHeight: 20 },
   itemRow:           { flexDirection: "row", alignItems: "center", paddingHorizontal: 20, paddingVertical: 14, borderBottomWidth: 0.5, borderBottomColor: "#E3F0A3", backgroundColor: "#fff" },
   itemDot:           { width: 8, height: 8, borderRadius: 4, backgroundColor: "#2D6A2D", marginRight: 12 },
   itemText:          { flex: 1, fontSize: 15, color: "#1a1a1a" },
   deleteBtn:         { padding: 6 },
-  deleteText:        { fontSize: 16, color: "#dc2626", fontWeight: "700" },
   memberSection:     { marginBottom: 4 },
   memberHeader:      { flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingVertical: 10, gap: 10 },
   memberAvatar:      { width: 32, height: 32, borderRadius: 16, backgroundColor: "#42D674", justifyContent: "center", alignItems: "center" },
@@ -476,6 +490,6 @@ const styles = StyleSheet.create({
   actionBtn:         { flex: 1, borderRadius: 16, padding: 14, alignItems: "center", justifyContent: "center" },
   orderBtnHalf:      { backgroundColor: "#2D6A2D" },
   scanBtnHalf:       { backgroundColor: "#1565C0" },
-  actionBtnEmoji:    { fontSize: 22, marginBottom: 4 },
+  actionBtnIcon:     { marginBottom: 4 },
   actionBtnText:     { fontSize: 13, fontWeight: "800", color: "#fff", textAlign: "center" },
 });

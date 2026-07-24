@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, SafeAreaView, Platform } from "react-native";
 import { WebView } from "react-native-webview";
 import * as Clipboard from "expo-clipboard";
+import { Ionicons } from "@expo/vector-icons";
 
 type DeliveryPlatform = "walmart" | "instacart" | "hellofresh";
 
@@ -36,7 +37,10 @@ export default function MarketplaceBrowserScreen({ url, platform, listText, item
     <SafeAreaView style={styles.container}>
       <View style={[styles.header, { borderBottomColor: color }]}>
         <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
-          <Text style={styles.closeBtnText}>✕ Close</Text>
+          <View style={styles.closeBtnRow}>
+            <Ionicons name="close" size={14} color="#C0392B" />
+            <Text style={styles.closeBtnText}>Close</Text>
+          </View>
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <Text style={styles.headerTitle}>
@@ -45,17 +49,27 @@ export default function MarketplaceBrowserScreen({ url, platform, listText, item
           <Text style={styles.headerSub}>Shopping via {label}</Text>
         </View>
         <TouchableOpacity onPress={handleCopyAgain} style={styles.copyBtn}>
-          <Text style={styles.copyBtnText}>{copied ? "✅ Copied" : "📋 Copy list"}</Text>
+          <View style={styles.copyBtnRow}>
+            <Ionicons
+              name={copied ? "checkmark-circle" : "clipboard-outline"}
+              size={13}
+              color="#2D6A2D"
+            />
+            <Text style={styles.copyBtnText}>{copied ? "Copied" : "Copy list"}</Text>
+          </View>
         </TouchableOpacity>
       </View>
       {showHint && (
         <View style={[styles.hintBanner, { backgroundColor: color }]}>
           <View style={styles.hintContent}>
-            <Text style={styles.hintTitle}>📋 {itemCount} items copied to clipboard</Text>
+            <View style={styles.hintTitleRow}>
+              <Ionicons name="clipboard-outline" size={13} color="#fff" />
+              <Text style={styles.hintTitle}>{itemCount} items copied to clipboard</Text>
+            </View>
             <Text style={styles.hintBody}>{PASTE_HINTS[platform]}</Text>
           </View>
           <TouchableOpacity onPress={() => setShowHint(false)} style={styles.hintClose}>
-            <Text style={styles.hintCloseText}>✕</Text>
+            <Ionicons name="close" size={16} color="#fff" />
           </TouchableOpacity>
         </View>
       )}
@@ -82,6 +96,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff", position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 999 },
   header:         { flexDirection: "row", alignItems: "center", paddingHorizontal: 12, paddingVertical: 10, borderBottomWidth: 2, backgroundColor: "#fff" },
   closeBtn:       { paddingHorizontal: 8, paddingVertical: 4 },
+  closeBtnRow:    { flexDirection: "row", alignItems: "center", gap: 4 },
   closeBtnText:   { fontSize: 14, color: "#C0392B", fontWeight: "700" },
   headerCenter:   { flex: 1, alignItems: "center" },
   headerTitle:    { fontSize: 16, fontWeight: "900" },
@@ -89,13 +104,14 @@ const styles = StyleSheet.create({
   vv:             { fontWeight: "900" },
   headerSub:      { fontSize: 11, color: "#888", marginTop: 1 },
   copyBtn:        { paddingHorizontal: 8, paddingVertical: 4 },
+  copyBtnRow:     { flexDirection: "row", alignItems: "center", gap: 4 },
   copyBtnText:    { fontSize: 12, color: "#2D6A2D", fontWeight: "700" },
   hintBanner:     { flexDirection: "row", alignItems: "flex-start", paddingHorizontal: 16, paddingVertical: 12 },
   hintContent:    { flex: 1 },
-  hintTitle:      { fontSize: 13, fontWeight: "800", color: "#fff", marginBottom: 4 },
+  hintTitleRow:   { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 4 },
+  hintTitle:      { fontSize: 13, fontWeight: "800", color: "#fff" },
   hintBody:       { fontSize: 12, color: "rgba(255,255,255,0.9)", lineHeight: 18 },
   hintClose:      { paddingLeft: 12, paddingTop: 2 },
-  hintCloseText:  { color: "#fff", fontSize: 16, fontWeight: "700" },
   loadingOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: "#fff", justifyContent: "center", alignItems: "center", zIndex: 10 },
   loadingText:    { marginTop: 12, fontSize: 14, color: "#666" },
   webview:        { flex: 1 },

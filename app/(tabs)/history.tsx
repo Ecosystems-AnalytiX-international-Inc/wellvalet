@@ -8,6 +8,7 @@ import {
   Alert,
 } from "react-native";
 import { Link, useFocusEffect, useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { isPremium } from "../../components/premiumService";
 import {
   getPurchaseHistory,
@@ -87,7 +88,9 @@ export default function HistoryTab() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Purchase History</Text>
-        <Link href="/profile" style={styles.profileIcon}>👤</Link>
+        <Link href="/profile" style={styles.profileLink}>
+          <Ionicons name="person-circle-outline" size={30} color="#2D6A2D" />
+        </Link>
       </View>
 
       {/* Summary Card with filter links */}
@@ -117,7 +120,7 @@ export default function HistoryTab() {
       {/* 3 month note */}
       <View style={styles.noteCard}>
         <Text style={styles.noteText}>
-          😄 Hey, we guess an item purchased three months ago would be deemed consumed! It will be automatically removed from your history. You may also delete any item once consumed.
+          Hey, we guess an item purchased three months ago would be deemed consumed! It will be automatically removed from your history. You may also delete any item once consumed.
         </Text>
       </View>
 
@@ -125,8 +128,9 @@ export default function HistoryTab() {
       {filter !== "All" && (
         <View style={styles.filterIndicator}>
           <Text style={styles.filterIndicatorText}>Showing: {filter} items</Text>
-          <TouchableOpacity onPress={() => setFilter("All")}>
-            <Text style={styles.clearFilter}>✕ Clear filter</Text>
+          <TouchableOpacity onPress={() => setFilter("All")} style={styles.clearFilterBtn}>
+            <Ionicons name="close" size={13} color="#dc2626" />
+            <Text style={styles.clearFilter}>Clear filter</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -194,7 +198,7 @@ export default function HistoryTab() {
                           method: "POST",
                           body: JSON.stringify({ item: productName }),
                         });
-                        Alert.alert("Added to Family List! 👨‍👩‍👧‍👦", productName + " added to your family shopping list.");
+                        Alert.alert("Added to Family List", productName + " added to your family shopping list.");
                         return;
                       }
                     } catch {}
@@ -206,11 +210,14 @@ export default function HistoryTab() {
                     const existing = (await AsyncStorage.getItem(key)) || "• ";
                     const updated = existing.trimEnd() + "\n• " + productName;
                     await AsyncStorage.setItem(key, updated);
-                    Alert.alert("Added! 🛒", productName + " added to your shopping list.");
+                    Alert.alert("Added", productName + " added to your shopping list.");
                   } catch(e) { Alert.alert("Error", "Could not add to shopping list."); }
                 }}
               >
-                <Text style={styles.addShoppingTxt}>🛒 Add to List</Text>
+                <View style={styles.addShoppingRow}>
+                  <Ionicons name="cart-outline" size={14} color="#fff" />
+                  <Text style={styles.addShoppingTxt}>Add to List</Text>
+                </View>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.deleteBtnSmall}
@@ -227,7 +234,7 @@ export default function HistoryTab() {
             onPress={() => router.push("/upgrade")}
             activeOpacity={0.85}
           >
-            <Text style={styles.historyLockIcon}>🔒</Text>
+            <Ionicons name="lock-closed" size={24} color="#fff" />
             <View style={styles.historyLockContent}>
               <Text style={styles.historyLockTitle}>
                 {lockedCount} older scan{lockedCount !== 1 ? "s" : ""} locked
@@ -256,7 +263,7 @@ const styles = StyleSheet.create({
   container: { flexGrow: 1, backgroundColor: "#E3F0A3", padding: 20, paddingTop: 70, paddingBottom: 40 },
   header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 20 },
   title: { fontSize: 26, fontWeight: "bold", color: "black" },
-  profileIcon: { fontSize: 28, textDecorationLine: "none" },
+  profileLink: { textDecorationLine: "none" },
   summaryCard: { backgroundColor: "#D6EAA0", padding: 16, borderRadius: 14, marginBottom: 12 },
   summaryText: { fontSize: 15, color: "#1a1a1a", marginBottom: 6, textDecorationLine: "underline" },
   goodText: { color: "#2D6A2D" },
@@ -267,6 +274,7 @@ const styles = StyleSheet.create({
   noteText: { fontSize: 13, color: "#444", lineHeight: 20, fontStyle: "italic" },
   filterIndicator: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 12 },
   filterIndicatorText: { fontSize: 14, fontWeight: "600", color: "#1a1a1a" },
+  clearFilterBtn: { flexDirection: "row", alignItems: "center", gap: 4 },
   clearFilter: { fontSize: 13, color: "#dc2626", fontWeight: "600" },
   empty: { fontSize: 15, color: "#555", marginBottom: 20, textAlign: "center", marginTop: 20 },
   card: { backgroundColor: "#D6EAA0", padding: 16, borderRadius: 14, marginBottom: 12 },
@@ -285,6 +293,7 @@ const styles = StyleSheet.create({
   deleteButtonText: { fontSize: 14, color: "white", fontWeight: "600" },
   actionRow: { flexDirection: "row", gap: 8, marginTop: 12 },
   addShoppingBtn: { flex: 1, backgroundColor: "#2D6A2D", borderRadius: 16, paddingVertical: 9, alignItems: "center" },
+  addShoppingRow: { flexDirection: "row", alignItems: "center", gap: 6 },
   addShoppingTxt: { fontSize: 13, color: "white", fontWeight: "600" },
   deleteBtnSmall: { paddingVertical: 9, paddingHorizontal: 16, borderRadius: 16, borderWidth: 1.5, borderColor: "#F44336" },
   deleteBtnSmallTxt: { fontSize: 13, color: "#F44336", fontWeight: "600" },
@@ -304,7 +313,6 @@ const styles = StyleSheet.create({
 
   historyLockBanner: { flexDirection: "row", alignItems: "center", backgroundColor: "#1a3a1a",
                         borderRadius: 14, padding: 16, marginHorizontal: 16, marginBottom: 12, gap: 12 },
-  historyLockIcon:   { fontSize: 24 },
   historyLockContent:{ flex: 1 },
   historyLockText:   { flex: 1 },
   historyLockTitle:  { fontSize: 14, fontWeight: "700", color: "#fff" },

@@ -5,7 +5,33 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { setPremium, setFamilyPlan } from "../components/premiumService";
+
+type IoniconName = React.ComponentProps<typeof Ionicons>["name"];
+type MCIName = React.ComponentProps<typeof MaterialCommunityIcons>["name"];
+
+type PerkIcon =
+  | { family: "Ionicons"; name: IoniconName }
+  | { family: "MaterialCommunityIcons"; name: MCIName };
+
+const PERKS: { icon: PerkIcon; text: string }[] = [
+  { icon: { family: "Ionicons",                name: "lock-open-outline" },   text: "Unlimited barcode scanning" },
+  { icon: { family: "Ionicons",                name: "warning-outline" },     text: "Allergen alerts from your profile" },
+  { icon: { family: "MaterialCommunityIcons",  name: "flask-outline" },       text: "Full ingredient & nutrition breakdown" },
+  { icon: { family: "Ionicons",                name: "bulb-outline" },        text: "Better alternative suggestions" },
+  { icon: { family: "MaterialCommunityIcons",  name: "robot-outline" },       text: "AI Valet — unlimited questions" },
+  { icon: { family: "Ionicons",                name: "clipboard-outline" },   text: "Full purchase history" },
+  { icon: { family: "Ionicons",                name: "restaurant-outline" },  text: "Weekly meal planner" },
+  { icon: { family: "Ionicons",                name: "people-outline" },      text: "Family shopping list (Family plan)" },
+];
+
+function PerkIconRender({ icon }: { icon: PerkIcon }) {
+  if (icon.family === "MaterialCommunityIcons") {
+    return <MaterialCommunityIcons name={icon.name} size={14} color="rgba(255,255,255,0.85)" />;
+  }
+  return <Ionicons name={icon.name} size={14} color="rgba(255,255,255,0.85)" />;
+}
 
 const API_BASE_URL = "https://api.wellvalet.com";
 const OFFER_SHOWN_KEY = "TRIAL_OFFER_SHOWN";
@@ -139,14 +165,17 @@ export default function TrialOfferScreen() {
 
         {/* ── Hero ── */}
         <View style={styles.hero}>
-          <Text style={styles.heroEmoji}>🛒</Text>
+          <Ionicons name="cart-outline" size={52} color="#fff" style={styles.heroIcon} />
           <Text style={styles.heroTitle}>Your Valet is ready.</Text>
           <Text style={styles.heroSub}>{allergyLine}</Text>
           {annualPlan.trialDays > 0 && (
             <View style={styles.trialBadge}>
-              <Text style={styles.trialBadgeText}>
-                🎁 {annualPlan.trialDays}-Day Free Trial — No charge today
-              </Text>
+              <View style={styles.trialBadgeRow}>
+                <Ionicons name="gift-outline" size={14} color="#1a3a1a" />
+                <Text style={styles.trialBadgeText}>
+                  {annualPlan.trialDays}-Day Free Trial — No charge today
+                </Text>
+              </View>
             </View>
           )}
         </View>
@@ -167,7 +196,7 @@ export default function TrialOfferScreen() {
             </View>
             {selected === "yearly" && (
               <View style={styles.checkCircle}>
-                <Text style={styles.checkText}>✓</Text>
+                <Ionicons name="checkmark" size={14} color="#fff" />
               </View>
             )}
           </View>
@@ -178,9 +207,12 @@ export default function TrialOfferScreen() {
           </View>
           <Text style={styles.planTotal}>{annualPlan.total}</Text>
           {annualPlan.trialDays > 0 && (
-            <Text style={styles.trialLine}>
-              ✅ First {annualPlan.trialDays} days free, then {annualPlan.total}
-            </Text>
+            <View style={styles.trialLineRow}>
+              <Ionicons name="checkmark-circle" size={13} color="#42D674" />
+              <Text style={styles.trialLine}>
+                First {annualPlan.trialDays} days free, then {annualPlan.total}
+              </Text>
+            </View>
           )}
         </TouchableOpacity>
 
@@ -195,7 +227,7 @@ export default function TrialOfferScreen() {
             <Text style={styles.planLabel}>Monthly Plan</Text>
             {selected === "monthly" && (
               <View style={[styles.checkCircle, { backgroundColor: "#666" }]}>
-                <Text style={styles.checkText}>✓</Text>
+                <Ionicons name="checkmark" size={14} color="#fff" />
               </View>
             )}
           </View>
@@ -230,17 +262,11 @@ export default function TrialOfferScreen() {
         {/* ── What is included ── */}
         <View style={styles.perksBox}>
           <Text style={styles.perksTitle}>Everything in Premium:</Text>
-          {[
-            "🔓 Unlimited barcode scanning",
-            "⚠️ Allergen alerts from your profile",
-            "🔬 Full ingredient & nutrition breakdown",
-            "💡 Better alternative suggestions",
-            "🤖 AI Valet — unlimited questions",
-            "📋 Full purchase history",
-            "🍽️ Weekly meal planner",
-            "👨‍👩‍👧‍👦 Family shopping list (Family plan)",
-          ].map((perk, i) => (
-            <Text key={i} style={styles.perkLine}>{perk}</Text>
+          {PERKS.map((perk, i) => (
+            <View key={i} style={styles.perkRow}>
+              <PerkIconRender icon={perk.icon} />
+              <Text style={styles.perkLine}>{perk.text}</Text>
+            </View>
           ))}
         </View>
 
@@ -266,10 +292,11 @@ const styles = StyleSheet.create({
 
   // Hero
   hero:             { alignItems: "center", paddingVertical: 32, paddingHorizontal: 16 },
-  heroEmoji:        { fontSize: 52, marginBottom: 12 },
+  heroIcon:         { marginBottom: 12 },
   heroTitle:        { fontSize: 28, fontWeight: "900", color: "#fff", textAlign: "center", marginBottom: 10 },
   heroSub:          { fontSize: 15, color: "rgba(255,255,255,0.80)", textAlign: "center", lineHeight: 22, marginBottom: 16 },
   trialBadge:       { backgroundColor: "#42D674", borderRadius: 20, paddingHorizontal: 18, paddingVertical: 8 },
+  trialBadgeRow:    { flexDirection: "row", alignItems: "center", gap: 6 },
   trialBadgeText:   { fontSize: 13, fontWeight: "700", color: "#1a3a1a" },
 
   // Plans
@@ -283,13 +310,13 @@ const styles = StyleSheet.create({
   bestValueText:    { fontSize: 10, fontWeight: "800", color: "#1a3a1a", letterSpacing: 0.5 },
   checkCircle:      { width: 24, height: 24, borderRadius: 12, backgroundColor: "#2D6A2D",
                       alignItems: "center", justifyContent: "center" },
-  checkText:        { color: "#fff", fontSize: 13, fontWeight: "700" },
   planLabel:        { fontSize: 15, fontWeight: "700", color: "#fff", marginBottom: 6 },
   priceRow:         { flexDirection: "row", alignItems: "flex-end", gap: 3, marginBottom: 4 },
   planPrice:        { fontSize: 34, fontWeight: "900", color: "#42D674" },
   planPeriod:       { fontSize: 14, color: "rgba(255,255,255,0.60)", marginBottom: 6 },
   planTotal:        { fontSize: 13, color: "rgba(255,255,255,0.60)" },
-  trialLine:        { fontSize: 12, color: "#42D674", marginTop: 6, fontWeight: "600" },
+  trialLineRow:     { flexDirection: "row", alignItems: "center", gap: 4, marginTop: 6 },
+  trialLine:        { fontSize: 12, color: "#42D674", fontWeight: "600" },
 
   // CTA
   ctaButton:        { backgroundColor: "#42D674", borderRadius: 30, paddingVertical: 18,
@@ -302,7 +329,8 @@ const styles = StyleSheet.create({
   perksBox:         { backgroundColor: "rgba(255,255,255,0.07)", borderRadius: 16,
                       padding: 18, marginBottom: 24 },
   perksTitle:       { fontSize: 14, fontWeight: "700", color: "#E3F0A3", marginBottom: 12 },
-  perkLine:         { fontSize: 13, color: "rgba(255,255,255,0.85)", marginBottom: 8, lineHeight: 20 },
+  perkRow:          { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 8 },
+  perkLine:         { fontSize: 13, color: "rgba(255,255,255,0.85)", lineHeight: 20, flex: 1 },
 
   // Skip + disclaimer
   skipBtn:          { alignItems: "center", marginBottom: 20 },

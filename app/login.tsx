@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { saveAuthSession, API_BASE_URL } from "../components/authService";
 
 export default function LoginScreen() {
@@ -59,7 +60,7 @@ export default function LoginScreen() {
             accessibilityRole="button"
             accessibilityLabel={showPassword ? "Hide password" : "Show password"}
           >
-            <Text style={styles.eyeIcon}>{showPassword ? "🙈" : "👁"}</Text>
+            <Ionicons name={showPassword ? "eye-off-outline" : "eye-outline"} size={22} color="#666" />
           </TouchableOpacity>
         </View>
         <TouchableOpacity

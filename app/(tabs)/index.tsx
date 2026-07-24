@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { isPremium } from "../../components/premiumService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -168,7 +169,7 @@ export default function HomeTab() {
           <Text style={styles.logoValet}>Valet</Text>
         </View>
         <TouchableOpacity onPress={() => router.push("/profile")}>
-          <Text style={styles.profileIcon}>👤</Text>
+          <Ionicons name="person-circle-outline" size={30} color="#2D6A2D" />
         </TouchableOpacity>
       </View>
 
@@ -180,13 +181,25 @@ export default function HomeTab() {
           <Text style={styles.welcomeRest}>, your wellness partner</Text>
         </Text>
         <Text style={styles.welcomeSub}>
-          Scan · Analyse · Improve · Thrive 🌿
+          Scan · Analyse · Improve · Thrive
         </Text>
         <View style={styles.pillRow}>
-          <View style={styles.pill}><Text style={styles.pillText}>🥗 Food</Text></View>
-          <View style={styles.pill}><Text style={styles.pillText}>💄 Beauty</Text></View>
-          <View style={styles.pill}><Text style={styles.pillText}>👨‍👩‍👧 Family</Text></View>
-          <View style={styles.pill}><Text style={styles.pillText}>🌟 Wellness</Text></View>
+          <View style={styles.pill}>
+            <MaterialCommunityIcons name="food-apple-outline" size={12} color="#fff" />
+            <Text style={styles.pillText}>Food</Text>
+          </View>
+          <View style={styles.pill}>
+            <MaterialCommunityIcons name="lipstick" size={12} color="#fff" />
+            <Text style={styles.pillText}>Beauty</Text>
+          </View>
+          <View style={styles.pill}>
+            <Ionicons name="people-outline" size={12} color="#fff" />
+            <Text style={styles.pillText}>Family</Text>
+          </View>
+          <View style={styles.pill}>
+            <Ionicons name="star-outline" size={12} color="#fff" />
+            <Text style={styles.pillText}>Wellness</Text>
+          </View>
         </View>
       </View>
 
@@ -196,7 +209,7 @@ export default function HomeTab() {
         onPress={() => router.push("/ai-valet")}
       >
         <View style={styles.aiValetLeft}>
-          <Text style={styles.aiValetEmoji}>🤖</Text>
+          <MaterialCommunityIcons name="robot-outline" size={32} color="#fff" />
           <View>
             <Text style={styles.aiValetTitle}>AI Valet</Text>
             <Text style={styles.aiValetSub}>Ask me anything about wellness</Text>
@@ -208,7 +221,7 @@ export default function HomeTab() {
       {/* Wellness Quote */}
       <View style={styles.card}>
         <View style={styles.cardTitleRow}>
-          <Text style={styles.cardIcon}>💬</Text>
+          <Ionicons name="chatbubble-outline" size={18} color="#2D6A2D" />
           <Text style={styles.cardTitle}>Wellness Quote of the Day</Text>
         </View>
         <Text style={styles.cardText}>"{wellness_quotes[quoteIndex]}"</Text>
@@ -217,7 +230,7 @@ export default function HomeTab() {
       {/* Did you know */}
       <View style={[styles.card, styles.factCard]}>
         <View style={styles.cardTitleRow}>
-          <Text style={styles.cardIcon}>💡</Text>
+          <Ionicons name="bulb-outline" size={18} color="#2D6A2D" />
           <Text style={styles.cardTitle}>Did You Know?</Text>
         </View>
         <Text style={styles.cardText}>{did_you_know[factIndex]}</Text>
@@ -227,9 +240,9 @@ export default function HomeTab() {
       {showNudge && !premium && (
         <View style={styles.nudgeCard}>
           <TouchableOpacity style={styles.nudgeDismiss} onPress={dismissNudge}>
-            <Text style={styles.nudgeDismissText}>✕</Text>
+            <Ionicons name="close" size={18} color="rgba(255,255,255,0.5)" />
           </TouchableOpacity>
-          <Text style={styles.nudgeEmoji}>⭐</Text>
+          <Ionicons name="star" size={32} color="#FFD54F" style={styles.nudgeIcon} />
           <Text style={styles.nudgeTitle}>See what Premium would catch</Text>
           <Text style={styles.nudgeSub}>
             Unlock allergen alerts for your profile, full ingredient breakdown and unlimited scanning.
@@ -247,7 +260,7 @@ export default function HomeTab() {
       {announcement ? (
         <View style={styles.announcementCard}>
           <View style={styles.announcementHeader}>
-            <Text style={styles.announcementIcon}>📣</Text>
+            <Ionicons name="megaphone-outline" size={22} color="#2D6A2D" />
             <Text style={styles.announcementTitle}>{announcement.title || "WellValet News"}</Text>
             <View style={styles.announcementBadge}>
               <Text style={styles.announcementBadgeText}>NEW</Text>
@@ -269,15 +282,18 @@ export default function HomeTab() {
       {/* Quick Guide */}
       <View style={[styles.card, styles.guideCard]}>
         <View style={styles.cardTitleRow}>
-          <Text style={styles.cardIcon}>🧭</Text>
+          <Ionicons name="compass-outline" size={18} color="#2D6A2D" />
           <Text style={styles.cardTitle}>Quick Guide</Text>
         </View>
         <Text style={styles.cardText}>
           Use the bottom navigation bar to manage your shopping list, scan food and beauty products, get inspired with the meal planner and glance at your past bagged items. You may also refer to our FAQ for any other questions.
         </Text>
-        <Text style={styles.enjoyText}>Enjoy your Wellness journey with WellValet! 🌿</Text>
+        <Text style={styles.enjoyText}>Enjoy your Wellness journey with WellValet!</Text>
         <TouchableOpacity onPress={() => router.push("/faq")} style={styles.faqLink}>
-          <Text style={styles.faqLinkText}>📖 Visit our FAQ</Text>
+          <View style={styles.faqLinkRow}>
+            <Ionicons name="book-outline" size={13} color="#2D6A2D" />
+            <Text style={styles.faqLinkText}>Visit our FAQ</Text>
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -295,7 +311,6 @@ const styles = StyleSheet.create({
   logoRow: { flexDirection: "row", alignItems: "center" },
   logoWell: { fontSize: 22, fontWeight: "900", color: "#2D6A2D", fontFamily: "Georgia" },
   logoValet: { fontSize: 22, fontWeight: "900", color: "#42D674", fontFamily: "Georgia" },
-  profileIcon: { fontSize: 26 },
 
   // Welcome card
   welcomeCard: { backgroundColor: "#2D6A2D", borderRadius: 20, padding: 22, marginBottom: 16, shadowColor: "#2D6A2D", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 12 },
@@ -305,7 +320,7 @@ const styles = StyleSheet.create({
   welcomeRest: { color: "#D6EAA0", fontSize: 18, fontWeight: "500", fontFamily: "Georgia" },
   welcomeSub: { fontSize: 14, color: "#A8D5A2", marginBottom: 14, letterSpacing: 0.5 },
   pillRow: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  pill: { backgroundColor: "rgba(255,255,255,0.12)", borderRadius: 20, paddingHorizontal: 12, paddingVertical: 5, borderWidth: 1, borderColor: "rgba(255,255,255,0.2)" },
+  pill: { flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: "rgba(255,255,255,0.12)", borderRadius: 20, paddingHorizontal: 12, paddingVertical: 5, borderWidth: 1, borderColor: "rgba(255,255,255,0.2)" },
   pillText: { fontSize: 12, color: "#fff", fontWeight: "600" },
 
   // Cards
@@ -313,24 +328,22 @@ const styles = StyleSheet.create({
   factCard: { backgroundColor: "#fff" },
   guideCard: { backgroundColor: "#E8F5E9", borderLeftWidth: 4, borderLeftColor: "#42D674" },
   cardTitleRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 10 },
-  cardIcon: { fontSize: 18 },
   cardTitle: { fontSize: 15, fontWeight: "700", color: "#2D6A2D" },
   cardText: { fontSize: 14, color: "#333", lineHeight: 23 },
   enjoyText: { fontSize: 14, color: "#2D6A2D", fontWeight: "700" },
   faqLink: { marginTop: 10, alignSelf: "flex-start" },
+  faqLinkRow: { flexDirection: "row", alignItems: "center", gap: 5 },
   faqLinkText: { fontSize: 13, color: "#2D6A2D", fontWeight: "600", textDecorationLine: "underline" },
 
   // AI Valet button
   aiValetBtn: { flexDirection: "row", alignItems: "center", backgroundColor: "#2D6A2D", borderRadius: 18, padding: 18, marginBottom: 14, shadowColor: "#2D6A2D", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.25, shadowRadius: 10 },
   aiValetLeft: { flex: 1, flexDirection: "row", alignItems: "center", gap: 14 },
-  aiValetEmoji: { fontSize: 32 },
   aiValetTitle: { fontSize: 17, fontWeight: "900", color: "#fff" },
   aiValetSub: { fontSize: 12, color: "rgba(255,255,255,0.75)", marginTop: 2 },
   aiValetArrow: { fontSize: 22, color: "#42D674", fontWeight: "700" },
   // Announcement
   announcementCard: { backgroundColor: "#fff", borderRadius: 20, padding: 20, marginBottom: 14, borderWidth: 2, borderColor: "#42D674", shadowColor: "#2D6A2D", shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.15, shadowRadius: 8 },
   announcementHeader: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 12 },
-  announcementIcon: { fontSize: 22 },
   announcementTitle: { fontSize: 16, fontWeight: "800", color: "#2D6A2D", flex: 1 },
   announcementBadge: { backgroundColor: "#42D674", borderRadius: 8, paddingHorizontal: 8, paddingVertical: 3 },
   announcementBadgeText: { fontSize: 11, color: "#fff", fontWeight: "800" },
@@ -343,8 +356,7 @@ const styles = StyleSheet.create({
                        marginHorizontal: 16, marginBottom: 16, alignItems: "center",
                        position: "relative" },
   nudgeDismiss:     { position: "absolute", top: 12, right: 12, padding: 6 },
-  nudgeDismissText: { color: "rgba(255,255,255,0.5)", fontSize: 18 },
-  nudgeEmoji:       { fontSize: 32, marginBottom: 8, marginTop: 8 },
+  nudgeIcon:        { marginBottom: 8, marginTop: 8 },
   nudgeTitle:       { fontSize: 16, fontWeight: "800", color: "#fff",
                        textAlign: "center", marginBottom: 6 },
   nudgeSub:         { fontSize: 13, color: "rgba(255,255,255,0.7)", textAlign: "center",

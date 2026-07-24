@@ -2,6 +2,7 @@ import React from "react";
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity
 } from "react-native";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function BeautyResultScreen({ result, onScanAgain, onScanIngredients }: any) {
 
@@ -25,7 +26,8 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.beautyTag}>
-          <Text style={styles.beautyTagText}>💄 Beauty & Personal Care</Text>
+          <MaterialCommunityIcons name="lipstick" size={12} color="#6A1B9A" />
+          <Text style={styles.beautyTagText}>Beauty & Personal Care</Text>
         </View>
         {isOCR ? (
           <Text style={styles.productName}>Ingredient Analysis</Text>
@@ -51,7 +53,10 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
             <Text style={styles.scoreMax}>/100</Text>
           </View>
           <Text style={styles.scoreLabel}>Skin Wellness Score</Text>
-          <Text style={styles.personalisedLabel}>⭐ Personalised</Text>
+          <View style={styles.personalisedRow}>
+            <Ionicons name="star" size={10} color="#2D6A2D" />
+            <Text style={styles.personalisedLabel}>Personalised</Text>
+          </View>
         </View>
         <View style={styles.scoreRight}>
           <View style={[styles.labelBadge, { backgroundColor: getLabelColor(result.label) }]}>
@@ -68,11 +73,15 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
       {/* Certifications */}
       {result.certifications && result.certifications.length > 0 && (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>🏆 Certifications</Text>
+          <View style={styles.sectionTitleRow}>
+            <Ionicons name="trophy-outline" size={14} color="#1a1a1a" />
+            <Text style={styles.sectionTitle}>Certifications</Text>
+          </View>
           <View style={styles.tagRow}>
             {result.certifications.map((cert: string, i: number) => (
               <View key={i} style={styles.certBadge}>
-                <Text style={styles.certText}>✓ {cert}</Text>
+                <Ionicons name="checkmark" size={12} color="#6A1B9A" />
+                <Text style={styles.certText}>{cert}</Text>
               </View>
             ))}
           </View>
@@ -82,14 +91,21 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
       {/* Flagged Ingredients */}
       {result.flagged_ingredients && result.flagged_ingredients.length > 0 ? (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>⚠️ Ingredients of Concern ({result.flagged_ingredients.length})</Text>
+          <View style={styles.sectionTitleRow}>
+            <Ionicons name="warning-outline" size={14} color="#1a1a1a" />
+            <Text style={styles.sectionTitle}>Ingredients of Concern ({result.flagged_ingredients.length})</Text>
+          </View>
           {result.flagged_ingredients.map((item: any, i: number) => (
             <View key={i} style={[styles.flaggedRow, {
               backgroundColor: item.level === "avoid" ? "#FFF0F0" : "#FFFBEB",
               borderLeftColor: item.level === "avoid" ? "#dc2626" : "#f59e0b"
             }]}>
               <View style={styles.flaggedLeft}>
-                <Text style={styles.flaggedIcon}>{item.level === "avoid" ? "🔴" : "🟡"}</Text>
+                <Ionicons
+                  name="ellipse"
+                  size={14}
+                  color={item.level === "avoid" ? "#dc2626" : "#f59e0b"}
+                />
               </View>
               <View style={styles.flaggedRight}>
                 <Text style={styles.flaggedName}>{item.ingredient.charAt(0).toUpperCase() + item.ingredient.slice(1)}</Text>
@@ -100,7 +116,10 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
         </View>
       ) : (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>✅ No Concerning Ingredients Found</Text>
+          <View style={styles.sectionTitleRow}>
+            <Ionicons name="checkmark-circle" size={14} color="#2D6A2D" />
+            <Text style={styles.sectionTitle}>No Concerning Ingredients Found</Text>
+          </View>
           <Text style={styles.cleanMessage}>This product has a clean ingredient profile!</Text>
         </View>
       )}
@@ -108,7 +127,10 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
       {/* Clean Ingredients */}
       {result.clean_ingredients && result.clean_ingredients.length > 0 && (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>🌿 Beneficial Ingredients Found</Text>
+          <View style={styles.sectionTitleRow}>
+            <Ionicons name="leaf-outline" size={14} color="#2D6A2D" />
+            <Text style={styles.sectionTitle}>Beneficial Ingredients Found</Text>
+          </View>
           <View style={styles.tagRow}>
             {result.clean_ingredients.map((ing: string, i: number) => (
               <View key={i} style={styles.cleanBadge}>
@@ -121,7 +143,10 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
 
       {/* Recommendation */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>💡 Wellness Insight</Text>
+        <View style={styles.sectionTitleRow}>
+          <Ionicons name="bulb-outline" size={14} color="#1a1a1a" />
+          <Text style={styles.sectionTitle}>Wellness Insight</Text>
+        </View>
         <View style={styles.recommendBox}>
           <Text style={styles.recommendText}>{result.recommendation}</Text>
         </View>
@@ -130,7 +155,10 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
       {/* Ingredients List */}
       {result.ingredients && result.ingredients.length > 0 && (
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>📋 Full Ingredient List ({result.ingredients.length})</Text>
+          <View style={styles.sectionTitleRow}>
+            <Ionicons name="clipboard-outline" size={14} color="#1a1a1a" />
+            <Text style={styles.sectionTitle}>Full Ingredient List ({result.ingredients.length})</Text>
+          </View>
           <Text style={styles.ingredientsList}>
             {result.ingredients.slice(0, 20).join(" · ")}
             {result.ingredients.length > 20 ? ` · +${result.ingredients.length - 20} more` : ""}
@@ -143,12 +171,18 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
 
       {/* Action Buttons */}
       <TouchableOpacity style={styles.scanAgainButton} onPress={onScanAgain}>
-        <Text style={styles.scanAgainText}>📷 Scan Another Product</Text>
+        <View style={styles.actionButtonRow}>
+          <Ionicons name="camera-outline" size={16} color="#fff" />
+          <Text style={styles.scanAgainText}>Scan Another Product</Text>
+        </View>
       </TouchableOpacity>
 
       {onScanIngredients && (
         <TouchableOpacity style={styles.ocrButton} onPress={onScanIngredients}>
-          <Text style={styles.ocrButtonText}>🔍 Scan Ingredients Label Instead</Text>
+          <View style={styles.actionButtonRow}>
+            <Ionicons name="search-outline" size={15} color="#7B1FA2" />
+            <Text style={styles.ocrButtonText}>Scan Ingredients Label Instead</Text>
+          </View>
         </TouchableOpacity>
       )}
 
@@ -159,7 +193,7 @@ export default function BeautyResultScreen({ result, onScanAgain, onScanIngredie
 const styles = StyleSheet.create({
   container: { flexGrow: 1, backgroundColor: "#F3E5F5", padding: 16, paddingBottom: 40 },
   header: { backgroundColor: "#fff", borderRadius: 16, padding: 20, marginBottom: 12, alignItems: "center", borderTopWidth: 4, borderTopColor: "#7B1FA2" },
-  beautyTag: { backgroundColor: "#EDE7F6", paddingHorizontal: 14, paddingVertical: 5, borderRadius: 20, marginBottom: 10 },
+  beautyTag: { flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: "#EDE7F6", paddingHorizontal: 14, paddingVertical: 5, borderRadius: 20, marginBottom: 10 },
   beautyTagText: { fontSize: 12, fontWeight: "700", color: "#6A1B9A" },
   productName: { fontSize: 20, fontWeight: "800", color: "#1a1a1a", textAlign: "center", marginBottom: 4 },
   brandName: { fontSize: 15, color: "#555", textAlign: "center", fontWeight: "600" },
@@ -169,7 +203,8 @@ const styles = StyleSheet.create({
   scoreCircle: { width: 80, height: 80, borderRadius: 40, borderWidth: 4, justifyContent: "center", alignItems: "center", marginBottom: 6 },
   scoreNumber: { fontSize: 28, fontWeight: "900" },
   scoreLetter: { fontSize: 16, fontWeight: "900", marginTop: -4 },
-  personalisedLabel: { fontSize: 10, color: "#2D6A2D", fontWeight: "600", marginTop: 2 },
+  personalisedRow: { flexDirection: "row", alignItems: "center", gap: 3, marginTop: 2 },
+  personalisedLabel: { fontSize: 10, color: "#2D6A2D", fontWeight: "600" },
   scoreMax: { fontSize: 11, color: "#888", marginTop: -4 },
   scoreLabel: { fontSize: 11, color: "#555", textAlign: "center" },
   scoreRight: { flex: 1 },
@@ -177,15 +212,15 @@ const styles = StyleSheet.create({
   labelText: { fontSize: 16, fontWeight: "700", color: "#fff" },
   scoreHint: { fontSize: 13, color: "#555", lineHeight: 20 },
   section: { backgroundColor: "#fff", borderRadius: 14, padding: 16, marginBottom: 10 },
-  sectionTitle: { fontSize: 14, fontWeight: "700", color: "#1a1a1a", marginBottom: 12 },
+  sectionTitleRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 12 },
+  sectionTitle: { fontSize: 14, fontWeight: "700", color: "#1a1a1a" },
   tagRow: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  certBadge: { backgroundColor: "#EDE7F6", borderRadius: 20, paddingHorizontal: 12, paddingVertical: 6 },
+  certBadge: { flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: "#EDE7F6", borderRadius: 20, paddingHorizontal: 12, paddingVertical: 6 },
   certText: { fontSize: 12, fontWeight: "600", color: "#6A1B9A" },
   cleanBadge: { backgroundColor: "#E8F5E9", borderRadius: 20, paddingHorizontal: 12, paddingVertical: 6 },
   cleanText: { fontSize: 12, fontWeight: "500", color: "#2D6A2D" },
-  flaggedRow: { flexDirection: "row", borderLeftWidth: 3, borderRadius: 8, padding: 10, marginBottom: 8 },
-  flaggedLeft: { marginRight: 10, paddingTop: 2 },
-  flaggedIcon: { fontSize: 16 },
+  flaggedRow: { flexDirection: "row", alignItems: "center", borderLeftWidth: 3, borderRadius: 8, padding: 10, marginBottom: 8 },
+  flaggedLeft: { marginRight: 10 },
   flaggedRight: { flex: 1 },
   flaggedName: { fontSize: 13, fontWeight: "700", color: "#1a1a1a", textTransform: "capitalize" },
   flaggedReason: { fontSize: 12, color: "#666", marginTop: 2 },
@@ -198,4 +233,5 @@ const styles = StyleSheet.create({
   scanAgainText: { fontSize: 16, color: "#fff", fontWeight: "700" },
   ocrButton: { backgroundColor: "#fff", borderRadius: 25, paddingVertical: 14, alignItems: "center", borderWidth: 1.5, borderColor: "#7B1FA2" },
   ocrButtonText: { fontSize: 15, color: "#7B1FA2", fontWeight: "600" },
+  actionButtonRow: { flexDirection: "row", alignItems: "center", gap: 8 },
 });

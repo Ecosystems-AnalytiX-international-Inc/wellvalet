@@ -8,17 +8,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { isPremium, setPremium } from "../components/premiumService";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const API_BASE = "https://api.wellvalet.com";
 
 const SUGGESTIONS = [
-  "Recipe with my shopping list 🛒",
-  "Is olive oil healthy? 🫒",
-  "Explain E numbers 🔬",
-  "Low sugar breakfast ideas 🌅",
-  "High protein snacks 💪",
-  "Foods to avoid with high blood pressure 🩺",
-  "Quick 15-minute dinner ideas ⏱",
+  "Recipe with my shopping list",
+  "Is olive oil healthy?",
+  "Explain E numbers",
+  "Low sugar breakfast ideas",
+  "High protein snacks",
+  "Foods to avoid with high blood pressure",
+  "Quick 15-minute dinner ideas",
 ];
 
 interface Message {
@@ -31,7 +32,7 @@ export default function AIValetScreen() {
   const insets = useSafeAreaInsets();
   const [messages, setMessages] = useState<Message[]>([{
     role: "assistant",
-    text: "Hi! I am your WellValet AI Valet. I can help you find recipes, explain ingredients, suggest healthier alternatives, and answer wellness questions.\n\nWhat would you like to know today? 🌿",
+    text: "Hi! I am your WellValet AI Valet. I can help you find recipes, explain ingredients, suggest healthier alternatives, and answer wellness questions.\n\nWhat would you like to know today?",
   }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -133,13 +134,21 @@ export default function AIValetScreen() {
           onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: true })}>
           {messages.map((msg, i) => (
             <View key={i} style={[styles.bubble, msg.role === "user" ? styles.userBubble : styles.aiBubble]}>
-              {msg.role === "assistant" && <Text style={styles.bubbleLabel}>🌿 AI Valet</Text>}
+              {msg.role === "assistant" && (
+                <View style={styles.bubbleLabelRow}>
+                  <MaterialCommunityIcons name="robot-outline" size={13} color="#2D6A2D" />
+                  <Text style={styles.bubbleLabel}>AI Valet</Text>
+                </View>
+              )}
               <Text style={msg.role === "user" ? styles.userText : styles.aiText}>{msg.text}</Text>
             </View>
           ))}
           {loading && (
             <View style={styles.aiBubble}>
-              <Text style={styles.bubbleLabel}>🌿 AI Valet</Text>
+              <View style={styles.bubbleLabelRow}>
+                <MaterialCommunityIcons name="robot-outline" size={13} color="#2D6A2D" />
+                <Text style={styles.bubbleLabel}>AI Valet</Text>
+              </View>
               <View style={styles.typingRow}>
                 <ActivityIndicator size="small" color="#2D6A2D" />
                 <Text style={styles.typingText}>Thinking...</Text>
@@ -153,7 +162,10 @@ export default function AIValetScreen() {
         {/* AI limit notice */}
         {aiLimitReached && (
           <View style={styles.aiLimitBox}>
-            <Text style={styles.aiLimitTitle}>🤖 Daily question used</Text>
+            <View style={styles.aiLimitTitleRow}>
+              <MaterialCommunityIcons name="robot-outline" size={16} color="#fff" />
+              <Text style={styles.aiLimitTitle}>Daily question used</Text>
+            </View>
             <Text style={styles.aiLimitSub}>
               You have 1 free AI Valet question per day. Upgrade for unlimited questions.
 
@@ -175,7 +187,7 @@ export default function AIValetScreen() {
             onSubmitEditing={() => sendMessage(input)} />
           <TouchableOpacity style={[styles.sendBtn, (!input.trim() || loading || aiLimitReached) && styles.sendBtnDisabled]}
             onPress={() => sendMessage(input)} disabled={!input.trim() || loading || aiLimitReached}>
-            <Text style={styles.sendBtnText}>➤</Text>
+            <Ionicons name="send" size={18} color="#fff" />
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -206,7 +218,8 @@ const styles = StyleSheet.create({
   bubble:           { borderRadius: 16, padding: 14, maxWidth: "88%" },
   userBubble:       { backgroundColor: "#2D6A2D", alignSelf: "flex-end", borderBottomRightRadius: 4 },
   aiBubble:         { backgroundColor: "#fff", alignSelf: "flex-start", borderBottomLeftRadius: 4, shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.06, shadowRadius: 4, elevation: 2 },
-  bubbleLabel:      { fontSize: 11, color: "#2D6A2D", fontWeight: "700", marginBottom: 6 },
+  bubbleLabelRow:   { flexDirection: "row", alignItems: "center", gap: 4, marginBottom: 6 },
+  bubbleLabel:      { fontSize: 11, color: "#2D6A2D", fontWeight: "700" },
   userText:         { fontSize: 15, color: "#fff", lineHeight: 22 },
   aiText:           { fontSize: 15, color: "#1a1a1a", lineHeight: 23 },
   typingRow:        { flexDirection: "row", alignItems: "center", gap: 8 },
@@ -216,11 +229,11 @@ const styles = StyleSheet.create({
   input:            { flex: 1, backgroundColor: "#F5F5F5", borderRadius: 22, paddingHorizontal: 16, paddingVertical: 10, fontSize: 15, color: "#1a1a1a", maxHeight: 100, borderWidth: 1, borderColor: "#E0E0E0" },
   sendBtn:          { backgroundColor: "#2D6A2D", borderRadius: 22, width: 44, height: 44, justifyContent: "center", alignItems: "center" },
   sendBtnDisabled:  { opacity: 0.4 },
-  sendBtnText:      { fontSize: 18, color: "#fff", fontWeight: "700" },
 
   aiLimitBox:     { backgroundColor: "#1a3a1a", borderRadius: 16, padding: 20,
                      marginBottom: 16, alignItems: "center" },
-  aiLimitTitle:   { fontSize: 16, fontWeight: "800", color: "#fff", marginBottom: 8 },
+  aiLimitTitleRow:{ flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 8 },
+  aiLimitTitle:   { fontSize: 16, fontWeight: "800", color: "#fff" },
   aiLimitSub:     { fontSize: 13, color: "rgba(255,255,255,0.7)", textAlign: "center",
                      lineHeight: 20, marginBottom: 16 },
   aiLimitCta:     { backgroundColor: "#42D674", borderRadius: 20, paddingVertical: 12,

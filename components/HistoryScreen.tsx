@@ -178,7 +178,7 @@ export default function HistoryScreen({ onBack }: any) {
                     onPress={async () => {
                       const added = await addToShoppingList(item.product_name || item.name || "");
                       Alert.alert(
-                        added ? "Added ✅" : "Already in list",
+                        added ? "Added" : "Already in list",
                         added
                           ? `${item.product_name || item.name} added to your shopping list.`
                           : `${item.product_name || item.name} is already in your shopping list.`

@@ -4,6 +4,7 @@ import {
   ScrollView, ActivityIndicator, Alert, KeyboardAvoidingView, Platform
 } from "react-native";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { fetchWithAuth } from "../components/authService";
 
 const API_BASE_URL = "https://api.wellvalet.com";
@@ -46,7 +47,7 @@ export default function FamilySetupScreen() {
         setMessage(data.error);
       } else {
         Alert.alert(
-          "Family Created! 🎉",
+          "Family Created",
           `Your family group "${data.family_name}" has been created.\nInvite code: ${data.invite_code}\n${emails.length > 0 ? `Invites sent to ${emails.length} member(s)!` : ""}`,
           [{ text: "OK", onPress: () => router.replace("/family-shopping") }]
         );
@@ -77,7 +78,7 @@ export default function FamilySetupScreen() {
         setMessage(data.error);
       } else {
         Alert.alert(
-          "Joined Family! 🎉",
+          "Joined Family",
           `You have joined "${data.family_name}"!`,
           [{ text: "OK", onPress: () => router.replace("/family-shopping") }]
         );
@@ -104,25 +105,31 @@ export default function FamilySetupScreen() {
 
         <View style={styles.featureRow}>
           <View style={styles.featureItem}>
-            <Text style={styles.featureIcon}>🛒</Text>
+            <Ionicons name="cart-outline" size={28} color="#2D6A2D" style={styles.featureIcon} />
             <Text style={styles.featureText}>Shared shopping list</Text>
           </View>
           <View style={styles.featureItem}>
-            <Text style={styles.featureIcon}>👨‍👩‍👧‍👦</Text>
+            <Ionicons name="people-outline" size={28} color="#2D6A2D" style={styles.featureIcon} />
             <Text style={styles.featureText}>Up to 4 members</Text>
           </View>
           <View style={styles.featureItem}>
-            <Text style={styles.featureIcon}>📧</Text>
+            <Ionicons name="mail-outline" size={28} color="#2D6A2D" style={styles.featureIcon} />
             <Text style={styles.featureText}>Invite by email</Text>
           </View>
         </View>
 
         <TouchableOpacity style={styles.primaryButton} onPress={() => setMode("create")}>
-          <Text style={styles.primaryButtonText}>➕ Create a Family Group</Text>
+          <View style={styles.buttonRow}>
+            <Ionicons name="add-circle-outline" size={16} color="#fff" />
+            <Text style={styles.primaryButtonText}>Create a Family Group</Text>
+          </View>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.secondaryButton} onPress={() => setMode("join")}>
-          <Text style={styles.secondaryButtonText}>🔑 Join with Invite Code</Text>
+          <View style={styles.buttonRow}>
+            <Ionicons name="key-outline" size={16} color="#2D6A2D" />
+            <Text style={styles.secondaryButtonText}>Join with Invite Code</Text>
+          </View>
         </TouchableOpacity>
       </ScrollView>
     );
@@ -252,8 +259,9 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 14, color: "#4a7a4a", marginBottom: 24, lineHeight: 22 },
   featureRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 28 },
   featureItem: { alignItems: "center", flex: 1 },
-  featureIcon: { fontSize: 28, marginBottom: 6 },
+  featureIcon: { marginBottom: 6 },
   featureText: { fontSize: 11, color: "#2D6A2D", textAlign: "center", fontWeight: "600" },
+  buttonRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   card: { backgroundColor: "#fff", borderRadius: 16, padding: 16, marginBottom: 16 },
   label: { fontSize: 13, fontWeight: "700", color: "#2D6A2D", marginBottom: 6, marginTop: 8 },
   hint: { fontSize: 12, color: "#888", marginBottom: 4 },

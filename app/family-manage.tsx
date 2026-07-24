@@ -4,6 +4,7 @@ import {
   ScrollView, ActivityIndicator, Alert, KeyboardAvoidingView, Platform
 } from "react-native";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { fetchWithAuth } from "../components/authService";
 
 const API_BASE_URL = "https://api.wellvalet.com";
@@ -15,6 +16,7 @@ export default function FamilyManageScreen() {
   const [inviteEmail, setInviteEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [message, setMessage] = useState("");
+  const [messageStatus, setMessageStatus] = useState<"success" | "error" | "">("");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editName, setEditName] = useState("");
 
@@ -39,6 +41,7 @@ export default function FamilyManageScreen() {
     if (!inviteEmail.trim()) return;
     setSending(true);
     setMessage("");
+    setMessageStatus("");
     try {
       const res = await fetchWithAuth(`${API_BASE_URL}/family/invite`, {
         method: "POST",
@@ -48,12 +51,15 @@ export default function FamilyManageScreen() {
       const data = await res.json();
       if (data.error) {
         setMessage(data.error);
+        setMessageStatus("error");
       } else {
-        setMessage(`✅ Invite sent to ${inviteEmail.trim()}`);
+        setMessage(`Invite sent to ${inviteEmail.trim()}`);
+        setMessageStatus("success");
         setInviteEmail("");
       }
     } catch {
       setMessage("Could not send invite.");
+      setMessageStatus("error");
     }
     setSending(false);
   };
@@ -133,7 +139,10 @@ export default function FamilyManageScreen() {
 
       {/* Family Info Card */}
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>👨‍👩‍👧‍👦 {family?.family_name}</Text>
+        <View style={styles.cardTitleRow}>
+          <Ionicons name="people-outline" size={18} color="#2D6A2D" />
+          <Text style={styles.cardTitle}>{family?.family_name}</Text>
+        </View>
         <Text style={styles.cardSub}>{family?.member_count}/4 members</Text>
 
         {/* Members list */}
@@ -174,7 +183,7 @@ export default function FamilyManageScreen() {
             )}
             {family?.is_admin && !member.is_admin && editingId !== member.id && (
               <TouchableOpacity onPress={() => confirmRemove(member)} style={styles.memberActionBtn}>
-                <Text style={styles.memberActionRemove}>✕</Text>
+                <Ionicons name="close" size={16} color="#dc2626" />
               </TouchableOpacity>
             )}
           </View>
@@ -184,7 +193,10 @@ export default function FamilyManageScreen() {
       {/* Invite Code Card — admin only */}
       {family?.is_admin && (
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>🔑 Invite Code</Text>
+          <View style={styles.cardTitleRow}>
+            <Ionicons name="key-outline" size={18} color="#2D6A2D" />
+            <Text style={styles.cardTitle}>Invite Code</Text>
+          </View>
           <Text style={styles.cardSub}>Share this code or send invites by email below.</Text>
           <View style={styles.codeBox}>
             <Text style={styles.codeText}>{family?.invite_code}</Text>
@@ -195,7 +207,10 @@ export default function FamilyManageScreen() {
       {/* Send Invite — admin only */}
       {family?.is_admin && (family?.member_count || 0) < 4 && (
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>📧 Invite by Email</Text>
+          <View style={styles.cardTitleRow}>
+            <Ionicons name="mail-outline" size={18} color="#2D6A2D" />
+            <Text style={styles.cardTitle}>Invite by Email</Text>
+          </View>
           <Text style={styles.cardSub}>
             {Math.max(0, 4 - (family?.member_count || 1))} invite slot{Math.max(0, 4 - (family?.member_count || 1)) !== 1 ? "s" : ""} remaining (max 4 members total).
           </Text>
@@ -218,16 +233,26 @@ export default function FamilyManageScreen() {
             </TouchableOpacity>
           </View>
           {message ? (
-            <Text style={[styles.messageText, message.includes("✅") ? styles.successText : styles.errorText]}>
-              {message}
-            </Text>
+            <View style={styles.messageRow}>
+              {messageStatus === "success" ? (
+                <Ionicons name="checkmark-circle" size={14} color="#2D6A2D" />
+              ) : messageStatus === "error" ? (
+                <Ionicons name="close-circle" size={14} color="#dc2626" />
+              ) : null}
+              <Text style={[styles.messageText, messageStatus === "success" ? styles.successText : styles.errorText]}>
+                {message}
+              </Text>
+            </View>
           ) : null}
         </View>
       )}
 
       {/* Shopping List Button */}
       <TouchableOpacity style={styles.primaryButton} onPress={() => router.replace("/family-shopping")}>
-        <Text style={styles.primaryButtonText}>🛒 View Family Shopping List</Text>
+        <View style={styles.buttonRow}>
+          <Ionicons name="cart-outline" size={18} color="#fff" />
+          <Text style={styles.primaryButtonText}>View Family Shopping List</Text>
+        </View>
       </TouchableOpacity>
 
     </ScrollView>
@@ -242,8 +267,11 @@ const styles = StyleSheet.create({
   backText: { fontSize: 15, color: "#2D6A2D", fontWeight: "600" },
   title: { fontSize: 26, fontWeight: "800", color: "#2D6A2D", marginBottom: 20 },
   card: { backgroundColor: "#fff", borderRadius: 16, padding: 16, marginBottom: 16 },
-  cardTitle: { fontSize: 16, fontWeight: "700", color: "#2D6A2D", marginBottom: 4 },
+  cardTitleRow: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 4 },
+  cardTitle: { fontSize: 16, fontWeight: "700", color: "#2D6A2D" },
   cardSub: { fontSize: 13, color: "#888", marginBottom: 14 },
+  buttonRow: { flexDirection: "row", alignItems: "center", gap: 6 },
+  messageRow: { flexDirection: "row", alignItems: "center", gap: 6, marginTop: 8 },
   memberRow: { flexDirection: "row", alignItems: "center", paddingVertical: 8, borderTopWidth: 0.5, borderTopColor: "#E3F0A3", gap: 10 },
   memberAvatar: { width: 36, height: 36, borderRadius: 18, backgroundColor: "#2D6A2D", justifyContent: "center", alignItems: "center" },
   memberAvatarText: { color: "#fff", fontWeight: "800", fontSize: 15 },
@@ -263,7 +291,7 @@ const styles = StyleSheet.create({
   inviteButton: { backgroundColor: "#2D6A2D", borderRadius: 20, paddingHorizontal: 20, justifyContent: "center" },
   inviteButtonText: { color: "#fff", fontWeight: "700", fontSize: 14 },
   buttonDisabled: { opacity: 0.5 },
-  messageText: { fontSize: 13, marginTop: 8 },
+  messageText: { fontSize: 13 },
   successText: { color: "#2D6A2D" },
   errorText: { color: "#dc2626" },
   primaryButton: { backgroundColor: "#2D6A2D", borderRadius: 25, paddingVertical: 14, alignItems: "center", marginTop: 8 },

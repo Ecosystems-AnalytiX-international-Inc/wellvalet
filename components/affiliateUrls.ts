@@ -45,11 +45,16 @@ export function formatListForPlatform(items: string[], platform: DeliveryPlatfor
   }
 }
 
+import type { ComponentProps } from "react";
+import type { Ionicons } from "@expo/vector-icons";
+
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
+
 export const PLATFORM_INFO: Record<DeliveryPlatform, {
-  label: string; emoji: string; color: string;
+  label: string; iconName: IoniconName; color: string;
   description: string; cookie: string; commission: string;
 }> = {
-  walmart:    { label: "Walmart Canada", emoji: "🛒", color: "#0071CE", description: "Grocery delivery from Walmart.ca",        cookie: "4 days",  commission: "2–4% on orders" },
-  instacart:  { label: "Instacart",      emoji: "🟢", color: "#43B02A", description: "1-hour delivery from local stores",       cookie: "14 days", commission: "C$5–10 new · 3% repeat" },
-  hellofresh: { label: "HelloFresh",     emoji: "🍽", color: "#99CC00", description: "Meal kits with fresh ingredients",        cookie: "30 days", commission: "C$10–20 per signup" },
+  walmart:    { label: "Walmart Canada", iconName: "cart-outline",       color: "#0071CE", description: "Grocery delivery from Walmart.ca",        cookie: "4 days",  commission: "2–4% on orders" },
+  instacart:  { label: "Instacart",      iconName: "basket-outline",     color: "#43B02A", description: "1-hour delivery from local stores",       cookie: "14 days", commission: "C$5–10 new · 3% repeat" },
+  hellofresh: { label: "HelloFresh",     iconName: "restaurant-outline", color: "#99CC00", description: "Meal kits with fresh ingredients",        cookie: "30 days", commission: "C$10–20 per signup" },
 };
