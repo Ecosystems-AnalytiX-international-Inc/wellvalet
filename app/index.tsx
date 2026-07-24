@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from "react-native";
 import { useRouter } from "expo-router";
-import Svg, { Circle, Path, Ellipse, Line, G, Rect, Text as SvgText, TextPath } from "react-native-svg";
+import Svg, { Circle, Path, Line } from "react-native-svg";
 
 const { width, height } = Dimensions.get("window");
 

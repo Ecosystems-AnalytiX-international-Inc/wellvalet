@@ -206,7 +206,7 @@ export default function FamilySetupScreen() {
       </TouchableOpacity>
 
       <Text style={styles.title}>Join Family Group</Text>
-      <Text style={styles.subtitle}>Enter the 6-digit invite code from your family member's email.</Text>
+      <Text style={styles.subtitle}>Enter the 6-digit invite code from your family member&apos;s email.</Text>
 
       <View style={styles.card}>
         <Text style={styles.label}>Invite Code</Text>

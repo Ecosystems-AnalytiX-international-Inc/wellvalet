@@ -303,17 +303,10 @@ const styles = StyleSheet.create({
   freeNote: { fontSize: 12, color: "rgba(255,255,255,0.6)" },
 
   historyLockBanner: { flexDirection: "row", alignItems: "center", backgroundColor: "#1a3a1a",
-                        borderRadius: 14, padding: 16, margin: 16, gap: 12 },
+                        borderRadius: 14, padding: 16, marginHorizontal: 16, marginBottom: 12, gap: 12 },
   historyLockIcon:   { fontSize: 24 },
+  historyLockContent:{ flex: 1 },
   historyLockText:   { flex: 1 },
   historyLockTitle:  { fontSize: 14, fontWeight: "700", color: "#fff" },
   historyLockSub:    { fontSize: 12, color: "#42D674", marginTop: 3 },
-
-  historyLockBanner:  { flexDirection: "row", alignItems: "center", backgroundColor: "#1a3a1a",
-                         borderRadius: 14, padding: 16, marginHorizontal: 16,
-                         marginBottom: 12, gap: 12 },
-  historyLockIcon:    { fontSize: 24 },
-  historyLockContent: { flex: 1 },
-  historyLockTitle:   { fontSize: 14, fontWeight: "700", color: "#fff" },
-  historyLockSub:     { fontSize: 12, color: "#42D674", marginTop: 3 },
 });

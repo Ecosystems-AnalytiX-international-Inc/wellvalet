@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useRouter } from "expo-router";
-import Svg, { Circle, Path, Rect, Text as SvgText, TextPath } from "react-native-svg";
-import { saveAuthSession } from "../components/authService";
-
-const API_BASE_URL = "https://api.wellvalet.com";
+import { saveAuthSession, API_BASE_URL } from "../components/authService";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -82,7 +79,7 @@ export default function LoginScreen() {
 
         <TouchableOpacity style={styles.createLink} onPress={() => router.push("/signup")}>
           <Text style={styles.createLinkText}>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Text style={styles.createLinkBold}>Create one</Text>
           </Text>
         </TouchableOpacity>

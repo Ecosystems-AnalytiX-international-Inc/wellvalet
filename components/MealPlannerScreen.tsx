@@ -277,7 +277,8 @@ export default function MealPlannerScreen({ onBack }: any) {
                   <Text style={styles.recipeItemName}>{meal}</Text>
                   <Text style={styles.recipeItemTip}>{
                     (() => {
-                      const name = (typeof meal === "string" ? meal : (meal?.name || meal?.meal || "")).toLowerCase();
+                      const mAny: any = meal;
+                      const name = (typeof meal === "string" ? meal : (mAny?.name || mAny?.meal || "")).toLowerCase();
                       if (name.includes("oat") || name.includes("porridge")) return "💧 Add chia seeds for extra fibre · Top with fresh berries";
                       if (name.includes("chicken") || name.includes("poulet")) return "🌿 Marinate with lemon & herbs · Pair with steamed greens";
                       if (name.includes("salmon") || name.includes("fish")) return "🫐 Rich in omega-3 · Serve with quinoa or brown rice";
@@ -388,4 +389,10 @@ const styles = StyleSheet.create({
   legendTitle: { fontWeight: "bold", marginBottom: 10, color: "#1a1a1a", fontSize: 15 },
   legendItem: { color: "#333", marginBottom: 6, fontSize: 13, lineHeight: 20 },
   disclaimer: { fontSize: 12, color: "#666", marginBottom: 20, lineHeight: 20 },
+  bbcBtn: { marginTop: 8, backgroundColor: "#E3F0A3", borderRadius: 12, paddingVertical: 6, paddingHorizontal: 12, alignSelf: "flex-start" },
+  bbcBtnText: { fontSize: 12, color: "#2D6A2D", fontWeight: "700" },
+  bbcHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, paddingBottom: 14, backgroundColor: "#2D6A2D" },
+  bbcHeaderTitle: { fontSize: 18, fontWeight: "800", color: "#fff" },
+  bbcCloseBtn: { backgroundColor: "rgba(255,255,255,0.2)", borderRadius: 16, paddingHorizontal: 12, paddingVertical: 6 },
+  bbcCloseText: { color: "#fff", fontWeight: "700", fontSize: 13 },
 });

@@ -253,19 +253,11 @@ export default function ShoppingTab() {
           )}
           {items.length > 0 && (
             <View style={styles.actionRow}>
-              {(profileType === "FAM_ADMIN" || profileType === "FAM_MEMBER") ? (
-                <TouchableOpacity style={[styles.actionBtn, styles.orderBtnHalf]}
-                  onPress={() => setShowOrderModal(true)}>
-                  <Text style={styles.actionBtnEmoji}>🚀</Text>
-                  <Text style={styles.actionBtnText}>Order for Delivery</Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity style={[styles.actionBtn, styles.orderBtnHalf]}
-                  onPress={() => router.push("/upgrade")}>
-                  <Text style={styles.actionBtnEmoji}>⭐</Text>
-                  <Text style={styles.actionBtnText}>Shop Online? Unlock Premium!</Text>
-                </TouchableOpacity>
-              )}
+              <TouchableOpacity style={[styles.actionBtn, styles.orderBtnHalf]}
+                onPress={() => setShowOrderModal(true)}>
+                <Text style={styles.actionBtnEmoji}>🚀</Text>
+                <Text style={styles.actionBtnText}>Order for Delivery</Text>
+              </TouchableOpacity>
               <TouchableOpacity style={[styles.actionBtn, styles.scanBtnHalf]}
                 onPress={() => router.push("/(tabs)/scan")}>
                 <Text style={styles.actionBtnEmoji}>📷</Text>

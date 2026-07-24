@@ -17,7 +17,7 @@ export default function ScoreRing({ score, label, letter }: ScoreRingProps) {
       duration: 1200,
       useNativeDriver: false,
     }).start();
-  }, [score]);
+  }, [score, animatedValue]);
 
   const getColor = (label: string) => {
     if (label === "Good") return "#42D674";
