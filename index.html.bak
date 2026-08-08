@@ -461,11 +461,13 @@
   <h2>Ready to meet your wellness valet?</h2>
   <p>Download WellValet free today and take control of your food choices. Available on iOS and Android.</p>
   <div class="download-buttons">
-    <a href="https://apps.apple.com/ca/app/wellvalet/id6778571808" target="_blank" rel="noopener" aria-label="Download WellValet on the App Store">
-      <img src="app-store-badge.svg" alt="Download on the App Store" style="height:56px;width:auto;display:block;">
+    <a href="https://apps.apple.com/ca/app/wellvalet/id6778571808" class="store-btn" target="_blank" rel="noopener">
+      <div class="store-icon">🍎</div>
+      <div><div class="store-text-small">Download on the</div><div class="store-text-big">App Store</div></div>
     </a>
-    <a href="https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet" target="_blank" rel="noopener" aria-label="Get WellValet on Google Play">
-      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:83px;width:auto;display:block;">
+    <a href="https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet" class="store-btn" target="_blank" rel="noopener">
+      <div class="store-icon">🤖</div>
+      <div><div class="store-text-small">Get it on</div><div class="store-text-big">Google Play</div></div>
     </a>
   </div>
 </section>
