@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 40" width="135" height="40">
+  <rect x="0.5" y="0.5" width="134" height="39" rx="6" fill="#000000" stroke="#a6a6a6" stroke-width="1"/>
+  <g transform="translate(10, 8)">
+    <path d="M1.3,0.7 C0.8,1.2 0.5,1.9 0.5,2.9 L0.5,21.1 C0.5,22.1 0.8,22.8 1.3,23.3 L1.4,23.4 L11.8,13.0 L11.8,11.0 L1.4,0.6 L1.3,0.7 Z" fill="#00D2FF"/>
+    <path d="M15.3,14.5 L11.8,12.0 L11.8,12.0 L15.3,9.5 L15.4,9.6 L19.5,11.9 C20.7,12.6 20.7,13.7 19.5,14.4 L15.4,14.7 L15.3,14.5 Z" fill="#FFD500"/>
+    <path d="M15.4,14.4 L11.8,12.0 L1.3,22.5 C1.7,22.9 2.4,23.0 3.2,22.6 L15.4,15.7 Z" fill="#FF3A44"/>
+    <path d="M15.4,9.6 L3.2,2.7 C2.4,2.3 1.7,2.4 1.3,2.8 L11.8,12.0 L15.4,9.6 Z" fill="#00E676"/>
+  </g>
+  <text x="42" y="14" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="7.5" font-weight="600" fill="#FFFFFF" letter-spacing="0.8">GET IT ON</text>
+  <text x="42" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="0.1">Google Play</text>
+</svg>
