@@ -168,10 +168,10 @@
 
     /* DOWNLOAD */
     .download { padding: 100px 48px; background: var(--green-dark); text-align: center; position: relative; overflow: hidden; }
-    .download::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(66,214,116,0.1) 0%, transparent 60%); }
-    .download h2 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 900; color: white; margin-bottom: 16px; position: relative; }
-    .download p { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 48px; line-height: 1.7; position: relative; }
-    .download-buttons { display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; }
+    .download::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(66,214,116,0.1) 0%, transparent 60%); pointer-events: none; }
+    .download h2 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 900; color: white; margin-bottom: 16px; position: relative; z-index: 1; }
+    .download p { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 48px; line-height: 1.7; position: relative; z-index: 1; }
+    .download-buttons { display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; position: relative; z-index: 2; }
     .store-btn { display: flex; align-items: center; gap: 14px; background: white; color: var(--text-dark); padding: 16px 28px; border-radius: 16px; text-decoration: none; transition: all 0.3s; min-width: 200px; }
     .store-btn:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
     .store-icon { font-size: 32px; }
