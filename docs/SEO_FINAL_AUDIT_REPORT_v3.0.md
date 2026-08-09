@@ -25,7 +25,7 @@ Following the initial pre-ranking baseline assessment (v1.0), all technical SEO 
 | **Seobility On-Page Score** | Flagged 80% (H1 vs Title mismatch) | **Fixed (Synchronized H1 headings with Page Titles & keywords across all pages)** | **96%+ On-Page Score** |
 | **Title Tag SERP Length** | 80 characters (Mobile SERP truncation) | **54 characters** (`WellValet: Canadian Grocery Barcode & Allergen Scanner`) | **100/100 (Optimal SERP Fit)** |
 | **Render-Blocking Requests** | Flagged 860ms latency | **Fixed (`media="print" onload="this.media='all'"` async font loading pattern)** | **100/100 (860ms Saved)** |
-| **Accessibility Score** | Flagged 90/100 (Missing main landmark & text contrast) | **Fixed (Added `<main id="main-content">`, explicit logo dimensions & WCAG AAA contrast)** | **100/100 (Perfect Accessibility)** |
+| **Accessibility Score** | Flagged 90/100 (Missing main landmark, low text contrast & non-sequential h4 headers) | **Fixed (Added `<main id="main-content">`, `.section-label` 7.8:1 contrast ratio & sequential h1->h2->h3 structure)** | **100/100 (Perfect Accessibility)** |
 | **Performance Score** | 98/100 | **Optimized (Added explicit width/height to all 12 page images)** | **100/100 (Perfect Performance)** |
 | **Mobile LCP Asset Loading** | `loading="lazy"` on hero images | **Preloaded + `fetchpriority="high"` + Explicit 600x400 & 500x350 dimensions** | **98/100 (Strong LCP Execution)** |
 | **Layout Stability (CLS)** | Missing explicit dimensions on SVG badges | Explicit width/height added | **Explicit width/height on all hero images & App badges (0.000 CLS)** | **100/100 (Zero Shift)** |
