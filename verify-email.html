@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email — WellValet</title>
+  <meta name="description" content="Verify your email address for your WellValet account.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Verify Email — WellValet">
+  <meta property="og:description" content="Verify your email address for your WellValet account.">
+  <meta property="og:image" content="https://www.wellvalet.com/Banner%20Test%20WellValet.png">
+  <meta property="og:site_name" content="WellValet">
+  <style>
+    body { font-family: Arial, sans-serif; background: #E3F0A3; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+    .card { background: white; border-radius: 20px; padding: 40px 30px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .logo { font-size: 32px; font-weight: 900; margin-bottom: 8px; }
+    .logo span:first-child { color: #2D6A2D; }
+    .logo span:last-child { color: #42D674; }
+    .tagline { color: #888; font-size: 14px; margin-bottom: 30px; }
+    h2 { color: #2D6A2D; margin-bottom: 16px; }
+    .token-box { background: #E3F0A3; border-radius: 12px; padding: 16px; margin: 20px 0; word-break: break-all; font-family: monospace; font-size: 13px; color: #2D6A2D; font-weight: bold; }
+    .steps { text-align: left; background: #f9f9f9; border-radius: 12px; padding: 20px; margin: 20px 0; }
+    .steps p { margin: 8px 0; font-size: 14px; color: #444; line-height: 22px; }
+    .btn { display: inline-block; background: #2D6A2D; color: white; padding: 14px 32px; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 15px; margin-top: 16px; }
+  </style>
+  <script>
+    // Extract token from URL
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      if (token) {
+        document.getElementById('token-display').textContent = token;
+        document.getElementById('token-box').style.display = 'block';
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="card">
+    <div class="logo"><span>Well</span><span>Valet</span></div>
+    <div class="tagline">Your Wellness Partner</div>
+    <h2>✉️ Verify Your Email</h2>
+    <p style="color:#555; font-size:14px; line-height:22px;">
+      To complete your email verification, open the WellValet app:
+    </p>
+    <div class="token-box" id="token-box" style="display:none;">
+      <small style="color:#888; font-size:11px; display:block; margin-bottom:6px;">Your Verification Code</small>
+      <span id="token-display"></span>
+    </div>
+    <div class="steps">
+      <p>1. Open the <strong>WellValet</strong> app</p>
+      <p>2. Complete email verification using the code above</p>
+      <p>3. Enjoy your personal wellness valet!</p>
+    </div>
+    <p style="color:#888; font-size:12px;">If you did not sign up for WellValet, you can safely ignore this page.</p>
+    <a href="https://www.wellvalet.com" class="btn">Back to WellValet</a>
+  </div>
+</body>
+</html>
