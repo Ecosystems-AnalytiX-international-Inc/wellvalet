@@ -1,0 +1,18 @@
+GitHub Pages runs Jekyll by default, and Jekyll EXCLUDES every file and
+directory whose name begins with a dot from the published output. Without this
+marker file, /.well-known/apple-app-site-association and
+/.well-known/assetlinks.json are silently dropped at build time and return 404
+in production — even though they are committed and visible in the repo.
+
+That is exactly the failure that was observed on 2026-08-09:
+
+  https://www.wellvalet.com/.well-known/apple-app-site-association  -> 404
+  https://www.wellvalet.com/.well-known/assetlinks.json             -> 404
+
+The presence of this file (any name starting with .nojekyll, contents ignored)
+disables the Jekyll build and makes GitHub Pages serve the repository verbatim,
+including dot-directories.
+
+DO NOT DELETE. If it is removed, iOS Universal Links and Android App Links stop
+working with no error anywhere except a 404 on the association files, and
+password-reset emails silently open in a browser instead of the app.
