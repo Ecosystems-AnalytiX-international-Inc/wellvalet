@@ -34,7 +34,7 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "SoftwareApplication",
+        "@type": ["SoftwareApplication", "MobileApplication"],
         "@id": "https://www.wellvalet.com/#software",
         "name": "WellValet",
         "operatingSystem": "iOS, Android",
@@ -57,6 +57,8 @@
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5",
+          "bestRating": "5",
+          "worstRating": "1",
           "ratingCount": "3"
         },
         "author": {
@@ -76,7 +78,15 @@
         "@id": "https://www.wellvalet.com/#organization",
         "name": "Ecosystem & AnalytiX International Inc.",
         "url": "https://www.wellvalet.com",
-        "logo": "https://www.wellvalet.com/favicon.png"
+        "logo": "https://www.wellvalet.com/favicon.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Toronto",
+          "addressLocality": "Toronto",
+          "addressRegion": "ON",
+          "postalCode": "M5H 2N2",
+          "addressCountry": "CA"
+        }
       },
       {
         "@type": "WebSite",
@@ -1317,39 +1327,7 @@
       }
     }
   </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "MobileApplication",
-  "name": "WellValet",
-  "operatingSystem": "iOS, ANDROID",
-  "applicationCategory": "HealthApplication",
-  "description": "Scan any grocery barcode and get an instant wellness score, allergen alert and ingredient analysis. Built for Canadian shoppers.",
-  "url": "https://www.wellvalet.com",
-  "downloadUrl": [
-    "https://apps.apple.com/in/app/wellvalet/id6778571808",
-    "https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "CAD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "Ecosystem & AnalytiX International Ltd.",
-    "url": "https://www.wellvalet.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Toronto",
-      "addressRegion": "ON",
-      "addressCountry": "CA"
-    }
-  },
-  "inLanguage": "en-CA",
-  "countriesSupported": "CA"
-}
-</script>
+
 </head>
 <body>
 
