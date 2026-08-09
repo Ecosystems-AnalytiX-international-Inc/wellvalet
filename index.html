@@ -4,21 +4,25 @@
 <meta name="impact-site-verification" value="880f642e-174e-4dc3-8ec7-4627f24628ca">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WellValet — Canadian Grocery Barcode Scanner | Wellness Scores & Allergen Alerts</title>
+  <title>WellValet: Canadian Grocery Barcode & Allergen Scanner</title>
   <meta name="description" content="Scan any grocery barcode and get an instant wellness score, allergen alert and ingredient analysis. Free to download on iOS and Android. Proudly Canadian.">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="grocery barcode scanner app Canada, food scanner app Canada, allergen scanner app, wellness score grocery, yuka alternative Canada, ingredient checker app, healthy grocery app Canada, food allergy scanner, barcode scanner nutrition Canada">
+  <!-- Preconnect and Preload for Core Web Vitals -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&auto=format&fit=crop&q=80" fetchpriority="high">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.wellvalet.com/">
-  <meta property="og:title" content="WellValet — Canadian Grocery Barcode Scanner | Wellness Scores & Allergen Alerts">
+  <meta property="og:title" content="WellValet: Canadian Grocery Barcode & Allergen Scanner">
   <meta property="og:description" content="Scan any grocery barcode and get an instant wellness score, allergen alert and ingredient analysis. Free to download on iOS and Android. Proudly Canadian.">
   <meta property="og:image" content="https://www.wellvalet.com/Banner%20Test%20WellValet.png">
   <meta property="og:site_name" content="WellValet">
   <meta property="og:locale" content="en_CA">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="WellValet — Canadian Grocery Barcode Scanner | Wellness Scores & Allergen Alerts">
+  <meta name="twitter:title" content="WellValet: Canadian Grocery Barcode & Allergen Scanner">
   <meta name="twitter:description" content="Scan any grocery barcode and get an instant wellness score, allergen alert and ingredient analysis. Free to download on iOS and Android. Proudly Canadian.">
   <meta name="twitter:image" content="https://www.wellvalet.com/Banner%20Test%20WellValet.png">
   <!-- Favicon -->
@@ -28,42 +32,101 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "WellValet",
-    "operatingSystem": "iOS, Android",
-    "applicationCategory": "HealthApplication",
-    "description": "Scan any grocery barcode and get an instant wellness score, allergen alert and ingredient analysis. Free to download on iOS and Android. Proudly Canadian.",
-    "downloadUrl": "https://apps.apple.com/in/app/wellvalet/id6778571808",
-    "installUrl": [
-      "https://apps.apple.com/in/app/wellvalet/id6778571808",
-      "https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet"
-    ],
-    "sameAs": [
-      "https://apps.apple.com/in/app/wellvalet/id6778571808",
-      "https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "CAD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "ratingCount": "3"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "Ecosystem & AnalytiX International Inc.",
-      "url": "https://www.wellvalet.com"
-    },
-    "url": "https://www.wellvalet.com",
-    "image": "https://www.wellvalet.com/Banner%20Test%20WellValet.png",
-    "inLanguage": "en",
-    "countryOfOrigin": {
-      "@type": "Country",
-      "name": "Canada"
-    }
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.wellvalet.com/#software",
+        "name": "WellValet",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "HealthApplication",
+        "description": "Scan any grocery or beauty barcode and get instant personalised wellness scores, allergen alerts, and OCR ingredient analysis tailored to Canadian shoppers.",
+        "downloadUrl": "https://apps.apple.com/in/app/wellvalet/id6778571808",
+        "installUrl": [
+          "https://apps.apple.com/in/app/wellvalet/id6778571808",
+          "https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet"
+        ],
+        "sameAs": [
+          "https://apps.apple.com/in/app/wellvalet/id6778571808",
+          "https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CAD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "ratingCount": "3"
+        },
+        "author": {
+          "@type": "Organization",
+          "@id": "https://www.wellvalet.com/#organization"
+        },
+        "url": "https://www.wellvalet.com",
+        "image": "https://www.wellvalet.com/Banner%20Test%20WellValet.png",
+        "inLanguage": "en",
+        "countryOfOrigin": {
+          "@type": "Country",
+          "name": "Canada"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.wellvalet.com/#organization",
+        "name": "Ecosystem & AnalytiX International Inc.",
+        "url": "https://www.wellvalet.com",
+        "logo": "https://www.wellvalet.com/favicon.png"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.wellvalet.com/#website",
+        "url": "https://www.wellvalet.com/",
+        "name": "WellValet",
+        "publisher": {
+          "@id": "https://www.wellvalet.com/#organization"
+        },
+        "inLanguage": "en-CA"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.wellvalet.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is WellValet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WellValet is a Canadian grocery and beauty barcode scanner app that provides instant personalized wellness scores, allergen alerts, and ingredient safety analysis without ads."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is WellValet free to use in Canada?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, WellValet is 100% free to download and use on iOS and Android with zero advertisements."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does WellValet check for food allergens?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You set your allergy and dietary preferences in your profile. When you scan a product barcode or photo of an ingredient list, WellValet cross-checks ingredients against your personal profile and alerts you instantly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is WellValet PIPEDA compliant?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. WellValet complies with Canadian PIPEDA regulations. Your health preferences and personal shopping data stay private on your device."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -1306,6 +1369,8 @@
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#how">How It Works</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="about.html">About Us</a></li>
     <li><a href="#download" class="nav-cta">Download App</a></li>
   </ul>
 </nav>
@@ -1320,10 +1385,10 @@
     </p>
     <div class="hero-buttons">
       <a href="https://apps.apple.com/in/app/wellvalet/id6778571808" target="_blank" rel="noopener" aria-label="Download WellValet on the App Store" class="store-badge-link">
-        <img src="app-store-badge.svg" alt="Download on the App Store">
+        <img src="app-store-badge.svg" alt="Download on the App Store" width="140" height="42">
       </a>
       <a href="https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet" target="_blank" rel="noopener" aria-label="Get WellValet on Google Play" class="store-badge-link">
-        <img src="google-play-badge.svg" alt="Get it on Google Play">
+        <img src="google-play-badge.svg" alt="Get it on Google Play" width="140" height="42">
       </a>
     </div>
   </div>
@@ -1331,10 +1396,10 @@
   <div class="hero-visual">
     <div class="hero-img-stack">
       <div class="hero-img-card hero-img-card-1">
-        <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&auto=format&fit=crop&q=80" alt="Supermarket shelves with packaged products" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&auto=format&fit=crop&q=80" alt="Supermarket shelves with packaged products" fetchpriority="high" width="600" height="400" />
       </div>
       <div class="hero-img-card hero-img-card-2">
-        <img src="https://images.unsplash.com/photo-1601598851547-4302969d0614?w=500&auto=format&fit=crop&q=80" alt="Scanning product barcode" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1601598851547-4302969d0614?w=500&auto=format&fit=crop&q=80" alt="Scanning product barcode" fetchpriority="high" width="500" height="350" />
       </div>
       <div class="hero-score-badge">
         <div class="hero-score-name">Organic Rolled Oats</div>
@@ -1568,35 +1633,34 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="#" class="footer-logo"><img src="favicon.png" alt="WellValet Logo" class="nav-logo-icon" />Well<span>Valet</span></a>
-      <span class="footer-tagline">Your Personal Wellness Valet</span>
-      <p>A wellness companion app by Ecosystem & AnalytiX International Inc. Helping you make smarter food choices, one scan at a time.</p>
+      <a href="index.html" class="footer-logo"><img src="favicon.png" alt="WellValet Logo" class="nav-logo-icon" />Well<span>Valet</span></a>
+      <p>A wellness companion app by Ecosystem & AnalytiX International Inc. Helping Canadian shoppers make healthier choices, one barcode scan at a time.</p>
     </div>
     <div class="footer-col">
       <h4>App</h4>
       <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#how">How It Works</a></li>
-        <li><a href="#download">Download</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#how">How It Works</a></li>
+        <li><a href="resources.html">Resources & Guides</a></li>
         <li><a href="https://apps.apple.com/in/app/wellvalet/id6778571808" target="_blank" rel="noopener">App Store</a></li>
         <li><a href="https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet" target="_blank" rel="noopener">Google Play</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Support</h4>
+      <h4>Guides & Support</h4>
       <ul>
-        <li><a href="support.html">FAQ</a></li>
-        <li><a href="mailto:support@wellvalet.com">Contact Us</a></li>
+        <li><a href="yuka-alternative-canada.html">WellValet vs Yuka</a></li>
+        <li><a href="allergen-scanner-app.html">Allergen Scanner App</a></li>
+        <li><a href="support.html">FAQ & Support</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
         <li><a href="terms.html">Terms & Conditions</a></li>
-        <li><a href="delete-account.html">Delete Account</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
-        <li><a href="#features">About Us</a></li>
-        <li><a href="https://www.cruise-mu.com" target="_blank" rel="noopener">cruise-mu.com</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="resources.html">Knowledge Hub</a></li>
         <li><a href="mailto:support@wellvalet.com">Contact Us</a></li>
       </ul>
     </div>
@@ -1604,10 +1668,11 @@
   <div class="footer-bottom">
     <div class="footer-copy">© 2026 Ecosystem & AnalytiX International Inc. WellValet™ All rights reserved.</div>
     <div class="footer-legal">
+      <a href="about.html">About Us</a>
+      <a href="resources.html">Resources</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms & Conditions</a>
       <a href="delete-account.html">Delete Account</a>
-      <a href="support.html">FAQ</a>
     </div>
   </div>
 </footer>

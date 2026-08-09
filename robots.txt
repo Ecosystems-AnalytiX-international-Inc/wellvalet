@@ -5,4 +5,21 @@ Disallow: /reset-password/
 Disallow: /verify-email.html
 Disallow: /verify-email/
 
+# Explicit permissions for AI Search Crawlers (ChatGPT, Claude, Perplexity, Gemini AI)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.wellvalet.com/sitemap.xml
+

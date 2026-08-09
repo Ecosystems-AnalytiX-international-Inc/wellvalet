@@ -25,7 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --font-main: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-main: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
   --primary: #2D6A2D;
   --primary-dark: #1a3a1a;
@@ -50,6 +50,10 @@ body {
   background: var(--bg-cream);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .hero h1, nav a.logo, .footer-logo {
+  font-family: var(--font-display);
 }
 
 /* NAVIGATION */
@@ -109,6 +113,63 @@ nav a.back:hover {
   color: var(--primary-deep);
   border-color: var(--accent);
   transform: translateX(-3px);
+}
+
+/* FOOTER STYLES */
+footer {
+  background: #0D2914;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 60px 48px 30px;
+  margin-top: 80px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-brand p { font-size: 14px; margin-top: 12px; color: rgba(255, 255, 255, 0.65); line-height: 1.6; text-align: left; }
+
+.footer-logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-col h4 { color: #fff; font-size: 16px; margin-bottom: 16px; }
+.footer-col ul { list-style: none; padding: 0; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+.footer-col a:hover { color: #34D399; }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.footer-copy { color: rgba(255, 255, 255, 0.65); }
+
+.footer-legal a { color: rgba(255, 255, 255, 0.6); margin-left: 16px; text-decoration: none; transition: color 0.2s; }
+.footer-legal a:hover { color: #fff; }
+
+@media (max-width: 768px) {
+  footer { padding: 40px 24px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 16px; }
+  .footer-legal a { margin: 0 8px; }
 }
 
 /* HERO SECTION */
@@ -617,10 +678,50 @@ footer a:hover { color: #fff; text-decoration: underline; }
 </div>
 
 <footer>
-  <p>&copy; 2026 Ecosystem &amp; AnalytiX International Inc. WellValet&#8482; &nbsp;&middot;&nbsp;
-  <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
-  <a href="terms.html">Terms &amp; Conditions</a> &nbsp;&middot;&nbsp;
-  <a href="support.html">Support</a></p>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><img src="favicon.png" alt="WellValet Logo" class="nav-logo-icon" />Well<span>Valet</span></a>
+      <p>A wellness companion app by Ecosystem & AnalytiX International Inc. Helping Canadian shoppers make healthier choices, one barcode scan at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>App</h4>
+      <ul>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#how">How It Works</a></li>
+        <li><a href="resources.html">Resources & Guides</a></li>
+        <li><a href="https://apps.apple.com/in/app/wellvalet/id6778571808" target="_blank" rel="noopener">App Store</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.cruiseanalytix.wellvalet" target="_blank" rel="noopener">Google Play</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Guides & Support</h4>
+      <ul>
+        <li><a href="yuka-alternative-canada.html">WellValet vs Yuka</a></li>
+        <li><a href="allergen-scanner-app.html">Allergen Scanner App</a></li>
+        <li><a href="support.html">FAQ & Support</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="resources.html">Knowledge Hub</a></li>
+        <li><a href="mailto:support@wellvalet.com">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Ecosystem & AnalytiX International Inc. WellValet™ All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="about.html">About Us</a>
+      <a href="resources.html">Resources</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="delete-account.html">Delete Account</a>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
