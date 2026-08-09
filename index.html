@@ -58,19 +58,25 @@
     }
   }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --green-1: #A1F1A1;
       --green-2: #E3F0A3;
       --green-3: #BADBA2;
-      --green-4: #42D674;
-      --green-dark: #2D6A2D;
-      --green-deep: #1a4a1a;
+      --green-4: #34D399;
+      --green-emerald: #10B981;
+      --green-dark: #1E5325;
+      --green-deep: #0D2914;
       --cream: #FAFFF5;
-      --text-dark: #1a2a1a;
-      --text-mid: #3a5a3a;
-      --text-light: #6a8a6a;
+      --text-dark: #112214;
+      --text-mid: #2A4830;
+      --text-light: #527359;
+      --shadow-sm: 0 4px 14px rgba(30, 83, 37, 0.06);
+      --shadow-md: 0 12px 32px rgba(30, 83, 37, 0.12);
+      --shadow-glow: 0 16px 40px rgba(52, 211, 153, 0.35);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --border-subtle: rgba(52, 211, 153, 0.25);
     }
 
     * {
@@ -84,10 +90,11 @@
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
       background: var(--cream);
       color: var(--text-dark);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ----------------------------------------------------
@@ -115,6 +122,18 @@
       color: var(--green-dark);
       letter-spacing: -1px;
       text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      object-fit: cover;
+      vertical-align: middle;
+      margin-right: 10px;
+      box-shadow: 0 4px 12px rgba(26, 58, 26, 0.15);
     }
 
     .nav-logo span {
@@ -1275,7 +1294,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Well<span>Valet</span></a>
+  <a href="#" class="nav-logo"><img src="favicon.png" alt="WellValet Logo" class="nav-logo-icon" />Well<span>Valet</span></a>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#how">How It Works</a></li>

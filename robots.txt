@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /reset-password.html
+Disallow: /reset-password/
+Disallow: /verify-email.html
+Disallow: /verify-email/
 
 Sitemap: https://www.wellvalet.com/sitemap.xml

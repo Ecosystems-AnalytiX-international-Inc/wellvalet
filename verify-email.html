@@ -11,21 +11,141 @@
   <meta property="og:image" content="https://www.wellvalet.com/Banner%20Test%20WellValet.png">
   <meta property="og:site_name" content="WellValet">
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; background: #E3F0A3; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-    .card { background: white; border-radius: 20px; padding: 40px 30px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-    .logo { font-size: 32px; font-weight: 900; margin-bottom: 8px; }
-    .logo span:first-child { color: #2D6A2D; }
-    .logo span:last-child { color: #42D674; }
-    .tagline { color: #888; font-size: 14px; margin-bottom: 30px; }
-    h2 { color: #2D6A2D; margin-bottom: 16px; }
-    .token-box { background: #E3F0A3; border-radius: 12px; padding: 16px; margin: 20px 0; word-break: break-all; font-family: monospace; font-size: 13px; color: #2D6A2D; font-weight: bold; }
-    .steps { text-align: left; background: #f9f9f9; border-radius: 12px; padding: 20px; margin: 20px 0; }
-    .steps p { margin: 8px 0; font-size: 14px; color: #444; line-height: 22px; }
-    .btn { display: inline-block; background: #2D6A2D; color: white; padding: 14px 32px; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 15px; margin-top: 16px; }
+    :root {
+      --font-main: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --primary: #2D6A2D;
+      --primary-dark: #1a3a1a;
+      --accent: #42D674;
+      --accent-light: #E3F0A3;
+      --bg-gradient: linear-gradient(135deg, #1D4A27 0%, #112D18 60%, #0A1C0F 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-gradient);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+      color: #1C2D21;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 44px 36px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(227, 240, 163, 0.3);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      object-fit: cover;
+      vertical-align: middle;
+      margin-right: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo span:first-child { color: var(--primary); }
+    .logo span:last-child { color: var(--accent); }
+
+    .tagline {
+      color: #55725C;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      color: var(--primary-dark);
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    p.desc {
+      color: #4A6352;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .token-box {
+      background: linear-gradient(135deg, #F0FDF4 0%, #E3F0A3 100%);
+      border: 1px solid rgba(66, 214, 116, 0.4);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 22px 0;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 14px;
+      color: var(--primary-dark);
+      font-weight: bold;
+    }
+
+    .steps {
+      text-align: left;
+      background: #F8FDF9;
+      border: 1px solid #E2F5E7;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 22px 0;
+    }
+
+    .steps p {
+      margin: 10px 0;
+      font-size: 13.5px;
+      color: #2D3E31;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 14px 34px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      margin-top: 16px;
+      box-shadow: 0 8px 24px rgba(45, 106, 45, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(45, 106, 45, 0.4);
+    }
   </style>
   <script>
-    // Extract token from URL
     window.onload = function() {
       const params = new URLSearchParams(window.location.search);
       const token = params.get('token');
@@ -38,22 +158,22 @@
 </head>
 <body>
   <div class="card">
-    <div class="logo"><span>Well</span><span>Valet</span></div>
+    <div class="logo"><img src="favicon.png" alt="WellValet Logo" class="logo-icon" /><span>Well</span><span>Valet</span></div>
     <div class="tagline">Your Wellness Partner</div>
     <h2>✉️ Verify Your Email</h2>
-    <p style="color:#555; font-size:14px; line-height:22px;">
+    <p class="desc">
       To complete your email verification, open the WellValet app:
     </p>
     <div class="token-box" id="token-box" style="display:none;">
-      <small style="color:#888; font-size:11px; display:block; margin-bottom:6px;">Your Verification Code</small>
+      <small style="color:#55725C; font-size:11px; display:block; margin-bottom:6px; font-family:sans-serif;">Your Verification Code</small>
       <span id="token-display"></span>
     </div>
     <div class="steps">
-      <p>1. Open the <strong>WellValet</strong> app</p>
+      <p>1. Open the <strong>WellValet</strong> mobile app</p>
       <p>2. Complete email verification using the code above</p>
       <p>3. Enjoy your personal wellness valet!</p>
     </div>
-    <p style="color:#888; font-size:12px;">If you did not sign up for WellValet, you can safely ignore this page.</p>
+    <p style="color:#7A9482; font-size:12px;">If you did not sign up for WellValet, you can safely ignore this page.</p>
     <a href="index.html" class="btn">Back to WellValet</a>
   </div>
 </body>
