@@ -1,0 +1,28 @@
+# WellValet
+
+> Canadian grocery barcode scanner. Scan any food or personal care product for
+> personalised wellness scores, allergen alerts and full ingredient analysis.
+> Built by Ecosystem & AnalytiX International Ltd., Toronto, Ontario, Canada.
+
+## What it does
+- Scans grocery and beauty product barcodes for instant ingredient breakdown
+- Flags allergens against the user's own declared allergy profile
+- Produces an A-D wellness score personalised to the individual, not a population average
+- Covers Canadian grocery products via the Open Food Facts database
+
+## Key pages
+- [Home](https://www.wellvalet.com/): product overview and features
+- [WellValet vs Yuka](https://www.wellvalet.com/yuka-alternative-canada.html): comparison for Canadian shoppers
+- [Allergen scanner](https://www.wellvalet.com/allergen-scanner-app.html): how allergen detection works
+- [Resources](https://www.wellvalet.com/resources.html): guides on Canadian grocery labels
+- [Support](https://www.wellvalet.com/support.html): frequently asked questions
+- [About](https://www.wellvalet.com/about.html): company information
+
+## Availability
+Free tier: 3 scans per day. Premium from C$5.99/month. Family plan available.
+iOS and Android. Canada.
+
+## Note
+WellValet provides general wellness information, not medical advice.
+Ingredient data is community-sourced and incomplete for some products.
+Users should always read the physical product label for allergen information.
