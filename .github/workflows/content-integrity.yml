@@ -1,0 +1,56 @@
+name: Content Integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: No fabricated ratings
+        run: |
+          if grep -rn "aggregateRating" --include="*.html" .; then
+            echo "::error::aggregateRating found — no genuine reviews exist"
+            exit 1
+          fi
+
+      - name: Canadian App Store links only
+        run: |
+          if grep -rn "apps.apple.com/in/app\|apps.apple.com/us/app" --include="*.html" --include="*.md" .; then
+            echo "::error::Non-Canadian App Store link found"
+            exit 1
+          fi
+
+      - name: No fabricated testimonials
+        run: |
+          if grep -rniE "Sarah M\.|David L\.|Emily K\.|James T\." --include="*.html" .; then
+            echo "::error::Fabricated testimonial found"
+            exit 1
+          fi
+
+      - name: No unevidenced claims
+        run: |
+          if grep -rniE "thousands of (shoppers|users)|trusted by [0-9,]+" --include="*.html" .; then
+            echo "::error::Unevidenced user-volume claim found"
+            exit 1
+          fi
+
+      - name: Valid JSON-LD
+        run: |
+          python3 - << 'PY'
+          import re, json, glob, sys
+          bad = 0
+          for f in glob.glob('*.html'):
+              h = open(f, encoding='utf-8', errors='replace').read()
+              for i, b in enumerate(re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S), 1):
+                  try: json.loads(b)
+                  except Exception as e:
+                      print(f"::error file={f}::Invalid JSON-LD block {i}: {e}")
+                      bad = 1
+          sys.exit(bad)
+          PY

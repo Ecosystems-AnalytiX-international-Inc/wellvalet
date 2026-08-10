@@ -1,0 +1,56 @@
+#!/bin/bash
+# WellValet content integrity check
+fail=0
+
+echo "Running content integrity check..."
+
+# 1. Fabricated ratings in schema
+if grep -rn "aggregateRating" --include="*.html" . 2>/dev/null | grep -v node_modules; then
+  echo "BLOCKED: aggregateRating found."
+  echo "  We have no genuine reviews. Fabricated rating data breaches"
+  echo "  Google's structured data policy and risks a manual penalty."
+  fail=1
+fi
+
+# 2. Wrong App Store storefront
+if grep -rn "apps.apple.com/in/app\|apps.apple.com/us/app" --include="*.html" --include="*.md" . 2>/dev/null | grep -v node_modules; then
+  echo "BLOCKED: non-Canadian App Store link. Must be /ca/."
+  fail=1
+fi
+
+# 3. Known fabricated testimonial names
+if grep -rniE "Sarah M\.|David L\.|Emily K\.|James T\." --include="*.html" . 2>/dev/null | grep -v node_modules; then
+  echo "BLOCKED: fabricated testimonial detected."
+  fail=1
+fi
+
+# 4. Unevidenced volume claims
+if grep -rniE "thousands of (shoppers|users|customers)|[0-9,]+\+? (happy|satisfied) users|trusted by [0-9,]+" --include="*.html" . 2>/dev/null | grep -v node_modules; then
+  echo "BLOCKED: unevidenced user-volume claim."
+  fail=1
+fi
+
+# 5. Invalid JSON-LD
+python3 - << 'PY'
+import re, json, glob, sys
+bad = 0
+for f in glob.glob('*.html'):
+    h = open(f, encoding='utf-8', errors='replace').read()
+    for i, b in enumerate(re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S), 1):
+        try:
+            json.loads(b)
+        except Exception as e:
+            print(f"BLOCKED: invalid JSON-LD in {f} block {i}: {e}")
+            bad = 1
+sys.exit(bad)
+PY
+[ $? -ne 0 ] && fail=1
+
+if [ $fail -ne 0 ]; then
+  echo ""
+  echo "Commit blocked. Fix the above, or override with --no-verify if you are certain."
+  exit 1
+fi
+
+echo "Content integrity check passed."
+exit 0

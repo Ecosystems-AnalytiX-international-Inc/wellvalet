@@ -68,7 +68,7 @@ Upgraded the site's JSON-LD structured data on `index.html` to a multi-entity `@
       "operatingSystem": "iOS, Android",
       "applicationCategory": "HealthApplication",
       "description": "Scan any grocery or beauty barcode and get instant personalised wellness scores, allergen alerts, and OCR ingredient analysis tailored to Canadian shoppers.",
-      "downloadUrl": "https://apps.apple.com/in/app/wellvalet/id6778571808",
+      "downloadUrl": "https://apps.apple.com/ca/app/wellvalet/id6778571808",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
       "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "3" },
       "author": { "@type": "Organization", "@id": "https://www.wellvalet.com/#organization" }
