@@ -150,7 +150,7 @@ footer {
 .footer-col h4 { color: #fff; font-size: 16px; margin-bottom: 16px; }
 .footer-col ul { list-style: none; padding: 0; }
 .footer-col li { margin-bottom: 10px; }
-.footer-col a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+.footer-col a { display: inline-block; padding: 6px 0;  color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.2s; }
 .footer-col a:hover { color: #34D399; }
 
 .footer-bottom {
@@ -166,14 +166,14 @@ footer {
 
 .footer-copy { color: rgba(255, 255, 255, 0.65); }
 
-.footer-legal a { color: rgba(255, 255, 255, 0.6); margin-left: 16px; text-decoration: none; transition: color 0.2s; }
+.footer-legal a { display: inline-block; padding: 8px 4px;  color: rgba(255, 255, 255, 0.6); margin-left: 16px; text-decoration: none; transition: color 0.2s; }
 .footer-legal a:hover { color: #fff; }
 
 @media (max-width: 768px) {
   footer { padding: 40px 24px 24px; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; text-align: center; gap: 16px; }
-  .footer-legal a { margin: 0 8px; }
+  .footer-legal a { display: inline-block; padding: 8px 4px;  margin: 0 8px; }
 }
 
 /* HERO SECTION */
@@ -410,7 +410,7 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-footer a {
+footer a { display: inline-block; padding: 6px 8px; 
   color: var(--accent-light);
   text-decoration: none;
   font-weight: 500;
