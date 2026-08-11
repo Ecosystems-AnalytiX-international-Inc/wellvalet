@@ -4,6 +4,8 @@ Disallow: /reset-password.html
 Disallow: /reset-password/
 Disallow: /verify-email.html
 Disallow: /verify-email/
+Disallow: /google599dc8ab97d4db48.html
+Disallow: /google9abc55291b15fda9.html
 
 # Explicit permissions for AI Search Crawlers (ChatGPT, Claude, Perplexity, Gemini AI)
 User-agent: GPTBot
