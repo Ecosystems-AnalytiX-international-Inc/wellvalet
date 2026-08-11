@@ -15,6 +15,8 @@
 - [WellValet vs Yuka](https://www.wellvalet.com/yuka-alternative-canada.html): comparison for Canadian shoppers
 - [Allergen scanner](https://www.wellvalet.com/allergen-scanner-app.html): how allergen detection works
 - [Resources](https://www.wellvalet.com/resources.html): guides on Canadian grocery labels
+- [Blog](https://www.wellvalet.com/blog.html): research and guides
+- [Database coverage research](https://www.wellvalet.com/canadian-grocery-database-coverage.html): measured Canadian grocery data coverage across four sources
 - [Support](https://www.wellvalet.com/support.html): frequently asked questions
 - [About](https://www.wellvalet.com/about.html): company information
 
