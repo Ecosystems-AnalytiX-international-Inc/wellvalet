@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>We Tested 4 Product Databases for Canadian Grocery Coverage</title>
+<meta name="description" content="Original research: Open Food Facts holds 124,088 Canadian products but only 21,918 have complete ingredients. UPCitemdb, USDA FoodData Central and Nutritionix compared. Full numbers and method.">
+<link rel="canonical" href="https://www.wellvalet.com/canadian-grocery-database-coverage.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.wellvalet.com/canadian-grocery-database-coverage.html">
+<meta property="og:title" content="We tested four product databases for Canadian grocery coverage. Only one was usable.">
+<meta property="og:description" content="Open Food Facts holds 124,088 Canadian products — but only 21,918 have complete ingredient data. What we measured across four sources, including the parts that reflect badly on our own app.">
+<meta property="og:site_name" content="WellValet">
+<meta property="og:locale" content="en_CA">
+<meta property="article:published_time" content="2026-08-11">
+<meta property="article:author" content="Ecosystem &amp; AnalytiX International Ltd.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="We tested four product databases for Canadian grocery coverage">
+<meta name="twitter:description" content="Only one was usable. Full numbers, method, and what we got wrong.">
+
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "We tested four product databases for Canadian grocery coverage. Only one was usable.",
+      "description": "Original research comparing Open Food Facts, UPCitemdb, USDA FoodData Central and Nutritionix for Canadian grocery product coverage.",
+      "datePublished": "2026-08-11",
+      "dateModified": "2026-08-11",
+      "inLanguage": "en-CA",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.wellvalet.com/canadian-grocery-database-coverage.html"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Ecosystem & AnalytiX International Ltd."
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ecosystem & AnalytiX International Ltd.",
+        "url": "https://www.wellvalet.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Toronto",
+          "addressRegion": "ON",
+          "addressCountry": "CA"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://www.wellvalet.com/"},
+        {"@type":"ListItem","position":2,"name":"Blog","item":"https://www.wellvalet.com/blog.html"},
+        {"@type":"ListItem","position":3,"name":"Canadian grocery database coverage"}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --green-deep:#1e4d1e; --green-dark:#2D6A2D; --green-4:#42D674;
+    --green-2:#F2F8EC; --cream:#FDFCF7;
+    --text-dark:#1a1a1a; --text-mid:#3d3d3d; --text-light:#7a7a7a;
+    --border:#E6EBE0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+       color:var(--text-dark);background:var(--cream);line-height:1.75;
+       -webkit-font-smoothing:antialiased}
+  a{color:var(--green-dark)}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(253,252,247,0.92);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-inner{max-width:1100px;margin:0 auto;padding:16px 24px;
+             display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;
+         font-size:18px;color:var(--green-dark)}
+  .brand img{width:32px;height:32px;border-radius:8px}
+  .nav-links{display:flex;gap:24px;list-style:none;font-size:14px;font-weight:500}
+  .nav-links a{text-decoration:none;color:var(--text-mid)}
+  .nav-links a:hover{color:var(--green-dark)}
+
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  .crumb{font-size:13px;color:var(--text-light);padding:28px 0 0}
+  .crumb a{text-decoration:none;color:var(--text-light)}
+  .crumb a:hover{color:var(--green-dark)}
+
+  article header{padding:24px 0 32px;border-bottom:1px solid var(--border);margin-bottom:36px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
+           color:var(--green-dark);margin-bottom:14px}
+  h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,4.6vw,42px);
+     line-height:1.18;margin-bottom:18px}
+  .byline{font-size:14px;color:var(--text-light)}
+
+  article h2{font-family:'Playfair Display',Georgia,serif;font-size:26px;line-height:1.3;
+             margin:44px 0 16px;padding-top:8px}
+  article p{margin-bottom:20px;font-size:17px;color:var(--text-mid)}
+  article strong{color:var(--text-dark);font-weight:600}
+  article ul{margin:0 0 20px 22px;color:var(--text-mid)}
+  article li{margin-bottom:10px}
+
+  .stat{background:white;border:1px solid var(--border);border-left:4px solid var(--green-4);
+        border-radius:12px;padding:22px 26px;margin:26px 0;font-size:20px;font-weight:600;
+        color:var(--text-dark);font-family:'Playfair Display',Georgia,serif}
+
+  pre{background:#1f2937;color:#d1fae5;border-radius:12px;padding:20px 22px;overflow-x:auto;
+      font-size:13.5px;line-height:1.7;margin:24px 0;
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  table{width:100%;border-collapse:collapse;margin:26px 0;font-size:14.5px}
+  th{background:var(--green-dark);color:white;text-align:left;padding:12px 14px;font-weight:600}
+  td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text-mid)}
+  tr:nth-child(even) td{background:#fafcf8}
+
+  hr{border:none;border-top:1px solid var(--border);margin:44px 0}
+
+  .callout{background:var(--green-2);border-radius:16px;padding:24px 28px;margin:32px 0;
+           font-size:16px;color:var(--text-mid)}
+  .callout strong{color:var(--text-dark)}
+
+  /* SHARE */
+  .share{border-top:1px solid var(--border);margin-top:48px;padding-top:28px}
+  .share-label{font-size:13px;color:var(--text-light);margin-bottom:14px;
+               text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .share-row{display:flex;gap:10px;flex-wrap:wrap}
+  .share-row a{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;
+               border:1.5px solid var(--border);border-radius:30px;text-decoration:none;
+               font-size:14px;font-weight:500;color:var(--text-mid);
+               background:white;transition:all .2s}
+  .share-row a:hover{border-color:var(--green-dark);color:var(--green-dark);
+                     transform:translateY(-2px)}
+
+  .cta{background:var(--green-2);border-radius:20px;padding:32px;margin:40px 0 0;
+       text-align:center}
+  .cta h3{font-family:'Playfair Display',Georgia,serif;font-size:22px;margin-bottom:10px}
+  .cta p{font-size:15px;color:var(--text-mid);margin-bottom:18px}
+  .cta a{display:inline-block;background:var(--green-dark);color:white;text-decoration:none;
+         padding:13px 28px;border-radius:30px;font-weight:600;font-size:15px}
+
+  footer{border-top:1px solid var(--border);background:white;margin-top:80px}
+  .foot-inner{max-width:1100px;margin:0 auto;padding:40px 24px;
+              display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;
+              font-size:14px;color:var(--text-light)}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+  .foot-links a{text-decoration:none;color:var(--text-mid)}
+
+  @media(max-width:640px){
+    .nav-links{display:none}
+    article p{font-size:16px}
+    pre{font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="favicon.png" alt="WellValet">WellValet</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">Home</a> › <a href="blog.html">Blog</a> › Database coverage</div>
+
+  <article>
+    <header>
+      <div class="eyebrow">Research</div>
+      <h1>We tested four product databases for Canadian grocery coverage. Only one was usable.</h1>
+      <div class="byline">11 August 2026 · Ecosystem &amp; AnalytiX International Ltd., Toronto · 9 min read</div>
+    </header>
+
+    <p>If you build a barcode scanning app, the first question is where the product data comes
+       from. If you build one for Canada, the answer is harder than it looks.</p>
+
+    <p>We spent a week testing four candidate sources against real Canadian grocery barcodes.
+       Three of them were unusable, and the reasons were not what we expected. This is what we
+       found, including the numbers, the method, and the parts that reflect badly on our own product.</p>
+
+    <h2>The assumption we started with, and why it was wrong</h2>
+
+    <p>We began with a belief that turned out to be false: that Open Food Facts — the open,
+       community-maintained food database — had poor Canadian coverage, and that we would need a
+       commercial source to fill the gap.</p>
+
+    <p>That assumption came from scanning a handful of Canadian products in a supermarket and
+       getting nothing back. It felt like evidence. It wasn't. Some of the barcodes we were
+       testing against weren't real products, and a few genuine misses became, in our minds,
+       a pattern.</p>
+
+    <p>The lesson is uninteresting but worth stating plainly: <strong>measure before you
+       conclude.</strong> We nearly spent money solving a problem we hadn't verified.</p>
+
+    <h2>What Open Food Facts actually holds for Canada</h2>
+
+    <p>Open Food Facts exposes a public search API that reports a total count for any filtered
+       query. Filtering on products tagged with Canada as a market country returns a definitive
+       figure.</p>
+
+    <div class="stat">124,088 products tagged Canada</div>
+
+    <p>Then the more important question — how many are actually complete enough to be useful?
+       Open Food Facts tracks per-product completion states, including whether the ingredient
+       list has been filled in. Filtering the same Canadian set on that state gives the answer.</p>
+
+    <div class="stat">21,918 products with complete ingredient data</div>
+
+    <p>That second number is the one that matters, and it's uncomfortable.
+       <strong>Roughly 82% of Canadian products in Open Food Facts have incomplete ingredient
+       information.</strong> They exist as entries — a name, a brand, sometimes a photo — but
+       without the ingredient list that any allergen check or nutritional assessment depends on.</p>
+
+    <p>So the Canadian problem is real. It just isn't the problem we assumed.
+       <strong>The gap is incompleteness, not absence.</strong></p>
+
+    <p>That distinction changes what you build. A missing product needs a new record. An
+       incomplete product needs one field filled — a much smaller task, and one a user standing
+       in front of the package can do in thirty seconds.</p>
+
+    <h2>UPCitemdb: no incremental coverage, no nutrition</h2>
+
+    <p>UPCitemdb advertises over 700 million UPC and EAN records — by volume, the largest lookup
+       database available. We tested it as a fallback for products Open Food Facts missed.</p>
+
+    <p>Against our test barcodes it returned exactly one product: Barilla Farfalle. Open Food
+       Facts already had that one, with full nutrition. It missed both the Canadian artisan
+       product we tested and Nutella — one of the most widely distributed food products in
+       the world.</p>
+
+    <p>More fundamentally: <strong>UPCitemdb does not return ingredients or nutrition
+       facts.</strong> It returns a product name, a brand, a category and an image. That is
+       useful for identifying an object. It is not sufficient to assess one.</p>
+
+    <p>For a wellness or allergen application, a source that tells you <em>what</em> a product is
+       but not <em>what's in it</em> cannot serve as a fallback. It can only tell the user that
+       the product exists and you can't help them with it.</p>
+
+    <h2>USDA FoodData Central: two million records, 0.12% Canadian</h2>
+
+    <p>FoodData Central is a genuinely excellent resource — free, government-maintained, and
+       substantial. We downloaded the full April 2026 bulk export and analysed the branded foods
+       file, which contains a market country field and a GTIN/UPC field for every record.</p>
+
+<pre>Total records:                          1,999,950
+market_country = United States:         1,986,471   (99.3%)
+market_country = US:                       12,362   ( 0.6%)
+market_country = New Zealand:               1,117   ( 0.1%)
+
+UPCs carrying the Canadian 006 prefix:      2,319   ( 0.12%)</pre>
+
+    <p>Two thousand Canadian-registered barcodes out of two million records. That is not a
+       Canadian dataset with gaps; it is a US dataset with incidental cross-border spillover.</p>
+
+    <p>This isn't a criticism. USDA's mandate is the American food supply. But it means the
+       largest free nutrition database in North America is effectively unavailable to a Canadian
+       application.</p>
+
+    <p>Against our test barcodes it returned the same single hit as UPCitemdb — Barilla Farfalle,
+       which we already had.</p>
+
+    <h2>Nutritionix: priced out of reach</h2>
+
+    <p>Nutritionix has strong North American branded-food coverage and would likely have helped.
+       It is also no longer accessible to small developers.</p>
+
+    <p>The company discontinued its public free tier, citing misuse of trial accounts. Commercial
+       access now starts at approximately <strong>US$1,850 per month</strong> for around 600,000 UPCs.</p>
+
+    <p>For an enterprise that is reasonable. For a pre-revenue application it is roughly the
+       entire annual marketing budget, spent on one data source. We did not test it.
+       We could not afford to.</p>
+
+    <h2>Summary</h2>
+
+    <table>
+      <tr><th>Source</th><th>Canadian coverage</th><th>Ingredients</th><th>Nutrition</th><th>Cost</th></tr>
+      <tr><td><strong>Open Food Facts</strong></td><td>124,088 products<br>(21,918 complete)</td><td>Yes</td><td>Yes</td><td>Free</td></tr>
+      <tr><td>UPCitemdb</td><td>No incremental coverage in testing</td><td><strong>No</strong></td><td><strong>No</strong></td><td>~US$42–140/mo</td></tr>
+      <tr><td>USDA FoodData Central</td><td>2,319 of 2,000,000 (0.12%)</td><td>Yes</td><td>Yes</td><td>Free</td></tr>
+      <tr><td>Nutritionix</td><td>Not tested</td><td>Yes</td><td>Yes</td><td>~US$1,850/mo</td></tr>
+    </table>
+
+    <h2>The finding we didn't expect</h2>
+
+    <p>Partway through testing, our requests to Open Food Facts began returning an HTML
+       interstitial rather than data. We had hit their rate limit for anonymous traffic.</p>
+
+    <p>This matters more than it sounds. If you query their API synchronously on every scan, a
+       modest number of concurrent users will trip that limit — and your users will see
+       "product not found" for products that are sitting in the database.</p>
+
+    <p>Two consequences we've acted on. <strong>Authenticate</strong> — registered accounts are
+       not subject to the same anonymous request limits, and we should have done this from the
+       start. And <strong>don't query per-scan in production</strong> — Open Food Facts publishes
+       complete database exports, including country-filtered extracts. Importing a Canadian
+       subset into your own database means scans resolve locally in milliseconds, with no
+       external dependency and no rate limit. Their API becomes a periodic refresh rather than a
+       runtime requirement.</p>
+
+    <div class="callout">
+      We'd assumed this was an optimisation for later. It's architectural — and it's also the
+      courteous thing to do. <strong>Open Food Facts is a volunteer-run non-profit.</strong>
+      Hammering their API on every user action is not a reasonable way to consume a free
+      public resource.
+    </div>
+
+    <h2>What we concluded</h2>
+
+    <p><strong>Canadian grocery product data cannot currently be bought at small-company
+       scale.</strong> The authoritative sources — GS1 Canada's verified data pool, and the
+       content syndication networks that supply major retailers — are enterprise-priced.
+       Everything accessible below that is either American or incomplete.</p>
+
+    <p>Open Food Facts is the only viable foundation, and it covers about a fifth of Canadian
+       products completely. That leaves one path: <strong>fill the gaps yourself, from the people
+       standing in front of the products.</strong></p>
+
+    <p>We're building toward a flow where a scan that returns nothing — or returns a product with
+       no ingredient list — becomes an invitation rather than a dead end. Photograph the
+       ingredient panel, and the extracted data goes into a review queue. It gets validated,
+       published, and the next person who scans that product gets an answer.</p>
+
+    <p>That is slow, unglamorous, and compounds. Every product added serves every future user who
+       scans it. It is also, as far as we can tell, the only approach available at this scale.</p>
+
+    <p>Instacart appears to have reached a similar conclusion at much larger scale — their
+       catalogue work now uses vision-language models to extract nutrition and allergen data from
+       packaging imagery, with human validation in the loop. The difference is that our users are
+       physically holding the product.</p>
+
+    <h2>Method and limitations</h2>
+
+    <p>The Open Food Facts figures come from their public search API, filtered on Canada as a
+       market country and, for the second figure, on the ingredients-completed state the project
+       maintains per product. Both are single queries returning a total count, taken in August
+       2026. The database grows continuously, so these figures will drift.</p>
+
+    <p>The USDA analysis used the April 2026 bulk CSV export, filtering the branded foods file on
+       its market country field and on the GS1 <code>006</code> prefix in the GTIN/UPC field,
+       across all 1,999,950 records.</p>
+
+    <p><strong>Our barcode-level testing used a small sample</strong> — three genuine products
+       across four sources. That is enough to establish that the commercial alternatives added
+       nothing over our primary source in those cases. It is not enough to characterise their
+       coverage generally, and we're not claiming it does.</p>
+
+    <p>If you have a larger Canadian barcode set and want to run the same comparison, we'd be
+       glad to see the results — including if they contradict ours.</p>
+
+    <h2>Why we published this</h2>
+
+    <p>We build <a href="index.html">WellValet</a>, a Canadian grocery barcode scanner. This
+       research determined our architecture, and the 82% incompleteness figure is a limitation of
+       our own product, not just of the database behind it. We'd rather state that than have
+       users discover it.</p>
+
+    <p>If you're building something similar, or you know of a Canadian product data source we've
+       missed, we'd genuinely like to hear from you:
+       <a href="mailto:cruise.analytix@gmail.com">cruise.analytix@gmail.com</a></p>
+
+    <div class="share">
+      <div class="share-label">Share this research</div>
+      <div class="share-row">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.wellvalet.com%2Fcanadian-grocery-database-coverage.html" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/intent/tweet?text=We%20tested%204%20product%20databases%20for%20Canadian%20grocery%20coverage.%20Only%20one%20was%20usable.&amp;url=https%3A%2F%2Fwww.wellvalet.com%2Fcanadian-grocery-database-coverage.html" target="_blank" rel="noopener">X</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wellvalet.com%2Fcanadian-grocery-database-coverage.html" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fwww.wellvalet.com%2Fcanadian-grocery-database-coverage.html&amp;t=We%20tested%20four%20product%20databases%20for%20Canadian%20grocery%20coverage" target="_blank" rel="noopener">Hacker News</a>
+        <a href="https://reddit.com/submit?url=https%3A%2F%2Fwww.wellvalet.com%2Fcanadian-grocery-database-coverage.html&amp;title=We%20tested%20four%20product%20databases%20for%20Canadian%20grocery%20coverage" target="_blank" rel="noopener">Reddit</a>
+        <a href="mailto:?subject=Canadian%20grocery%20database%20coverage&amp;body=https%3A%2F%2Fwww.wellvalet.com%2Fcanadian-grocery-database-coverage.html">Email</a>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h3>WellValet</h3>
+      <p>Scan any Canadian grocery barcode for allergen alerts and a wellness score
+         matched to your profile. Free to start.</p>
+      <a href="index.html">See how it works</a>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 Ecosystem &amp; AnalytiX International Ltd. · WellValet™</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

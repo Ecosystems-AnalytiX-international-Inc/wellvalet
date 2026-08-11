@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog — WellValet | Canadian Grocery, Labels & Wellness</title>
+<meta name="description" content="Research and practical guides on Canadian grocery labels, food allergens, ingredient data and shopping smarter. From the team behind WellValet.">
+<link rel="canonical" href="https://www.wellvalet.com/blog.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.wellvalet.com/blog.html">
+<meta property="og:title" content="Blog — WellValet | Canadian Grocery, Labels & Wellness">
+<meta property="og:description" content="Research and practical guides on Canadian grocery labels, food allergens and ingredient data.">
+<meta property="og:site_name" content="WellValet">
+<meta property="og:locale" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog — WellValet">
+<meta name="twitter:description" content="Research and practical guides on Canadian grocery labels, food allergens and ingredient data.">
+
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "WellValet Blog",
+  "description": "Research and practical guides on Canadian grocery labels, food allergens, ingredient data and shopping smarter.",
+  "url": "https://www.wellvalet.com/blog.html",
+  "inLanguage": "en-CA",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ecosystem & AnalytiX International Ltd.",
+    "url": "https://www.wellvalet.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toronto",
+      "addressRegion": "ON",
+      "addressCountry": "CA"
+    }
+  }
+}
+</script>
+
+<style>
+  :root{
+    --green-deep:#1e4d1e; --green-dark:#2D6A2D; --green-4:#42D674;
+    --green-2:#F2F8EC; --cream:#FDFCF7;
+    --text-dark:#1a1a1a; --text-mid:#4a4a4a; --text-light:#7a7a7a;
+    --border:#E6EBE0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+       color:var(--text-dark);background:var(--cream);line-height:1.7;
+       -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:rgba(253,252,247,0.92);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-inner{max-width:1100px;margin:0 auto;padding:16px 24px;
+             display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;
+         font-size:18px;color:var(--green-dark)}
+  .brand img{width:32px;height:32px;border-radius:8px}
+  .nav-links{display:flex;gap:24px;list-style:none;font-size:14px;font-weight:500}
+  .nav-links a{text-decoration:none;color:var(--text-mid);transition:color .2s}
+  .nav-links a:hover{color:var(--green-dark)}
+
+  /* HEADER */
+  header{max-width:820px;margin:0 auto;padding:72px 24px 40px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
+           color:var(--green-dark);margin-bottom:14px}
+  h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(32px,5vw,46px);
+     line-height:1.15;margin-bottom:16px}
+  .lede{font-size:17px;color:var(--text-mid);max-width:62ch}
+
+  /* POST LIST */
+  main{max-width:820px;margin:0 auto;padding:0 24px 100px}
+  .post{border-top:1px solid var(--border);padding:36px 0}
+  .post:last-child{border-bottom:1px solid var(--border)}
+  .post-meta{font-size:13px;color:var(--text-light);margin-bottom:10px;
+             display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .tag{background:var(--green-2);color:var(--green-dark);font-size:11px;font-weight:600;
+       padding:3px 10px;border-radius:20px;letter-spacing:.4px}
+  .post h2{font-family:'Playfair Display',Georgia,serif;font-size:26px;line-height:1.25;
+           margin-bottom:12px}
+  .post h2 a{text-decoration:none;transition:color .2s}
+  .post h2 a:hover{color:var(--green-dark)}
+  .post p{color:var(--text-mid);font-size:16px;margin-bottom:14px}
+  .readmore{font-size:14px;font-weight:600;color:var(--green-dark);text-decoration:none}
+  .readmore:hover{text-decoration:underline}
+
+  /* EMPTY STATE / NOTE */
+  .note{background:var(--green-2);border-radius:16px;padding:24px 28px;margin-top:48px;
+        font-size:15px;color:var(--text-mid)}
+  .note strong{color:var(--text-dark)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);background:white}
+  .foot-inner{max-width:1100px;margin:0 auto;padding:40px 24px;
+              display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;
+              font-size:14px;color:var(--text-light)}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+  .foot-links a{text-decoration:none;color:var(--text-mid)}
+  .foot-links a:hover{color:var(--green-dark)}
+
+  @media(max-width:640px){
+    .nav-links{display:none}
+    header{padding:48px 24px 28px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <img src="favicon.png" alt="WellValet">WellValet
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">WellValet Blog</div>
+  <h1>Notes from building a Canadian grocery scanner</h1>
+  <p class="lede">Research, measurements and practical guides on Canadian grocery labels,
+     food allergens and product data — including the parts that didn't work.</p>
+</header>
+
+<main>
+
+  <!-- ═══ POST ENTRY — copy this block for each new post ═══ -->
+  <article class="post">
+    <div class="post-meta">
+      <span class="tag">Research</span>
+      <time datetime="2026-08-11">11 August 2026</time>
+      <span>9 min read</span>
+    </div>
+    <h2><a href="canadian-grocery-database-coverage.html">We tested four product databases for Canadian grocery coverage. Only one was usable.</a></h2>
+    <p>We assumed Open Food Facts had poor Canadian coverage and that we'd need to buy a
+       commercial source. We were wrong — and the real problem turned out to be something
+       else entirely. Full numbers, method, and the finding that reflects badly on our own app.</p>
+    <a class="readmore" href="canadian-grocery-database-coverage.html">Read the research →</a>
+  </article>
+  <!-- ═══ END POST ENTRY ═══ -->
+
+  <div class="note">
+    <strong>Something to add?</strong> If you're building in this space, or you know a Canadian
+    product data source we've missed, we'd like to hear from you —
+    <a href="mailto:cruise.analytix@gmail.com" style="color:var(--green-dark);font-weight:600">cruise.analytix@gmail.com</a>.
+    We read everything.
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 Ecosystem &amp; AnalytiX International Ltd. · WellValet™</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
