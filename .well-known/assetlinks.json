@@ -1,11 +1,13 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.cruiseanalytix.wellvalet",
       "sha256_cert_fingerprints": [
-        "REPLACE_WITH_PLAY_APP_SIGNING_SHA256"
+        "13:28:24:0B:EC:55:20:89:78:13:EE:9D:07:32:4D:F6:1D:DD:D3:19:A2:58:CB:80:F4:1B:EE:E7:87:50:F2:F7"
       ]
     }
   }
