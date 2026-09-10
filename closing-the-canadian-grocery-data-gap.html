@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How WellValet Closes the Canadian Grocery Data Gap</title>
+<meta name="description" content="WellValet's scan-and-curate feature is live: photograph an ingredient label once, and every future shopper who scans that barcode benefits. Here's how the loop actually works.">
+<link rel="canonical" href="https://www.wellvalet.com/closing-the-canadian-grocery-data-gap.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.wellvalet.com/closing-the-canadian-grocery-data-gap.html">
+<meta property="og:title" content="How WellValet Closes the Canadian Grocery Data Gap">
+<meta property="og:description" content="Our scan-and-curate feature is live in the app. Photograph an ingredient label once, and every future shopper who scans that barcode gets the benefit.">
+<meta property="og:site_name" content="WellValet">
+<meta property="og:locale" content="en_CA">
+<meta property="article:published_time" content="2026-09-10">
+<meta property="article:author" content="Ecosystem &amp; AnalytiX International Ltd.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How WellValet Closes the Canadian Grocery Data Gap">
+<meta name="twitter:description" content="Our scan-and-curate feature is live. Here's how it actually works, and why most scans already succeed.">
+
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How WellValet Closes the Canadian Grocery Data Gap",
+      "description": "WellValet's live scan-and-curate feature: how an ingredient-label photo turns into a database update that benefits every future shopper.",
+      "datePublished": "2026-09-10",
+      "dateModified": "2026-09-10",
+      "inLanguage": "en-CA",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.wellvalet.com/closing-the-canadian-grocery-data-gap.html"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Ecosystem & AnalytiX International Ltd."
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ecosystem & AnalytiX International Ltd.",
+        "url": "https://www.wellvalet.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Toronto",
+          "addressRegion": "ON",
+          "addressCountry": "CA"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://www.wellvalet.com/"},
+        {"@type":"ListItem","position":2,"name":"Blog","item":"https://www.wellvalet.com/blog.html"},
+        {"@type":"ListItem","position":3,"name":"Closing the Canadian grocery data gap"}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --green-deep:#1e4d1e; --green-dark:#2D6A2D; --green-4:#42D674;
+    --green-2:#F2F8EC; --cream:#FDFCF7;
+    --text-dark:#1a1a1a; --text-mid:#3d3d3d; --text-light:#7a7a7a;
+    --border:#E6EBE0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+       color:var(--text-dark);background:var(--cream);line-height:1.75;
+       -webkit-font-smoothing:antialiased}
+  a{color:var(--green-dark)}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(253,252,247,0.92);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-inner{max-width:1100px;margin:0 auto;padding:16px 24px;
+             display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;
+         font-size:18px;color:var(--green-dark)}
+  .brand img{width:32px;height:32px;border-radius:8px}
+  .nav-links{display:flex;gap:24px;list-style:none;font-size:14px;font-weight:500}
+  .nav-links a{text-decoration:none;color:var(--text-mid)}
+  .nav-links a:hover{color:var(--green-dark)}
+
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  .crumb{font-size:13px;color:var(--text-light);padding:28px 0 0}
+  .crumb a{text-decoration:none;color:var(--text-light)}
+  .crumb a:hover{color:var(--green-dark)}
+
+  article header{padding:24px 0 32px;border-bottom:1px solid var(--border);margin-bottom:36px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
+           color:var(--green-dark);margin-bottom:14px}
+  h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,4.6vw,42px);
+     line-height:1.18;margin-bottom:18px}
+  .byline{font-size:14px;color:var(--text-light)}
+
+  article h2{font-family:'Playfair Display',Georgia,serif;font-size:26px;line-height:1.3;
+             margin:44px 0 16px;padding-top:8px}
+  article p{margin-bottom:20px;font-size:17px;color:var(--text-mid)}
+  article strong{color:var(--text-dark);font-weight:600}
+  article ul{margin:0 0 20px 22px;color:var(--text-mid)}
+  article li{margin-bottom:10px}
+
+  .stat{background:white;border:1px solid var(--border);border-left:4px solid var(--green-4);
+        border-radius:12px;padding:22px 26px;margin:26px 0;font-size:20px;font-weight:600;
+        color:var(--text-dark);font-family:'Playfair Display',Georgia,serif}
+
+  hr{border:none;border-top:1px solid var(--border);margin:44px 0}
+
+  .callout{background:var(--green-2);border-radius:16px;padding:24px 28px;margin:32px 0;
+           font-size:16px;color:var(--text-mid)}
+  .callout strong{color:var(--text-dark)}
+
+  /* SHARE */
+  .share{border-top:1px solid var(--border);margin-top:48px;padding-top:28px}
+  .share-label{font-size:13px;color:var(--text-light);margin-bottom:14px;
+               text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .share-row{display:flex;gap:10px;flex-wrap:wrap}
+  .share-row a{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;
+               border:1.5px solid var(--border);border-radius:30px;text-decoration:none;
+               font-size:14px;font-weight:500;color:var(--text-mid);
+               background:white;transition:all .2s}
+  .share-row a:hover{border-color:var(--green-dark);color:var(--green-dark);
+                     transform:translateY(-2px)}
+
+  .cta{background:var(--green-2);border-radius:20px;padding:32px;margin:40px 0 0;
+       text-align:center}
+  .cta h3{font-family:'Playfair Display',Georgia,serif;font-size:22px;margin-bottom:10px}
+  .cta p{font-size:15px;color:var(--text-mid);margin-bottom:18px}
+  .cta a{display:inline-block;background:var(--green-dark);color:white;text-decoration:none;
+         padding:13px 28px;border-radius:30px;font-weight:600;font-size:15px}
+
+  footer{border-top:1px solid var(--border);background:white;margin-top:80px}
+  .foot-inner{max-width:1100px;margin:0 auto;padding:40px 24px;
+              display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;
+              font-size:14px;color:var(--text-light)}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+  .foot-links a{text-decoration:none;color:var(--text-mid)}
+
+  @media(max-width:640px){
+    .nav-links{display:none}
+    article p{font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="favicon.png" alt="WellValet">WellValet</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">Home</a> › <a href="blog.html">Blog</a> › Closing the data gap</div>
+
+  <article>
+    <header>
+      <div class="eyebrow">Product Update</div>
+      <h1>How WellValet Closes the Canadian Grocery Data Gap</h1>
+      <div class="byline">10 September 2026 · Ecosystem &amp; AnalytiX International Ltd., Toronto · 6 min read</div>
+    </header>
+
+    <p>Last month we published <a href="canadian-grocery-database-coverage.html">our research into how well
+       existing product databases cover the Canadian grocery aisle</a>. It ended with a promise: build a flow
+       where a scan that comes up empty, or comes back with no ingredient list, becomes an invitation to fix
+       that instead of a dead end. That flow has been live in the app for several weeks now. Here's how it
+       actually works.</p>
+
+    <h2>From a blank scan to a data entry point</h2>
+
+    <p>When WellValet scans a barcode and either finds nothing or finds a product with no usable ingredient
+       list, the app now prompts the shopper standing in front of it to point the camera at the printed
+       ingredient panel instead. That's the same <a href="allergen-scanner-app.html">OCR ingredient scanner</a>
+       already built into the app for unbarcoded items, repurposed as the entry point for a missing product.</p>
+
+    <p>The photograph doesn't go straight into the live database. It's queued centrally, reviewed and curated
+       by our team, and then merged into the same shared, Open Food Facts–based dataset that every WellValet
+       install draws from. The next Canadian shopper who scans that exact barcode — whether that's a minute
+       later or a month later — gets a real answer instead of another blank scan.</p>
+
+    <p>It's a small, unglamorous mechanic, and that's the point: it turns ordinary use of the app into ongoing
+       maintenance of the dataset behind it, without asking anyone to do anything they weren't already doing.</p>
+
+    <h2>Why most scans succeed before that flow ever kicks in</h2>
+
+    <p>Canada's grocery retail sector is unusually concentrated by developed-market standards.</p>
+
+    <div class="stat">A handful of national chains account for roughly 60–70% of Canadian grocery sales</div>
+
+    <p>Loblaw, Sobeys (Empire), Metro, Costco and Walmart between them dominate the shelves most Canadians
+       actually shop from week to week. Because those chains' private-label lines and major national brands
+       are exactly the products most likely to already be well-documented in a shared, community-maintained
+       database, the products people scan on an ordinary shopping trip disproportionately land in the part of
+       the dataset that's already complete. In our own usage, that shows up as most scans simply working on the
+       first try, before the enrichment flow above is ever needed.</p>
+
+    <p>That's not a claim that every product in every store resolves instantly — a corner store's imported
+       specialty item is a different story than a Loblaws-brand pantry staple, and it's exactly that long tail
+       of smaller and regional products where the scan-and-curate flow above earns its keep.</p>
+
+    <h2>An ongoing pipeline, not a finished project</h2>
+
+    <p>We're not going to claim this closes every gap for good. New products land on Canadian shelves
+       constantly, and any crowdsourced or community-maintained dataset is chasing a moving target by design —
+       Open Food Facts itself grows and changes daily. What's changed on our end is the direction of travel:
+       the gap now narrows a little with every scan that comes up short, instead of sitting there until someone
+       manually re-imports a dataset months later.</p>
+
+    <div class="callout">
+      If you're one of the shoppers who's had a scan prompt you to photograph an ingredient panel — thank you.
+      That submission didn't just help you; it's already helping the next person who scans that product.
+    </div>
+
+    <p>We build <a href="index.html">WellValet</a>, a Canadian grocery barcode scanner. If you want the full
+       method and numbers behind the database this flow feeds into, read
+       <a href="canadian-grocery-database-coverage.html">our original database coverage research</a>. And if
+       you have thoughts on how we could do this better, we'd like to hear them:
+       <a href="mailto:support@wellvalet.com">support@wellvalet.com</a></p>
+
+    <div class="share">
+      <div class="share-label">Share this</div>
+      <div class="share-row">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.wellvalet.com%2Fclosing-the-canadian-grocery-data-gap.html" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/intent/tweet?text=How%20WellValet%20closes%20the%20Canadian%20grocery%20data%20gap&amp;url=https%3A%2F%2Fwww.wellvalet.com%2Fclosing-the-canadian-grocery-data-gap.html" target="_blank" rel="noopener">X</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wellvalet.com%2Fclosing-the-canadian-grocery-data-gap.html" target="_blank" rel="noopener">Facebook</a>
+        <a href="mailto:?subject=How%20WellValet%20closes%20the%20Canadian%20grocery%20data%20gap&amp;body=https%3A%2F%2Fwww.wellvalet.com%2Fclosing-the-canadian-grocery-data-gap.html">Email</a>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h3>WellValet</h3>
+      <p>Scan any Canadian grocery barcode for allergen alerts and a wellness score
+         matched to your profile. Free to start.</p>
+      <a href="index.html">See how it works</a>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 Ecosystem &amp; AnalytiX International Ltd. · WellValet™</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

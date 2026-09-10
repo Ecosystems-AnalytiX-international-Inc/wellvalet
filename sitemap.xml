@@ -38,7 +38,13 @@
   </url>
   <url>
     <loc>https://www.wellvalet.com/canadian-grocery-database-coverage.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wellvalet.com/closing-the-canadian-grocery-data-gap.html</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
