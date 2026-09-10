@@ -1045,6 +1045,81 @@
     }
 
     /* ----------------------------------------------------
+       KNOWLEDGE HUB TEASER
+    ---------------------------------------------------- */
+    .hub {
+      padding: 100px 48px;
+      background: var(--green-2);
+    }
+
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hub-card {
+      display: block;
+      background: white;
+      border-radius: 24px;
+      padding: 32px 28px;
+      border: 1px solid rgba(186, 219, 162, 0.4);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .hub-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(45, 106, 45, 0.12);
+    }
+
+    .hub-card-tag {
+      display: inline-block;
+      background: var(--green-2);
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.4px;
+      margin-bottom: 16px;
+    }
+
+    .hub-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hub-card-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .hub-card-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .hub-more {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 1024px) {
+      .hub-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ----------------------------------------------------
        FOOTER
     ---------------------------------------------------- */
     footer {
@@ -1553,6 +1628,36 @@
       <div class="promise-card"><div class="promise-card-icon">🇨🇦</div><div class="promise-card-title">Canadian Built</div><div class="promise-card-desc">Proudly made in Canada</div></div>
       <div class="promise-card"><div class="promise-card-icon">🌍</div><div class="promise-card-title">Global Database</div><div class="promise-card-desc">3M+ products worldwide</div></div>
     </div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE HUB TEASER -->
+<section class="hub" id="hub">
+  <div class="section-label">From the Knowledge Hub</div>
+  <h2 class="section-title">Research, guides &amp; the parts that didn't work</h2>
+  <p class="section-sub">Straight answers on Canadian grocery labels, food allergens and product data — including the research behind WellValet itself.</p>
+  <div class="hub-grid">
+    <a class="hub-card reveal" href="is-may-contain-regulated-canada.html">
+      <div class="hub-card-tag">Awareness</div>
+      <div class="hub-card-title">Is "May Contain" Regulated in Canada? What Every Allergy Parent Should Know</div>
+      <div class="hub-card-desc">Precautionary allergen statements aren't required by law. Here's what CFIA guidance actually says.</div>
+      <div class="hub-card-link">Read the post →</div>
+    </a>
+    <a class="hub-card reveal" href="hidden-allergens-grocery-shopping-canada.html">
+      <div class="hub-card-tag">Awareness</div>
+      <div class="hub-card-title">The Hidden Allergen Problem: Why Grocery Shopping Still Isn't Safe for Allergy Families</div>
+      <div class="hub-card-desc">More than 3 million Canadians live with a food allergy. Here's why the label alone isn't enough.</div>
+      <div class="hub-card-link">Read the post →</div>
+    </a>
+    <a class="hub-card reveal" href="canadian-grocery-database-coverage.html">
+      <div class="hub-card-tag">Research</div>
+      <div class="hub-card-title">We tested four product databases for Canadian grocery coverage. Only one was usable.</div>
+      <div class="hub-card-desc">The full method, numbers, and a finding that reflects badly on our own app.</div>
+      <div class="hub-card-link">Read the research →</div>
+    </a>
+  </div>
+  <div class="hub-more">
+    <a href="blog.html" class="btn-secondary">Visit the Blog</a>
   </div>
 </section>
 
