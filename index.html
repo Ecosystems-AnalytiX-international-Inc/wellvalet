@@ -111,7 +111,7 @@
             "name": "Is WellValet free to use in Canada?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "WellValet is free to download. The free plan includes 3 barcode and OCR scans per day with zero advertisements. Upgrade to Premium (C$5.99/month or C$47.99/year) or Family (C$8.99/month or C$74.99/year) for unlimited scanning and additional features."
+              "text": "WellValet is free to download. The free plan includes 3 barcode and OCR scans per day with zero advertisements. Upgrade to Premium (C$5.99/month or C$49.99/year) or Family (C$59.99/year) for unlimited scanning and additional features."
             }
           },
           {
@@ -715,6 +715,58 @@
       gap: 24px;
       max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .features-grid-primary {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 900px;
+      margin-bottom: 32px;
+    }
+
+    .more-features {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .more-features summary {
+      list-style: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--green-dark);
+      font-size: 15px;
+      padding: 10px 24px;
+      border: 1px solid rgba(186, 219, 162, 0.6);
+      border-radius: 50px;
+      margin-bottom: 24px;
+    }
+
+    .more-features summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .pain-callout {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+
+    .pain-callout p {
+      font-size: 19px;
+      line-height: 1.6;
+      color: var(--text-mid);
+      background: var(--cream);
+      border-left: 4px solid var(--green-4);
+      padding: 20px 28px;
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .pain-callout strong {
+      color: var(--green-deep);
     }
 
     .feature-card {
@@ -1448,6 +1500,9 @@
       .features-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+      .features-grid-primary {
+        grid-template-columns: 1fr;
+      }
       .how-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1493,7 +1548,7 @@
       .hero {
         padding: 100px 20px 40px;
       }
-      .features, .how, .testimonials, .download, .promise-section, .photo-strip, .compare, .faq {
+      .features, .how, .testimonials, .download, .promise-section, .photo-strip, .compare, .faq, .pain-callout, .more-features {
         padding: 50px 20px;
       }
       .compare-row-head {
@@ -1626,9 +1681,9 @@
 <section class="hero">
   <div class="hero-content">
     <div class="hero-tag">🌿 Built for Canadian Allergy Families</div>
-    <h1>WellValet: Canadian Grocery Barcode & Allergen Scanner<br /><em>Smarter Shopping. Better Living.</em></h1>
+    <h1>WellValet: The Allergen Scanner for Canadian Allergy Families<br /><em>Smarter Shopping. Safer Living.</em></h1>
     <p class="hero-sub">
-      WellValet is Canada's premier Canadian grocery barcode scanner and allergen app. Every score is built from your own age, weight, goals and conditions — not a one-size-fits-all number everyone else sees too. Includes AI ingredient scanning, allergen alerts, and smart meal planning.
+      Scan any barcode and get an instant allergen check against your family's saved profile, plus a personalised wellness score built from your own age, weight, goals and conditions — not a one-size-fits-all number everyone else sees too. Zero ads. Your data stays on your device.
     </p>
     <div class="hero-buttons">
       <a href="https://apps.apple.com/ca/app/wellvalet/id6778571808" onclick="gtag('event','app_store_click');" target="_blank" rel="noopener" aria-label="Download WellValet on the App Store" class="store-badge-link">
@@ -1676,6 +1731,11 @@
   <div class="stat-item reveal"><div class="stat-number">11</div><div class="stat-label">CFIA priority allergens matched</div></div>
   <div class="stat-item reveal"><div class="stat-number">0</div><div class="stat-label">Ads. Ever.</div></div>
   <div class="stat-item reveal"><div class="stat-number">🔒</div><div class="stat-label">Your data stays private</div></div>
+</section>
+
+<!-- PAIN CALLOUT -->
+<section class="pain-callout">
+  <p><strong>Standing in the aisle, turning a box over to read a paragraph of ingredients in eight-point type?</strong> WellValet reads it for you in seconds — checked against Canada's priority allergens, your own saved profile, and any hidden allergens buried in a "may contain" statement.</p>
 </section>
 
 <!-- WHY WELLVALET -->
@@ -1746,53 +1806,54 @@
   <div class="section-label">Everything you need</div>
   <h2 class="section-title">Your wellness valet — always on duty</h2>
   <p class="section-sub">From the supermarket shelf to your bathroom cabinet, WellValet guides every wellness decision — food, beauty and family — with intelligence and care.</p>
-  <div class="features-grid">
+  <div class="features-grid features-grid-primary">
+    <div class="feature-card reveal">
+      <div class="feature-icon">📷</div>
+      <div class="feature-title">Scan at the shelf and know in seconds</div>
+      <p class="feature-desc">Point your camera at any barcode for an instant result: your personalised wellness score, plus an alert if it matches Canada's 11 CFIA priority allergens or your own saved profile. No typing, no searching.</p>
+    </div>
     <div class="feature-card reveal">
       <div class="feature-icon">🎯</div>
-      <div class="feature-title">Personalised Scores</div>
-      <p class="feature-desc">Unlike apps that show everyone the same score, WellValet calculates yours from your age, weight, goals, conditions and allergies. Because your valet knows you personally.</p>
+      <div class="feature-title">Get a score that's actually about you</div>
+      <p class="feature-desc">Unlike apps that show everyone the same score, WellValet calculates yours from your age, weight, goals, conditions and allergies. Same product, different score — because it's about you, not the average shopper.</p>
     </div>
     <div class="feature-card reveal">
       <div class="feature-icon">🔍</div>
-      <div class="feature-title">OCR Ingredient Scanner</div>
-      <p class="feature-desc">Barcode-only scanners hit a wall the moment a product isn't in their database. WellValet reads the ingredient label directly with AI OCR — so you still get a score for imported goods, private-label products, and anything barcode databases have never seen. <a href="closing-the-canadian-grocery-data-gap.html">See why this matters →</a></p>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">⚠️</div>
-      <div class="feature-title">Allergen Alerts</div>
-      <p class="feature-desc">Checks every scan against Canada's 11 CFIA priority allergens — not a generic global list — plus your own personal profile. Your valet always has your back.</p>
+      <div class="feature-title">Scan what has no barcode</div>
+      <p class="feature-desc">Barcode-only scanners hit a wall the moment a product isn't in their database. WellValet reads the ingredient label directly with AI OCR — so imported goods, bakery items and private-label products still get a score. <a href="closing-the-canadian-grocery-data-gap.html">See why this matters →</a></p>
     </div>
     <div class="feature-card reveal">
       <div class="feature-icon">👨‍👩‍👧‍👦</div>
-      <div class="feature-title">Family Allergen Profiles</div>
+      <div class="feature-title">Shop for the whole family</div>
       <p class="feature-desc">Each family member gets their own allergy and dietary profile, so a scan flags what's unsafe for your child, not just you — plus a shared live shopping list for up to 4 people.</p>
     </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">📷</div>
-      <div class="feature-title">Instant Barcode Scan</div>
-      <p class="feature-desc">Point your camera at any product and get an instant wellness score in seconds. No typing, no searching — food or beauty.</p>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">💄</div>
-      <div class="feature-title">Beauty Product Scanning</div>
-      <p class="feature-desc">Scan skincare, shampoo, lotions and cosmetics. Parabens, sulfates and harmful chemicals flagged instantly with a skin wellness score.</p>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">🍽️</div>
-      <div class="feature-title">Weekly Meal Planner</div>
-      <p class="feature-desc">Dietitian-inspired meal plans generated from your purchase history. Breakfast, lunch, dinner and snacks — planned for you.</p>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">🛒</div>
-      <div class="feature-title">Smart Shopping List</div>
-      <p class="feature-desc">Build and manage your shopping list directly in the app. Never forget what you need — your valet remembers everything.</p>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">📋</div>
-      <div class="feature-title">Purchase History</div>
-      <p class="feature-desc">Track every product you have bagged. Filter by Good, Moderate or Care to understand your buying patterns over time.</p>
-    </div>
   </div>
+
+  <details class="more-features">
+    <summary>More features →</summary>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">💄</div>
+        <div class="feature-title">Beauty Product Scanning</div>
+        <p class="feature-desc">Scan skincare, shampoo, lotions and cosmetics. Parabens, sulfates and harmful chemicals flagged instantly with a skin wellness score.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🍽️</div>
+        <div class="feature-title">Weekly Meal Planner</div>
+        <p class="feature-desc">Dietitian-inspired meal plans generated from your purchase history. Breakfast, lunch, dinner and snacks — planned for you.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🛒</div>
+        <div class="feature-title">Smart Shopping List</div>
+        <p class="feature-desc">Build and manage your shopping list directly in the app. Never forget what you need — your valet remembers everything.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📋</div>
+        <div class="feature-title">Purchase History</div>
+        <p class="feature-desc">Track every product you have bagged. Filter by Good, Moderate or Care to understand your buying patterns over time.</p>
+      </div>
+    </div>
+  </details>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -1902,7 +1963,7 @@
     </details>
     <details class="faq-item">
       <summary>How many free scans do I get?</summary>
-      <p>3 barcode and OCR scans per day on the free plan, with zero ads. Beauty product scanning is a Premium feature. Upgrade to Premium (C$5.99/month) or Family (C$8.99/month) for unlimited scanning.</p>
+      <p>3 barcode and OCR scans per day on the free plan, with zero ads. Beauty product scanning is a Premium feature. Upgrade to Premium (C$5.99/month or C$49.99/year) or Family (C$59.99/year) for unlimited scanning.</p>
     </details>
     <details class="faq-item">
       <summary>Which Canadian grocery chains are covered?</summary>
