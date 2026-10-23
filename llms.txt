@@ -21,7 +21,8 @@
 - [About](https://www.wellvalet.com/about.html): company information
 
 ## Availability
-Free tier: 3 scans per day. Premium from C$5.99/month. Family plan available.
+Free tier: unlimited scanning (basic product view), zero ads.
+Premium: C$3.99/month or C$34.99/year. Family: C$44.99/year. 14-day free trial.
 iOS and Android. Canada.
 
 ## Note
