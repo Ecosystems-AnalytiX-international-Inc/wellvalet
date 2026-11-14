@@ -715,62 +715,10 @@
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1100px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1160px;
       margin: 0 auto;
-    }
-
-    .features-grid-primary {
-      grid-template-columns: repeat(2, 1fr);
-      max-width: 900px;
-      margin-bottom: 32px;
-    }
-
-    .more-features {
-      max-width: 1100px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .more-features summary {
-      list-style: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: var(--green-dark);
-      font-size: 15px;
-      padding: 10px 24px;
-      border: 1px solid rgba(186, 219, 162, 0.6);
-      border-radius: 50px;
-      margin-bottom: 24px;
-    }
-
-    .more-features summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .pain-callout {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0 24px 56px;
-    }
-
-    .pain-callout p {
-      font-size: 19px;
-      line-height: 1.6;
-      color: var(--text-mid);
-      background: var(--cream);
-      border-left: 4px solid var(--green-4);
-      padding: 20px 28px;
-      border-radius: 12px;
-      text-align: left;
-    }
-
-    .pain-callout strong {
-      color: var(--green-deep);
     }
 
     .feature-card {
@@ -1504,9 +1452,6 @@
       .features-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      .features-grid-primary {
-        grid-template-columns: 1fr;
-      }
       .how-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1552,7 +1497,7 @@
       .hero {
         padding: 100px 20px 40px;
       }
-      .features, .how, .testimonials, .download, .promise-section, .photo-strip, .compare, .faq, .pain-callout, .more-features {
+      .features, .how, .testimonials, .download, .promise-section, .photo-strip, .compare, .faq {
         padding: 50px 20px;
       }
       .compare-row-head {
@@ -1684,10 +1629,10 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-tag">🌿 Built for Canadian Allergy Families</div>
-    <h1>WellValet: The Allergen Scanner for Canadian Allergy Families<br /><em>Smarter Shopping. Safer Living.</em></h1>
+    <div class="hero-tag">🇨🇦 Built for Canadian Grocery Shoppers</div>
+    <h1>Scan barcodes. Catch allergens. Shop without the second-guessing.</h1>
     <p class="hero-sub">
-      Scan any barcode and get an instant allergen check against your family's saved profile, plus a personalised wellness score built from your own age, weight, goals and conditions — not a one-size-fits-all number everyone else sees too. Zero ads. Your data stays on your device.
+      Instant allergen checks against Canada's 11 priority allergens and your family's personal profiles. Point your camera at any barcode or ingredient label for immediate safety alerts and tailored wellness scores. Completely ad-free.
     </p>
     <div class="hero-buttons">
       <a href="https://apps.apple.com/ca/app/wellvalet/id6778571808" onclick="gtag('event','app_store_click');" target="_blank" rel="noopener" aria-label="Download WellValet on the App Store" class="store-badge-link">
@@ -1730,22 +1675,17 @@
 
 <!-- STATS -->
 <section class="stats">
-  <div class="stat-item reveal"><div class="stat-number">3M+</div><div class="stat-label">Products in database</div></div>
-  <div class="stat-item reveal"><div class="stat-number">100%</div><div class="stat-label">Personalised — not a universal score</div></div>
-  <div class="stat-item reveal"><div class="stat-number">11</div><div class="stat-label">CFIA priority allergens matched</div></div>
-  <div class="stat-item reveal"><div class="stat-number">0</div><div class="stat-label">Ads. Ever.</div></div>
-  <div class="stat-item reveal"><div class="stat-number">🔒</div><div class="stat-label">Your data stays private</div></div>
-</section>
-
-<!-- PAIN CALLOUT -->
-<section class="pain-callout">
-  <p><strong>Standing in the aisle, turning a box over to read a paragraph of ingredients in eight-point type?</strong> WellValet reads it for you in seconds — checked against Canada's priority allergens, your own saved profile, and any hidden allergens buried in a "may contain" statement.</p>
+  <div class="stat-item reveal"><div class="stat-number">3M+</div><div class="stat-label">Products indexed</div></div>
+  <div class="stat-item reveal"><div class="stat-number">11</div><div class="stat-label">CFIA priority allergens checked</div></div>
+  <div class="stat-item reveal"><div class="stat-number">100%</div><div class="stat-label">Personalized scoring</div></div>
+  <div class="stat-item reveal"><div class="stat-number">0</div><div class="stat-label">Ads or tracking</div></div>
+  <div class="stat-item reveal"><div class="stat-number">🔒</div><div class="stat-label">On-device privacy</div></div>
 </section>
 
 <!-- WHY WELLVALET -->
 <section class="compare" id="why">
   <div class="section-label">Why WellValet</div>
-  <h2 class="section-title">Built to be different, not just another scanner</h2>
+  <h2 class="section-title">Built for Canadian supermarket shelves</h2>
   <p class="section-sub">Most grocery barcode apps stop at "here's a score." Here is how WellValet compares with Yuka, the best-known one.</p>
   <div class="compare-table">
     <div class="compare-row compare-row-head">
@@ -1756,22 +1696,22 @@
     <div class="compare-row">
       <div class="compare-cell compare-cell-label">Scoring</div>
       <div class="compare-cell compare-cell-them" data-col="Yuka">Same score for everyone</div>
-      <div class="compare-cell compare-cell-us" data-col="WellValet">Personalised to your age, weight, goals &amp; conditions</div>
+      <div class="compare-cell compare-cell-us" data-col="WellValet">Personalized to your health goals, age &amp; sensitivities</div>
     </div>
     <div class="compare-row">
       <div class="compare-cell compare-cell-label">No barcode found</div>
       <div class="compare-cell compare-cell-them" data-col="Yuka">Barcode lookup only</div>
-      <div class="compare-cell compare-cell-us" data-col="WellValet">AI OCR reads the ingredient label directly</div>
+      <div class="compare-cell compare-cell-us" data-col="WellValet">AI OCR reads the printed ingredient label directly</div>
     </div>
     <div class="compare-row">
       <div class="compare-cell compare-cell-label">Allergens</div>
       <div class="compare-cell compare-cell-them" data-col="Yuka">Dietary alerts on Premium only</div>
-      <div class="compare-cell compare-cell-us" data-col="WellValet">Canada's 11 CFIA priority allergens + real Canadian grocery chains</div>
+      <div class="compare-cell compare-cell-us" data-col="WellValet">Canada's 11 CFIA priority allergens &amp; store brands</div>
     </div>
     <div class="compare-row">
       <div class="compare-cell compare-cell-label">Family</div>
-      <div class="compare-cell compare-cell-them" data-col="Yuka">No family shopping list or meal planner</div>
-      <div class="compare-cell compare-cell-us" data-col="WellValet">Shared family allergen profiles &amp; meal planning</div>
+      <div class="compare-cell compare-cell-them" data-col="Yuka">Single-user only</div>
+      <div class="compare-cell compare-cell-us" data-col="WellValet">Multi-profile checks for the whole family in one scan</div>
     </div>
     <div class="compare-row">
       <div class="compare-cell compare-cell-label">Scanning</div>
@@ -1795,21 +1735,21 @@
       <img src="images/hero-shelf.webp" alt="Supermarket shelves with packaged products" width="800" height="533" loading="lazy" />
       <div class="photo-card-overlay">
         <div class="photo-card-title">At the shelf</div>
-        <div class="photo-card-sub">Scan any product barcode instantly</div>
+        <div class="photo-card-sub">Instant match against Canadian products</div>
       </div>
     </div>
     <div class="photo-card reveal">
       <img src="images/hero-scan.webp" alt="Person scanning barcode with phone" width="800" height="533" loading="lazy" />
       <div class="photo-card-overlay">
         <div class="photo-card-title">Instant score</div>
-        <div class="photo-card-sub">Get your personalised wellness score</div>
+        <div class="photo-card-sub">Tailored to your health &amp; allergy profile</div>
       </div>
     </div>
     <div class="photo-card reveal">
       <img src="images/hero-products.webp" alt="Packaged food products on supermarket shelf" width="800" height="533" loading="lazy" />
       <div class="photo-card-overlay">
-        <div class="photo-card-title">Smart decisions</div>
-        <div class="photo-card-sub">Know exactly what's in every product</div>
+        <div class="photo-card-title">Label AI</div>
+        <div class="photo-card-sub">Reads ingredients when barcodes are missing</div>
       </div>
     </div>
   </div>
@@ -1817,57 +1757,51 @@
 
 <!-- FEATURES -->
 <section class="features" id="features">
-  <div class="section-label">Everything you need</div>
-  <h2 class="section-title">Your wellness valet — always on duty</h2>
-  <p class="section-sub">From the supermarket shelf to your bathroom cabinet, WellValet guides every wellness decision — food, beauty and family — with intelligence and care.</p>
-  <div class="features-grid features-grid-primary">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything you need in the aisle</h2>
+  <p class="section-sub">Fast, reliable scanning designed for real Canadian grocery shopping and family meal planning.</p>
+  <div class="features-grid">
     <div class="feature-card reveal">
       <div class="feature-icon">📷</div>
-      <div class="feature-title">Scan at the shelf and know in seconds</div>
-      <p class="feature-desc">Point your camera at any barcode for an instant result: your personalised wellness score, plus an alert if it matches Canada's 11 CFIA priority allergens or your own saved profile. No typing, no searching.</p>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">🎯</div>
-      <div class="feature-title">Get a score that's actually about you</div>
-      <p class="feature-desc">Unlike apps that show everyone the same score, WellValet calculates yours from your age, weight, goals, conditions and allergies. Same product, different score — because it's about you, not the average shopper.</p>
+      <div class="feature-title">Instant Barcode Scan</div>
+      <p class="feature-desc">Scan products at Loblaws, Superstore, Metro, Sobeys, and Walmart. Get immediate safety alerts and nutritional breakdowns without typing.</p>
     </div>
     <div class="feature-card reveal">
       <div class="feature-icon">🔍</div>
-      <div class="feature-title">Scan what has no barcode</div>
-      <p class="feature-desc">Barcode-only scanners hit a wall the moment a product isn't in their database. WellValet reads the ingredient label directly with AI OCR — so imported goods, bakery items and private-label products still get a score. <a href="closing-the-canadian-grocery-data-gap.html">See why this matters →</a></p>
+      <div class="feature-title">AI OCR Label Reader</div>
+      <p class="feature-desc">When a product has no barcode in the database—like bakery goods, store brands, or imports—snap the printed ingredient list to analyze it directly. <a href="closing-the-canadian-grocery-data-gap.html">Learn how it works →</a></p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">⚠️</div>
+      <div class="feature-title">CFIA Allergen Alerts</div>
+      <p class="feature-desc">Checks ingredients against Health Canada's 11 priority allergens, plus hidden additives and precautionary "may contain" statements.</p>
     </div>
     <div class="feature-card reveal">
       <div class="feature-icon">👨‍👩‍👧‍👦</div>
-      <div class="feature-title">Shop for the whole family</div>
-      <p class="feature-desc">Each family member gets their own allergy and dietary profile, so a scan flags what's unsafe for your child, not just you — plus a family shopping list where up to 4 members add items and the family admin sees them all.</p>
+      <div class="feature-title">Family Allergy Profiles</div>
+      <p class="feature-desc">Set individual allergy and dietary profiles for each family member. A single scan alerts you if a product is unsafe for anyone in your household.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">Personalized Scoring</div>
+      <p class="feature-desc">Scores adapt to your age, conditions, and wellness goals. Two people scanning the same item get insights relevant to their own health.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💄</div>
+      <div class="feature-title">Beauty &amp; Skincare Scanning</div>
+      <p class="feature-desc">Scan shampoos, lotions, and cosmetics. Instantly flags parabens, sulfates, and irritating chemicals with a dedicated skin wellness score.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🛒</div>
+      <div class="feature-title">Shared Shopping List</div>
+      <p class="feature-desc">Add safe items directly to a shared household list that syncs across devices, so everyone knows what to pick up.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🍽️</div>
+      <div class="feature-title">Allergy-Safe Meal Planner</div>
+      <p class="feature-desc">Plan breakfasts, lunches, and dinners built around safe ingredients and products you've already verified.</p>
     </div>
   </div>
-
-  <details class="more-features">
-    <summary>More features →</summary>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-icon">💄</div>
-        <div class="feature-title">Beauty Product Scanning</div>
-        <p class="feature-desc">Scan skincare, shampoo, lotions and cosmetics. Parabens, sulfates and harmful chemicals flagged instantly with a skin wellness score.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">🍽️</div>
-        <div class="feature-title">Weekly Meal Planner</div>
-        <p class="feature-desc">Dietitian-inspired meal plans generated from your purchase history. Breakfast, lunch, dinner and snacks — planned for you.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">🛒</div>
-        <div class="feature-title">Smart Shopping List</div>
-        <p class="feature-desc">Build and manage your shopping list directly in the app. Never forget what you need — your valet remembers everything.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon">📋</div>
-        <div class="feature-title">Purchase History</div>
-        <p class="feature-desc">Track every product you have bagged. Filter by Good, Moderate or Care to understand your buying patterns over time.</p>
-      </div>
-    </div>
-  </details>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -1883,29 +1817,29 @@
         <div class="step reveal">
           <div class="step-number">1</div>
           <div>
-            <div class="step-title">Brief Your Valet</div>
-            <p class="step-desc">Enter your age, weight, wellness goals, known conditions and allergies once. Your valet remembers everything.</p>
+            <div class="step-title">Set your family profile</div>
+            <p class="step-desc">Add allergies, dietary restrictions, and wellness goals once. All data stays saved privately on your device.</p>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-number">2</div>
           <div>
-            <div class="step-title">Scan at the Shelf</div>
-            <p class="step-desc">Point your camera at any barcode in the supermarket for an instant personalised result.</p>
+            <div class="step-title">Scan the barcode or label</div>
+            <p class="step-desc">Point your camera at any barcode. If there's no barcode, snap the printed ingredient list directly.</p>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-number">3</div>
           <div>
-            <div class="step-title">Get Your Score</div>
-            <p class="step-desc">Receive a personalised wellness score: Good, Moderate or Avoid — with full explanation and better alternatives.</p>
+            <div class="step-title">Get instant safety flags</div>
+            <p class="step-desc">See clear Good, Moderate, or Avoid ratings with exact allergen callouts and healthier Canadian alternatives.</p>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-number">4</div>
           <div>
-            <div class="step-title">Live Better</div>
-            <p class="step-desc">Use your meal planner and purchase history to build better habits — week by week, your valet guides the way.</p>
+            <div class="step-title">Shop and plan together</div>
+            <p class="step-desc">Save approved items to your shared family shopping list and plan weekly meals around safe ingredients.</p>
           </div>
         </div>
       </div>
@@ -1917,7 +1851,7 @@
 
 <!-- DOWNLOAD -->
 <section class="download" id="download">
-  <h2>Ready to meet your wellness valet?</h2>
+  <h2>Shop safer on your next grocery trip</h2>
   <p>Free to download, with unlimited scanning on the free plan. Premium from C$3.99/month with a 14-day free trial. Available on iOS and Android.</p>
   <div class="download-buttons">
     <a href="https://apps.apple.com/ca/app/wellvalet/id6778571808" onclick="gtag('event','app_store_click');" target="_blank" rel="noopener" aria-label="Download WellValet on the App Store" class="store-badge-link">
@@ -1933,15 +1867,14 @@
 <section class="promise-section">
   <div class="promise-inner">
     <div class="promise-content reveal">
-      <h2>A valet you can truly trust.</h2>
-      <p>We built WellValet because everyone deserves a personal wellness companion — without being bombarded by ads, sold to, or having their data monetised.</p>
-      <p>WellValet is completely ad-free. Your personal information stays on your device. We comply with Canadian (PIPEDA) and international privacy laws.</p>
+      <h2>Zero ads. Zero sponsored rankings. Real privacy.</h2>
+      <p>Many health and food apps make money by selling behavioral data or taking sponsorships to promote specific food brands. WellValet never does.</p>
+      <p>Your allergy profiles, dietary choices, and scan history remain on your phone in full compliance with Canadian PIPEDA privacy standards.</p>
       <ul class="promise-list">
-        <li><div class="promise-check">✓</div> No ads. No sponsored products. No hidden agendas.</li>
-        <li><div class="promise-check">✓</div> Your data is never sold to third parties.</li>
-        <li><div class="promise-check">✓</div> PIPEDA compliant privacy by design.</li>
-        <li><div class="promise-check">✓</div> General wellness information — not medical advice.</li>
-        <li><div class="promise-check">✓</div> Built by Ecosystem & AnalytiX International Ltd.</li>
+        <li><div class="promise-check">✓</div> 100% ad-free. No sponsored products or brand kickbacks.</li>
+        <li><div class="promise-check">✓</div> Your personal health profile never leaves your device.</li>
+        <li><div class="promise-check">✓</div> Objective ratings based on CFIA standards and nutritional facts.</li>
+        <li><div class="promise-check">✓</div> Transparent Canadian engineering by Ecosystem &amp; AnalytiX International Inc.</li>
       </ul>
     </div>
     <div class="promise-visual reveal">
